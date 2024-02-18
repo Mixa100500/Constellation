@@ -3,26 +3,25 @@ import {
 	getReviewsByFilm,
 	getReviewsBySerial,
 } from '../services/request/reviews'
+import { getGenres, getYear } from '../helpers/simple'
+import {
+	getMovieInfo,
+	getSerialIMDBID,
+	getSerialInfo,
+} from '../services/request/mediaInfo'
 
-const getYear = (release_date, first_air_date) => {
-	const date = release_date ? release_date : first_air_date
-	return date.slice(0, 4)
-}
-
-const getGenres = (genres) => {
-	return genres.map((genre) => genre.name.split(' & ')[0])
+const initialState = {
+	openedMovie: null,
+	reviews: {
+		list: [],
+		loading: false,
+		error: null,
+	},
 }
 
 const currentMovieSlice = createSlice({
 	name: 'currentWatch',
-	initialState: {
-		openedMovie: null,
-		reviews: {
-			list: [],
-			loading: false,
-			error: null,
-		},
-	},
+	initialState,
 	reducers: {
 		openMovie: (state, { payload }) => {
 			state.openedMovie = {
@@ -37,10 +36,7 @@ const currentMovieSlice = createSlice({
 				genres: getGenres(payload.genres),
 			}
 		},
-
-		closeMovie: (state) => {
-			state.openedMovie = null
-		},
+		closeMovie: () => initialState,
 		fetchReviewsStart: (state) => {
 			state.reviews.loading = true
 			state.reviews.error = null
@@ -72,6 +68,21 @@ export const fetchReviews = (movie, id) => {
 		info
 			.then((reviews) => dispatch(fetchReviewsSuccess(reviews)))
 			.catch((error) => dispatch(fetchReviewsFailure(error)))
+	}
+}
+
+export const initializeMedia = (movie, id) => {
+	return async (dispatch) => {
+		let info
+
+		if (movie) {
+			info = await getMovieInfo(id)
+		} else {
+			info = await getSerialInfo(id)
+			const data = await getSerialIMDBID(id)
+			info.imdb_id = data.imdb_id
+		}
+		dispatch(addMainInfo(info))
 	}
 }
 

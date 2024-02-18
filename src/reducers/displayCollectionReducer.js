@@ -1,10 +1,10 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import {
 	getCartoonCollection,
 	getMovieCollection,
 	getSerialCollection,
 } from '../services/request/collection'
-import { collections, collectionsNames } from '../App'
+import { collectionsNames } from '../сompositions/Router'
 export const nameSliceDisplayCollection = 'displayCollection'
 
 const initialState = {
@@ -42,7 +42,7 @@ export const initializeCollection = (type) => {
 	return async (dispatch) => {
 		let pageOfCollection
 		let first, second, last
-		console.log('type', type, collectionsNames.cartoons)
+		
 		switch (type) {
 			case collectionsNames.movies:
 				first = await getMovieCollection(1)
@@ -99,10 +99,5 @@ export const fetchNewPageCollection = (type) => {
 
 export const selectDisplayCollectionPages = (state) =>
 	state[nameSliceDisplayCollection].pages
-
-// export const selectDisplayCollection = createSelector(
-//   [selectDisplayCollectionState],
-//   (displayCollection) => displayCollection
-// )
 
 export default displayCollectionSlice.reducer
