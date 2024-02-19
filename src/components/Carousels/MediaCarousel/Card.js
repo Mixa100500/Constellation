@@ -10,6 +10,13 @@ const pricureCotainerStyle = {
 	alignItems: 'left',
 }
 
+const linkStyle = {
+	textDecoration: 'none',
+	color: 'white',
+	display: 'block',
+	height: '100%'
+}
+
 const pictureBaseUrl = 'https://image.tmdb.org/t/p'
 
 const Card = (props) => {
@@ -24,7 +31,7 @@ const Card = (props) => {
 		<div>
 			<Link
 				to={`/watch/${film.title ? 'movie' : 'serial'}/${film.id}`}
-				style={{ textDecoration: 'none', color: 'white' }}
+				style={linkStyle}
 				onClick={handleClick}>
 				<div
 					className='padding-horizontal padding-vertical'
