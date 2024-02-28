@@ -1,51 +1,6 @@
 import styled from "styled-components"
 import { generateContainerStyles, scrollbarWidth } from "../../../helpers/generateBreakpoints"
 
-
-export const ImgContiner = styled.div`
-	position: relative;
-	overflow: hidden;
-	transition: all 0.3s ease;
-
-	&::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.8);
-		opacity: 0;
-		transition: all 0.3s ease;
-	}
-
-	.play {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		display: none;
-		align-items: center;
-		justify-content: center;
-		font-size: 20px;
-		color: black;
-		cursor: pointer;
-		transition: all 0.3s ease;
-	}
-
-	.play img {
-		height: 50px;
-	}
-
-	&:hover::before {
-		opacity: 1;
-	}
-
-	&:hover .play {
-		display: flex;
-	}
-`
-
 export const PopularButtonContainer = styled.div`
 	height: 0px;
 	margin: 0 auto;
@@ -55,22 +10,14 @@ export const PopularButtonContainer = styled.div`
 
 	.carousel-popular__button {
 		display: none;
-		width: 48px;
-		height: 48px;
-		opacity: 0.75;
 	}
-
+	
 	@media screen and (min-width: 1101px) {
 		.carousel-popular__button {
 			display: block;
 			position: relative;
 			z-index: 0;
 			top: -216.5px;
-		}
-
-		.carousel-popular__button:hover {
-			opacity: 1;
-			cursor: pointer;
 		}
 	}
 `
@@ -109,11 +56,12 @@ export const ContainerPopular = styled.div`
 	}
 
 	.slick-dots li button:before {
-		color: white;
+		opacity: 1;
+		color: var(--dots-hover-bg-color);
 	}
 	
 	.slick-dots li.slick-active button:before {
-		color: white;
+		color: var(--dots-bg-color);
 	}
 
 	@media screen and (min-width: 610px) {
@@ -140,9 +88,4 @@ export const ContainerPopular = styled.div`
 	}
 
 	${containerPopularStyles}
-`
-
-export const BackdropImg = styled.img`
-	max-width: 100%;
-	border-radius: 5px;
 `

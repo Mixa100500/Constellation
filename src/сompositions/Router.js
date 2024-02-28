@@ -36,11 +36,11 @@ const Router = () => {
         <Route path='/watch'>
           <Route
             path='serial/:id'
-            element={<Watch IsMovie={false} />}
+            element={<Watch isMovie={false} />}
           />
           <Route
             path='movie/:id'
-            element={<Watch IsMovie={true} />}
+            element={<Watch isMovie={true} />}
           />
         </Route>
       </Routes>

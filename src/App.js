@@ -1,4 +1,4 @@
-import { Header } from './components/Header'
+import { Header } from "./components/Layout/Header"
 import Router from './сompositions/Router'
 
 function App() {

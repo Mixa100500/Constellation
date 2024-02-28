@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import MediaCarousel from '../../Carousels/MediaCarousel/CarouselMedia'
+import MediaCarousel from '../../Carousels/CarouselMedia/CarouselMedia'
 import recommendResponse from '../../recommend'
 
 const CarouselRecommend = () => {
@@ -15,8 +15,8 @@ const CarouselRecommend = () => {
 	return (
 		<>
 			<MediaCarousel
+				loaded={true}
 				list={recommend}
-				dark={false}
 				label={'Recommend'}
 			/>
 		</>

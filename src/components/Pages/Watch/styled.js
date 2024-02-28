@@ -19,6 +19,10 @@ export const Review = styled.div`
   .review__icon-content {
     position: relative;
   }
+  .review__content {
+    font-size: 18px;
+    color: var(--dark-color);
+  }
 
   .review__author {
     margin: 0.8rem 0;
@@ -66,7 +70,7 @@ export const GridTwoColumn = styled.div`
 `
 
 export const OverviewHeader = styled.h3`
-	color: var(--second-color);
+	color: var(--secondary-color);
 `
 
 export const DescriptionHeader = styled.div`
@@ -74,6 +78,6 @@ export const DescriptionHeader = styled.div`
 		font-size: 1.17em;
 		font-weight: bold;
 		text-align: left;
-		color: var(--second-color);
+		color: var(--secondary-color);
 	}
 `

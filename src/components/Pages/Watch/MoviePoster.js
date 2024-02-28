@@ -20,7 +20,7 @@ const BageDateStyled = styled.div`
 const ImgStyled = styled.img`
   max-width: 100%;
   aspect-ratio: 2 / 3;
-  border-radius: 8px;
+  border-radius: var(--poster-redius);
 `
 
 const MoviePoster = ({ mediaInfo }) => {

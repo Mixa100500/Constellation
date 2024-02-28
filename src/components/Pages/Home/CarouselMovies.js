@@ -1,25 +1,26 @@
 import React from 'react'
-import MediaCarousel from '../../Carousels/MediaCarousel/CarouselMedia'
+import MediaCarousel from '../../Carousels/CarouselMedia/CarouselMedia'
 import {
-	selectFilmsState,
-	selectFilmsLoadingState,
-} from '../../../reducers/filmCollectionReducer'
+	selectMoviesState,
+	selectMoviesLoadingState,
+	initializeMovies,
+} from '../../../reducers/moviesCollectionReducer'
 import { useSelector } from 'react-redux'
+import { ScrollLoader } from '../../Pagination/ScrollLoader'
 
 const CarouselFilms = () => {
-	const loaded = useSelector(selectFilmsLoadingState)
-	const films = useSelector(selectFilmsState)
-
-	if (!loaded) {
-		return <div>loading...</div>
-	}
+	const loaded = useSelector(selectMoviesLoadingState)
+	const films = useSelector(selectMoviesState)
 
 	return (
 		<>
-			<MediaCarousel
-				list={films}
-				label={'movies'}
-			/>
+			<ScrollLoader fetchData={initializeMovies} >
+				<MediaCarousel
+					loaded={loaded}
+					list={films}
+					label={'movies'}
+				/>
+			</ScrollLoader>
 		</>
 	)
 }

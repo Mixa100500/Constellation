@@ -1,6 +1,8 @@
-
 import React from 'react'
-import { useHeight } from '../context/height'
+import { useHeight } from '../../context/height'
+import { PosterCardPlaceholder } from '../UI/Cards/PosterCard/PosterCardPlaceholder'
+import { createArray } from '../../helpers/simple'
+import { CollectionList } from '../Pages/Collection/styled'
 
 const VirtualVisibility = (prop) => {
 	const children = prop.children
@@ -18,12 +20,13 @@ const VirtualVisibility = (prop) => {
 				rootMargin: '400px 0px 400px 0px',
 			}
 		)
+
 		if (elementRef.current) {
 			observer.observe(elementRef.current)
 		}
 
-		if (elementRef.current) {
-			observer.unobserve(elementRef.current)
+		return () => {
+			observer.disconnect()
 		}
 	}, [elementRef])
 
@@ -34,13 +37,22 @@ const VirtualVisibility = (prop) => {
 		}),
 		[height]
 	)
+	const placeholders = createArray(60)
 
 	return (
 		<div
 			style={styleHidden}
 			className='virtual-visibility'
 			ref={elementRef}>
-			{isVisible && children}
+			{isVisible ? 
+				children
+				:
+				<CollectionList>
+					{placeholders.map((item) => 
+						<PosterCardPlaceholder key={item} />
+					)}
+				</CollectionList>
+			}
 		</div>
 	)
 }

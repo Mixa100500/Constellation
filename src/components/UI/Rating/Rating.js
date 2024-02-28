@@ -5,7 +5,7 @@ const styleRating = {
 }
 
 const styleOwnerRating = {
-	color: 'var(--second-color)',
+	color: 'var(--primary-color)',
 }
 
 

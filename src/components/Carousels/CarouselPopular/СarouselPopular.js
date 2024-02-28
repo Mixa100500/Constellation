@@ -3,11 +3,20 @@ import Slider from 'react-slick'
 import { useDispatch, useSelector } from 'react-redux'
 import left48 from '../../../images/icons8-chevron-left-48.png'
 import right48 from '../../../images/icons8-chevron-right-48.png'
-import { BackdropImg, ContainerPopular, ImgContiner, PopularButtonContainer } from './styled'
-import { Card } from './Card'
-import { selectPopularLoadingState, selectPopularState } from '../../../reducers/popularCollectionReducer'
+import {
+	ContainerPopular,
+	PopularButtonContainer,
+} from './styled'
+import { PopularCard } from '../../UI/Cards/PopularCard/PopularCard'
+import {
+	selectPopularLoadingState,
+	selectPopularState,
+} from '../../../reducers/popularCollectionReducer'
 import { getPopularCorouselBrakepoints } from '../../../helpers/generateBreakpoints'
 import { useCarouselButton } from '../../../hooks'
+import { PopularCardPlaceholder } from '../../UI/Cards/PopularCard/PopularCardPlaceholder'
+import { createArray } from '../../../helpers/simple'
+import { ButtonImg } from '../../../elements/BottonImg'
 
 const settings = {
 	dots: true,
@@ -23,18 +32,15 @@ const settings = {
 	slidesToShow: 2,
 	slidesToScroll: 3,
 	pauseOnHover: true,
-	adaptiveHeight: true,
 	responsive: getPopularCorouselBrakepoints(),
 }
+
+const placeholders = createArray(20)
 
 function CarouselPopular() {
 	const popular = useSelector(selectPopularState)
 	const loaded = useSelector(selectPopularLoadingState)
-	const {sliderRef, prev, next} = useCarouselButton()
-
-	if (!loaded) {
-		return <div>loading...</div>
-	}
+	const { sliderRef, prev, next } = useCarouselButton()
 
 	return (
 		<>
@@ -42,21 +48,27 @@ function CarouselPopular() {
 				<Slider
 					ref={sliderRef}
 					{...settings}>
-					{popular.map((info) => (
-						<Card
-							info={info}
-							key={info.name || info.original_title}
-						/>
-					))}
+					{loaded ?
+						popular.map((info) => (
+							<PopularCard
+								info={info}
+								key={info.name || info.original_title}
+							/>
+						))
+						:
+						placeholders.map((item) => (
+							<PopularCardPlaceholder key={item}/>
+						))
+					}
 				</Slider>
 			</ContainerPopular>
 			<PopularButtonContainer>
-				<img
+				<ButtonImg
 					onClick={prev}
 					src={left48}
 					className='carousel-popular__button'
 				/>
-				<img
+				<ButtonImg
 					onClick={next}
 					src={right48}
 					className='carousel-popular__button'

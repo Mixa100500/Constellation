@@ -1,17 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getCartoons } from '../services/request/cartoon'
+import { getYear } from '../helpers/simple'
 
 export const nameSliceCartoonCollection = 'cartoonCollection'
 
 const cartoonSlice = createSlice({
   name: nameSliceCartoonCollection,
   initialState: {
-    cartoon: null,
+    cartoons: null,
     loaded: false,
   },
   reducers: {
-    setCartoons: (state, action) => {
-      state.cartoon = action.payload
+    setCartoons: (state, { payload }) => {
+      const cartoons = payload.map(a => {
+        a.year = getYear(a)
+        return a
+      })
+      state.cartoons = cartoons
       state.loaded = true
     },
   },
@@ -26,6 +31,6 @@ export const initializeCartoon = () => {
   }
 }
 
-export const selectCartoonsState = (state) => state[nameSliceCartoonCollection].cartoon
+export const selectCartoonsState = (state) => state[nameSliceCartoonCollection].cartoons
 export const selectCartoonsLoadingState = (state) => state[nameSliceCartoonCollection].loaded
 export default cartoonSlice.reducer

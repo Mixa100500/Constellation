@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useFirstPageRef, useHandleScroll } from '../../../hooks'
-import { initializeCollection, selectDisplayCollectionPages } from '../../../reducers/displayCollectionReducer'
+import { clearDisplayCollection, initializeCollection, selectDisplayCollectionPages } from '../../../reducers/displayCollectionReducer'
 import { CollectionList } from './styled'
-import { Page } from './Page'
-import Card from '../../Carousels/MediaCarousel/Card'
 import { useCustomRef } from '../../../context/ref'
-import VirtualVisibility from '../../VirtualVisibility'
+import VirtualVisibility from '../../Pagination/VirtualVisibility'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useClearWhenExitCollection } from '../../../hooks/Initializer'
+import { createArray } from '../../../helpers/simple'
+import { PosterCardPlaceholder } from '../../UI/Cards/PosterCard/PosterCardPlaceholder'
+import PosterCard from '../../UI/Cards/PosterCard/PosterCard'
 
 const Article = () => {
 	const dispatch = useDispatch()
@@ -17,24 +17,31 @@ const Article = () => {
 	useHandleScroll()
 	const ref = useCustomRef()
 	const list = useSelector(selectDisplayCollectionPages)
-	useClearWhenExitCollection()
+
 	useEffect(() => {
 		dispatch(initializeCollection(type))
-	}, [])
 
-	if (!list[0]) {
-		return <div>lading...</div>
-	}
+		return () => {
+      dispatch(clearDisplayCollection())
+    }
+	}, [type])
+
+	const placeholders = createArray(60)
 
 	return (
 		<>
 			<CollectionList ref={ref}>
-				{list[0].map((info) => (
-					<Card
-						film={info}
-						key={info.id}
-					/>
-				))}
+				{list[0] ?
+					list[0].map((info) => (
+						<PosterCard
+							film={info}
+							key={info.id}
+						/>
+					))
+					:
+					placeholders.map((item) => 
+						<PosterCardPlaceholder key={item} />
+					)}
 			</CollectionList>
 			{list.map((pageList, index) => {
 				if (index === 0) {
@@ -42,7 +49,14 @@ const Article = () => {
 				}
 				return (
 					<VirtualVisibility key={index}>
-						<Page pageList={pageList} />
+						<CollectionList>
+							{pageList.map((info) => (
+								<PosterCard
+									film={info}
+									key={info.id}
+								/>
+							))}
+						</CollectionList>
 					</VirtualVisibility>
 				)
 			})}

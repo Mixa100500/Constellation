@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getSerials } from '../services/request/serials'
+import { getYear } from '../helpers/simple'
 
 export const nameSliceSerialCollection = 'serialCollection'
 
@@ -10,8 +11,12 @@ const serialsSlice = createSlice({
     loaded: false,
   },
   reducers: {
-    setSerials: (state, action) => {
-      state.serials = action.payload
+    setSerials: (state, { payload }) => {
+      const cartoons = payload.map(a => {
+        a.year = getYear(a)
+        return a
+      })
+      state.serials = cartoons
       state.loaded = true
     },
   },

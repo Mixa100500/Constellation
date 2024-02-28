@@ -1,24 +1,26 @@
 import React, { useEffect } from 'react'
-import MediaCarousel from '../../Carousels/MediaCarousel/CarouselMedia'
+import MediaCarousel from '../../Carousels/CarouselMedia/CarouselMedia'
 import { useSelector } from 'react-redux'
 import {
+	initializeSerials,
 	selectSerialsLoadingState,
 	selectSerialsState,
 } from '../../../reducers/serialsCollectionReducer'
+import { ScrollLoader } from '../../Pagination/ScrollLoader'
 
 const CarouselSerials = () => {
 	const loaded = useSelector(selectSerialsLoadingState)
 	const serials = useSelector(selectSerialsState)
 
-	if (!loaded) {
-		return <div>loading...</div>
-	}
 	return (
 		<>
-			<MediaCarousel
-				list={serials}
-				label={'serials'}
-			/>
+			<ScrollLoader fetchData={initializeSerials} >
+				<MediaCarousel
+					loaded={loaded}
+					list={serials}
+					label={'serials'}
+				/>
+				</ScrollLoader>
 		</>
 	)
 }

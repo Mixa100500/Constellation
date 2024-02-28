@@ -10,13 +10,18 @@ import {
 	getSerialInfo,
 } from '../services/request/mediaInfo'
 
-const initialState = {
-	openedMovie: null,
+
+const initialReviws = {
 	reviews: {
 		list: [],
-		loading: false,
+		loaded: false,
 		error: null,
-	},
+	}
+}
+
+const initialState = {
+	openedMovie: null,
+	reviews: initialReviws,
 }
 
 const currentMovieSlice = createSlice({
@@ -26,28 +31,27 @@ const currentMovieSlice = createSlice({
 		openMovie: (state, { payload }) => {
 			state.openedMovie = {
 				...payload,
-				date: getYear(payload.release_date, payload.first_air_date),
+				date: getYear(payload),
 			}
+		},
+		clearReview: (state) => {
+			state.reviews = initialReviws
 		},
 		addMainInfo: (state, { payload }) => {
 			state.openedMovie = {
 				...payload,
-				date: getYear(payload.release_date, payload.first_air_date),
+				date: getYear(payload),
 				genres: getGenres(payload.genres),
 			}
 		},
 		closeMovie: () => initialState,
-		fetchReviewsStart: (state) => {
-			state.reviews.loading = true
-			state.reviews.error = null
-		},
 		fetchReviewsSuccess: (state, { payload }) => {
 			state.reviews.list = payload.results
-			state.reviews.loading = false
+			state.reviews.loaded = true
 		},
 		fetchReviewsFailure: (state, { payload }) => {
 			state.reviews.error = payload
-			state.reviews.loading = false
+			state.reviews.loaded = false
 		},
 	},
 })
@@ -55,12 +59,13 @@ const currentMovieSlice = createSlice({
 export const { fetchReviewsStart, fetchReviewsFailure, fetchReviewsSuccess } =
 	currentMovieSlice.actions
 
-export const fetchReviews = (movie, id) => {
+export const fetchReviews = (obj) => {
+	const { isMovie, id } = obj;
+
 	return (dispatch) => {
-		dispatch(fetchReviewsStart())
 		let info
 
-		if (movie) {
+		if (isMovie) {
 			info = getReviewsByFilm(id)
 		} else {
 			info = getReviewsBySerial(id)
@@ -71,11 +76,11 @@ export const fetchReviews = (movie, id) => {
 	}
 }
 
-export const initializeMedia = (movie, id) => {
+export const initializeMedia = (IsMovie, id) => {
 	return async (dispatch) => {
 		let info
 
-		if (movie) {
+		if (IsMovie) {
 			info = await getMovieInfo(id)
 		} else {
 			info = await getSerialInfo(id)
@@ -86,7 +91,7 @@ export const initializeMedia = (movie, id) => {
 	}
 }
 
-export const { openMovie, closeMovie, addMainInfo } = currentMovieSlice.actions
+export const { openMovie, closeMovie, addMainInfo, clearReview } = currentMovieSlice.actions
 export const selectOpenedMovieId = (state) => state.currentWatch.openedMovie.id
 export const selectOpenedMovieInfo = (state) => state.currentWatch.openedMovie
 export const selectOpenedMovieReview = (state) => state.currentWatch.reviews

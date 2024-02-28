@@ -15,7 +15,7 @@ Front-end application for searching and watching movies. Demo: [https://constell
 # Technology Stack:
 
 -   React + React Hooks
--   Redux Toolkit
+-   Redux-Toolkit
 -   styled-components
 
 # File Structure:

@@ -31,7 +31,6 @@ export function useFirstPageRef() {
 				setHeight(height)
 			}
 		}
-
 		window.addEventListener('resize', handleResize)
 
 		return () => window.removeEventListener('resize', handleResize)
@@ -48,7 +47,7 @@ export function useHandleScroll() {
 	const dispatch = useDispatch()
 	const setHeight = useHeightResize()
 
-	function handleScroll() {
+	async function handleScroll() {
 		if (!delayResize && firstPageRef.current) {
 			const height = firstPageRef.current.offsetHeight
 			setHeight(height)
@@ -64,14 +63,14 @@ export function useHandleScroll() {
 
 		if (checkHeight()) {
 			delayFetch = true
-			dispatch(fetchNewPageCollection(type))
+			await dispatch(fetchNewPageCollection(type))
 
 			setTimeout(() => {
 				delayFetch = false
 				if (checkHeight()) {
 					handleScroll()
 				}
-			}, 1000)
+			}, 500)
 		}
 	}
 	useEffect(() => {

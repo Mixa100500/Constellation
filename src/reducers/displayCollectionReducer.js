@@ -5,10 +5,11 @@ import {
 	getSerialCollection,
 } from '../services/request/collection'
 import { collectionsNames } from '../сompositions/Router'
+import { getYear } from '../helpers/simple'
 export const nameSliceDisplayCollection = 'displayCollection'
 
 const initialState = {
-	page: 0,
+	page: 1,
 	pages: [],
 }
 
@@ -17,7 +18,12 @@ const displayCollectionSlice = createSlice({
 	initialState,
 	reducers: {
 		setDisplayCollection: (state, action) => {
-			state.pages.push(action.payload)
+			const collection = action.payload.map(a => {
+        a.year = getYear(a)
+        return a
+      })
+
+			state.pages.push(collection)
 			state.page = 1
 			return state
 		},
@@ -25,7 +31,12 @@ const displayCollectionSlice = createSlice({
 			return initialState
 		},
 		addPageOfCollection: (state, action) => {
-			state.pages.push(action.payload)
+			const collection = action.payload.map(a => {
+        a.year = getYear(a)
+        return a
+      })
+
+			state.pages.push(collection)
 			state.page++
 			return state
 		},
@@ -63,6 +74,7 @@ export const initializeCollection = (type) => {
 				return
 		}
 		pageOfCollection = [...first, ...second, ...last]
+		// dispatch(clearDisplayCollection())
 		dispatch(setDisplayCollection(pageOfCollection))
 	}
 }
@@ -70,6 +82,7 @@ export const initializeCollection = (type) => {
 export const fetchNewPageCollection = (type) => {
 	return async (dispatch, getState) => {
 		const page = getState()[nameSliceDisplayCollection].page
+		console.log('page', page)
 		let pageOfCollection
 		let first, second, last
 

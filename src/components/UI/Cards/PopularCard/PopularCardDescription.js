@@ -13,7 +13,7 @@ const ItemDesription = (props) => {
       style={containerStyle}
     >
       <h3 className="title block--ellipsis">{film.title || film.name}</h3>
-      <div className="date block--ellipsis">{film.release_date || film.first_air_date}</div>
+      <div className="date block--ellipsis">{film.year}</div>
     </div>
   )
 }

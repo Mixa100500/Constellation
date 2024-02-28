@@ -1,31 +1,34 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
 	closeMovie,
+	fetchReviews,
 	selectOpenedMovieInfo,
 } from '../../../reducers/currentWatchReducer'
 import Reviews from './Reviews'
 import MoviePoster from './MoviePoster'
 import GenresList from './GenresList'
-import VideoPlayer from '../../VideoPlayer'
+import VideoPlayer from '../../Player/MoviePlayer'
 import CarouselRecommend from './CarouselRecommend'
-import Layout from '../../Layout'
+import Layout from '../../Layout/Layout'
 import { H2 } from '../../../elements/H2'
 import { useClearWhenExitWath, useInitializationWatch } from '../../../hooks/Initializer'
-import { Rating } from './Rating'
+import { Rating } from '../../UI/Rating/Rating'
 import { DescriptionHeader, Flex, GridTwoColumn, InfoColumnStyled, OverviewHeader, PosterContainer } from './styled'
+import { useParams } from 'react-router-dom'
 
 
 const margened = { marginBottom: '15px' }
 
-const Watch = ({ IsMovie }) => {
+const Watch = ({ isMovie }) => {
+	const id = useParams().id
 	const mediaInfo = useSelector(selectOpenedMovieInfo)
-	const initializerWatch = useInitializationWatch(IsMovie)
+	const initializerWatch = useInitializationWatch(isMovie)
 	useClearWhenExitWath()
 	
 	useEffect(() => {
 		initializerWatch()
-	}, [])
+	}, [id])
 
 	if (!mediaInfo) {
 		return <div>loading...</div>
@@ -48,18 +51,18 @@ const Watch = ({ IsMovie }) => {
 					</PosterContainer>
 					<InfoColumnStyled>
 						<VideoPlayer imdbId={imdbId} />
-						<H2 $verticalPadding={true}>{mediaInfo.name || mediaInfo.title}</H2>
+						<H2 $paddingTop='xl' $paddingBottom='xl'>{mediaInfo.name || mediaInfo.title}</H2>
 						<GridTwoColumn>
 							<DescriptionHeader>genres:</DescriptionHeader>
 							<GenresList genres={mediaInfo.genres} />
-							{IsMovie && imdbId && (
+							{isMovie && imdbId && (
 								<>
 									<DescriptionHeader>runtime:</DescriptionHeader>
 									<div>{mediaInfo.runtime} min</div>
 								</>
 							)}
 
-							{!IsMovie && imdbId && (
+							{!isMovie && imdbId && (
 								<>
 									<DescriptionHeader>episodes:</DescriptionHeader>
 									<div>{mediaInfo.number_of_episodes}</div>
@@ -79,7 +82,7 @@ const Watch = ({ IsMovie }) => {
 					</InfoColumnStyled>
 				</Flex>
 				<CarouselRecommend />
-				<Reviews movie={IsMovie} />
+				<Reviews isMovie={isMovie}/>
 			</Layout>
 		</div>
 	)

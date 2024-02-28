@@ -1,9 +1,8 @@
-import logo from '../logoWhite.png'
-import { A } from '../elements/A'
-import { actionModifierPadding } from '../modifiers/padding'
+import logo from '../../logoWhite.png'
+import { Link } from '../../elements/Link'
 import styled from 'styled-components'
-import { collections } from '../сompositions/Router'
-import { H2 } from '../elements/H2'
+import { collections } from '../../сompositions/Router'
+import { H2 } from '../../elements/H2'
 
 const paddingStyle = { padding: '0 20px' }
 
@@ -35,32 +34,41 @@ const ContainerHeader = styled.div`
 		display: flex;
 		justify-content: space-between;
 	}
+	
+	.content-logo {
+		display: flex;
+		align-items: center;
+	}
 `
+
+
 
 export const Header = () => {
 	return (
 		<header style={paddingStyle}>
 			<ContainerHeader className='padding-horizontal'>
-				<A to='/' >
 					<div className='container-logo'>
-						<H2 $verticalPadding={true}>Constellation</H2>
-						<img
-							className='container-logo__logo'
-							src={logo}
-							alt='Logo'
-						/>
+						<Link to='/' >
+						<div className='content-logo'>
+							<H2 $paddingTop='xl' $paddingBottom='xl'>Constellation</H2>
+							<img
+								className='container-logo__logo'
+								src={logo}
+								alt='Logo'
+							/>
+						</div>
+					</Link>
 					</div>
-				</A>
 				<nav>
 					<ul className='menu'>
 						{collections.map((c) => {
 							return (
 								<li key={c.name}>
-									<A
-										$padding={actionModifierPadding.padding}
+									<Link 
+										$padding='md'
 										to={`/popular/${c.name}`}>
 										{c.name}
-									</A>
+									</Link>
 								</li>
 							)
 						})}

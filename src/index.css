@@ -20,9 +20,15 @@ code {
   --main-bg-color: #070717;
   --button-bg-color: #fdd10f;
   --bage-bg-color: #FCCD00;
-  --second-color: silver;
+  --secondary-color: #7b7a8f;
+  --primary-color: #7e79ff;
+  --dark-color: #797979;
   --hover-bg-color: #440097;
   --second-bg-color: #110e15;
+  --primory-bg-color: rgba(255, 255, 255, .08);
+  --dots-bg-color: #e4e4e3;
+  --dots-hover-bg-color: #404040;
+
 }
 
 
@@ -33,6 +39,11 @@ code {
   --carousel-min-button-width: 36px;
 }
 
+:root {
+  --backdrop-radius: 5px;
+  --poster-redius: 8px;
+}
+
 
 body {
   background-color: var(--main-bg-color);
@@ -41,7 +52,6 @@ body {
 
 h2 {
   margin: 0px;
-  padding: 1.7rem 0;
   font-size: 2em;
 }
 
@@ -69,6 +79,10 @@ nav li:first-of-type {
   padding-right: 8px;
 }
 
+.padding-top {
+  padding-top: 12px;
+}
+
 @media screen and (min-width: 1101px) {
 
   .padding-horizontal {
@@ -78,5 +92,8 @@ nav li:first-of-type {
   .padding-vertical {
     padding-top: 12px;
     padding-bottom: 12px;
+  }
+  .padding-top {
+    padding-top: 12px;
   }
 }

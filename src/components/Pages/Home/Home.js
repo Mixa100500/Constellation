@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import CarouselPopular from '../../Carousels/CarouselPopular/СarouselPopular'
 import CarouselMovies from './CarouselMovies'
 import CarouselSerials from './CarouselSerials'
-import Layout from '../../Layout'
+import Layout from '../../Layout/Layout'
 import CarouselCartoons from './CarouselCartoons'
 import { useInitializationHome } from '../../../hooks/Initializer'
 
