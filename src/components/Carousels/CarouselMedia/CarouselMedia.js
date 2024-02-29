@@ -6,6 +6,7 @@ import { useCarouselButton } from '../../../hooks'
 import { PosterCardPlaceholder } from '../../UI/Cards/PosterCard/PosterCardPlaceholder'
 import { createArray } from '../../../helpers/simple'
 import Gallery from '../../../blocks/Gallery/index.js'
+import VirtualVisibility from '../../../context/VirtualVisibility.js'
 
 const responsive = [
 	{
@@ -70,22 +71,24 @@ const MediaCarousel = ({ list, label, loaded }) => {
 				prev={prev}
 				label={label}
 			/>
-			<Slider
-				ref={sliderRef}
-				{...settings}
-			>
-				{loaded ?
-					list.map((film) => (
-						<PosterCard
-							film={film}
-							key={film.id}
-						/>
-					))
-					:
-					placeholders.map((index) => (
-						<PosterCardPlaceholder key={index}/>
-					))}
-			</Slider>
+			<VirtualVisibility>
+				<Slider
+					ref={sliderRef}
+					{...settings}
+				>
+					{loaded ?
+						list.map((film) => (
+							<PosterCard
+								film={film}
+								key={film.id}
+							/>
+						))
+						:
+						placeholders.map((index) => (
+							<PosterCardPlaceholder key={index}/>
+						))}
+				</Slider>
+			</VirtualVisibility>
 		</Gallery>
 	)
 }

@@ -9,7 +9,7 @@ import { getYear } from '../helpers/simple'
 export const nameSliceDisplayCollection = 'displayCollection'
 
 const initialState = {
-	page: 1,
+	pageCount: 0,
 	pages: [],
 }
 
@@ -22,9 +22,8 @@ const displayCollectionSlice = createSlice({
         a.year = getYear(a)
         return a
       })
-
-			state.pages.push(collection)
-			state.page = 1
+			state.pages = [collection]
+			state.pageCount = 1
 			return state
 		},
 		clearDisplayCollection: () => {
@@ -37,7 +36,7 @@ const displayCollectionSlice = createSlice({
       })
 
 			state.pages.push(collection)
-			state.page++
+			state.pageCount++
 			return state
 		},
 	},
@@ -74,15 +73,14 @@ export const initializeCollection = (type) => {
 				return
 		}
 		pageOfCollection = [...first, ...second, ...last]
-		// dispatch(clearDisplayCollection())
 		dispatch(setDisplayCollection(pageOfCollection))
 	}
 }
 
 export const fetchNewPageCollection = (type) => {
 	return async (dispatch, getState) => {
-		const page = getState()[nameSliceDisplayCollection].page
-		console.log('page', page)
+		const page = getState()[nameSliceDisplayCollection].pageCount
+
 		let pageOfCollection
 		let first, second, last
 

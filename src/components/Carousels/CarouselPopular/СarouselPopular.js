@@ -17,6 +17,7 @@ import { useCarouselButton } from '../../../hooks'
 import { PopularCardPlaceholder } from '../../UI/Cards/PopularCard/PopularCardPlaceholder'
 import { createArray } from '../../../helpers/simple'
 import { ButtonImg } from '../../../elements/BottonImg'
+import VirtualVisibility from '../../../context/VirtualVisibility'
 
 const settings = {
 	dots: true,
@@ -45,22 +46,24 @@ function CarouselPopular() {
 	return (
 		<>
 			<ContainerPopular>
-				<Slider
-					ref={sliderRef}
-					{...settings}>
-					{loaded ?
-						popular.map((info) => (
-							<PopularCard
-								info={info}
-								key={info.name || info.original_title}
-							/>
-						))
-						:
-						placeholders.map((item) => (
-							<PopularCardPlaceholder key={item}/>
-						))
-					}
-				</Slider>
+				<VirtualVisibility>
+					<Slider
+						ref={sliderRef}
+						{...settings}>
+						{loaded ?
+							popular.map((info) => (
+								<PopularCard
+									info={info}
+									key={info.name || info.original_title}
+								/>
+							))
+							:
+							placeholders.map((item) => (
+								<PopularCardPlaceholder key={item}/>
+							))
+						}
+					</Slider>
+				</VirtualVisibility>
 			</ContainerPopular>
 			<PopularButtonContainer>
 				<ButtonImg

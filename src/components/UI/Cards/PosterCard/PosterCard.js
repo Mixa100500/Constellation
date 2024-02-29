@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
-import ItemDesription from '../PopularCard/PopularCardDescription'
+import ItemDesription from './ItemDesription'
 import { useDispatch } from 'react-redux'
 import { openMovie } from '../../../../reducers/currentWatchReducer'
 import { PosterImg, PosterContainer, PosterImgPlaceholder } from '.'
+import { useVisible } from '../../../../context/VirtualVisibility'
+
 
 const linkStyle = {
 	textDecoration: 'none',
@@ -20,7 +22,7 @@ const PosterCard = (props) => {
 	const handleClick = () => {
 		dispatch(openMovie(film))
 	}
-
+	const visible = useVisible()
 	return (
 		<div>
 			<Link
@@ -30,28 +32,28 @@ const PosterCard = (props) => {
 				<PosterContainer
 					className='padding-horizontal padding-top'
 				>
-					{film.poster_path ? 
-						<picture>
-							<source
-								media='(min-width: 758px)'
-								srcSet={`${pictureBaseUrl}/w200${film.poster_path}`}
-							/>
-							<source
-								media='(min-width: 319px)'
-								srcSet={`${pictureBaseUrl}/w300${film.poster_path}`}
-							/>
-							<source
-								media='(min-width: 200px)'
-								srcSet={`${pictureBaseUrl}/w500${film.poster_path}`}
-							/>
-							<PosterImg
-								src={`${pictureBaseUrl}/w200${film.poster_path}`}
-								alt={film.name || film.original_title}
-							/>
-						</picture>
-						:
-						<PosterImgPlaceholder />
-					}
+					<PosterImgPlaceholder >
+						{visible && film.poster_path &&
+							<picture>
+								<source
+									media='(min-width: 758px)'
+									srcSet={`${pictureBaseUrl}/w200${film.poster_path}`}
+								/>
+								<source
+									media='(min-width: 319px)'
+									srcSet={`${pictureBaseUrl}/w300${film.poster_path}`}
+								/>
+								<source
+									media='(min-width: 200px)'
+									srcSet={`${pictureBaseUrl}/w500${film.poster_path}`}
+								/>
+								<PosterImg
+									src={`${pictureBaseUrl}/w200${film.poster_path}`}
+									alt={film.name || film.original_title}
+								/>
+							</picture>
+						}
+					</PosterImgPlaceholder>
 					<ItemDesription film={film} />
 				</PosterContainer>
 			</Link>
