@@ -11,10 +11,10 @@ export const ScrollLoader = (props) => {
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
+      async (entries) => {
 				if(entries[0].isIntersecting && hasMore) {
           setHasMore(false)
-          dispatch(fetchData(query))
+          await dispatch(fetchData(query))
         }
 
         if(!hasMore) {

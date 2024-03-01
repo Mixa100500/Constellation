@@ -77,7 +77,9 @@ export const initializeCollection = (type) => {
 	}
 }
 
-export const fetchNewPageCollection = (type) => {
+
+export const fetchNewPageCollection = ({ type }) => {
+
 	return async (dispatch, getState) => {
 		const page = getState()[nameSliceDisplayCollection].pageCount
 

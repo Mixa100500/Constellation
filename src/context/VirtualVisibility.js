@@ -9,8 +9,9 @@ export const useVisible = () => {
 
 const VirtualVisibility = (prop) => {
 	const children = prop.children
+	const isVisible = prop.visible
 	const elementRef = React.useRef(null)
-	const [visible, setVisible] = React.useState(false)
+	const [visible, setVisible] = React.useState(isVisible || false)
 
 	React.useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -20,7 +21,7 @@ const VirtualVisibility = (prop) => {
 			{
 				root: null,
 				threshold: 0,
-				rootMargin: '400px 0px 400px 0px',
+				rootMargin: '500px 0px 500px 0px',
 			}
 		)
 

@@ -37,7 +37,7 @@ export function useScrollPagination() {
 				if (checkHeight()) {
 					handleScroll()
 				}
-			}, 200)
+			}, 500)
 		}
 	}
 	useEffect(() => {

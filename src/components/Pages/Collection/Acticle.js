@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useScrollPagination } from '../../../hooks'
-import { clearDisplayCollection, initializeCollection, selectDisplayCollectionPages } from '../../../reducers/displayCollectionReducer'
+import { clearDisplayCollection, fetchNewPageCollection, initializeCollection, selectDisplayCollectionPages } from '../../../reducers/displayCollectionReducer'
 import { CollectionList } from './styled'
 import { useCustomRef } from '../../../context/ref'
 import { useEffect } from 'react'
@@ -9,10 +9,13 @@ import { createArray } from '../../../helpers/simple'
 import { PosterCardPlaceholder } from '../../UI/Cards/PosterCard/PosterCardPlaceholder'
 import PosterCard from '../../UI/Cards/PosterCard/PosterCard'
 import VirtualVisibility from '../../../context/VirtualVisibility'
+import { ScrollLoader } from '../../Pagination/ScrollLoader'
+import { InfiniteScrolling } from '../../Pagination/InfiniteScrolling'
 
 const Article = () => {
 	const dispatch = useDispatch()
 	const type = useParams().type
+	const query = { type }
 	useScrollPagination()
 	const ref = useCustomRef()
 	const list = useSelector(selectDisplayCollectionPages)
@@ -28,39 +31,23 @@ const Article = () => {
 	const placeholders = createArray(60)
 
 	return (
-		<>	
-			<VirtualVisibility key='0'>
-				<CollectionList ref={ref}>
-					{list[0] ?
-						list[0].map((info) => (
-							<PosterCard
-								film={info}
-								key={info.id}
-							/>
-						))
-						:
-						placeholders.map((item) => 
-							<PosterCardPlaceholder key={item} />
-						)}
+		<>
+			{list.map((pageList, index) => (
+				<VirtualVisibility key={index} isVisibe={list.length === index + 1}>
+					<CollectionList>
+						{pageList.map((info) => (
+							<PosterCard film={info} key={info.id} />
+						))}
+					</CollectionList>
+				</VirtualVisibility>
+			))}
+			<InfiniteScrolling fetchData={fetchNewPageCollection} query={query}>
+				<CollectionList>
+					{placeholders.map((item) => 
+						<PosterCardPlaceholder key={item} />
+					)}
 				</CollectionList>
-			</VirtualVisibility>
-			{list.map((pageList, index) => {
-				if (index === 0) {
-					return null
-				}
-				return (
-					<VirtualVisibility key={index}>
-						<CollectionList>
-							{pageList.map((info) => (
-								<PosterCard
-									film={info}
-									key={info.id}
-								/>
-							))}
-						</CollectionList>
-					</VirtualVisibility>
-				)
-			})}
+			</InfiniteScrolling>
 		</>
 	)
 }
