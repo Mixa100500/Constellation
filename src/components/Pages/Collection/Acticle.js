@@ -2,14 +2,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useScrollPagination } from '../../../hooks'
 import { clearDisplayCollection, fetchNewPageCollection, initializeCollection, selectDisplayCollectionPages } from '../../../reducers/displayCollectionReducer'
 import { CollectionList } from './styled'
-import { useCustomRef } from '../../../context/ref'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { createArray } from '../../../helpers/simple'
 import { PosterCardPlaceholder } from '../../UI/Cards/PosterCard/PosterCardPlaceholder'
 import PosterCard from '../../UI/Cards/PosterCard/PosterCard'
 import VirtualVisibility from '../../../context/VirtualVisibility'
-import { ScrollLoader } from '../../Pagination/ScrollLoader'
 import { InfiniteScrolling } from '../../Pagination/InfiniteScrolling'
 
 const Article = () => {
@@ -17,7 +15,6 @@ const Article = () => {
 	const type = useParams().type
 	const query = { type }
 	useScrollPagination()
-	const ref = useCustomRef()
 	const list = useSelector(selectDisplayCollectionPages)
 
 	useEffect(() => {
@@ -33,14 +30,15 @@ const Article = () => {
 	return (
 		<>
 			{list.map((pageList, index) => (
-				<VirtualVisibility key={index} isVisibe={list.length === index + 1}>
+				<VirtualVisibility key={pageList[index].id} isVisibe={list.length === index + 1}>
 					<CollectionList>
 						{pageList.map((info) => (
 							<PosterCard film={info} key={info.id} />
 						))}
 					</CollectionList>
 				</VirtualVisibility>
-			))}
+			)
+			)}
 			<InfiniteScrolling fetchData={fetchNewPageCollection} query={query}>
 				<CollectionList>
 					{placeholders.map((item) => 

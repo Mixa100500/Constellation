@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchNewPageCollection } from '../reducers/displayCollectionReducer'
 import { checkHeight } from '../helpers/simple'
 import { useParams } from 'react-router-dom'
-import { useCustomRef } from '../context/ref'
 
 export function useCarouselButton() {
 	const sliderRef = useRef()

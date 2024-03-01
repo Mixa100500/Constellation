@@ -18,11 +18,14 @@ const pictureBaseUrl = 'https://image.tmdb.org/t/p'
 const PosterCard = (props) => {
 	const film = props.film
 	const dispatch = useDispatch()
-
 	const handleClick = () => {
 		dispatch(openMovie(film))
 	}
 	const visible = useVisible()
+	const showWhenVisible = {
+		display: visible ? 'block' : 'none'
+	}
+
 	return (
 		<div>
 			<Link
@@ -33,8 +36,8 @@ const PosterCard = (props) => {
 					className='padding-horizontal padding-top'
 				>
 					<PosterImgPlaceholder >
-						{visible && film.poster_path &&
-							<picture>
+						{film.poster_path &&
+							<picture style={showWhenVisible}>
 								<source
 									media='(min-width: 758px)'
 									srcSet={`${pictureBaseUrl}/w200${film.poster_path}`}
