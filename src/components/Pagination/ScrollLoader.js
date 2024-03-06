@@ -6,18 +6,18 @@ export const ScrollLoader = (props) => {
   const fetchData = props.fetchData
   const query = props.query
   const dispatch = useDispatch()
-  const [hasMore, setHasMore] = React.useState(true)
+  const [isLoaded, setIsLoaded] = React.useState(true)
   const ref = React.useRef()
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       async (entries) => {
-				if(entries[0].isIntersecting && hasMore) {
-          setHasMore(false)
+				if(entries[0].isIntersecting && isLoaded) {
+          setIsLoaded(false)
           await dispatch(fetchData(query))
         }
 
-        if(!hasMore) {
+        if(!isLoaded) {
           observer.disconnect()
         }
 			},
@@ -35,7 +35,7 @@ export const ScrollLoader = (props) => {
     return () => {
       observer.disconnect()
     }
-	}, [hasMore])
+	}, [isLoaded])
 
   return (
     <div ref={ref}>
