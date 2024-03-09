@@ -1,14 +1,15 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 
-export const InfiniteScrolling = (props) => {
+const InfiniteScrolling = (props) => {
 	const fetchData = props.fetchData
 	const query = props.query
 	const dispatch = useDispatch()
 	const ref = React.useRef()
 	let delayFetch = false
   let countQuickScrolls = 0;
-
+	
 	const isElementVisible = () => {
 		return (
 			document.documentElement.offsetHeight -
@@ -76,4 +77,11 @@ export const InfiniteScrolling = (props) => {
 	return <div ref={ref}>{props.children}</div>
 }
 
+InfiniteScrolling.propTypes = {
+  query: PropTypes.object.isRequired,
+  fetchData: PropTypes.func.isRequired,
+}
 
+export {
+	InfiniteScrolling
+}

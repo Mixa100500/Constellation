@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { openMovie } from '../../../../reducers/currentWatchReducer'
 import { PosterImg, PosterContainer, PosterImgPlaceholder } from '.'
 import { useVisible } from '../../../../context/VirtualVisibility'
-
+import PropTypes from 'prop-types'
 
 const linkStyle = {
 	textDecoration: 'none',
@@ -62,6 +62,10 @@ const PosterCard = (props) => {
 			</Link>
 		</div>
 	)
+}
+
+PosterCard.propTypes = {
+  film: PropTypes.object.isRequired
 }
 
 export default PosterCard

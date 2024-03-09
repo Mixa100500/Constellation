@@ -5,9 +5,10 @@ import play from '../../../../images/play.svg'
 import { BackdropImg, ImgContiner, PlaceholderContent, PopularImgPlaceholder } from "."
 import { PopularCardPlaceholder } from "./PopularCardPlaceholder"
 import { useVisible } from "../../../../context/VirtualVisibility"
+import PropTypes from 'prop-types'
 const basePictureUrl = 'https://image.tmdb.org/t/p'
 
-export const PopularCard = ({ info }) => {
+const PopularCard = ({ info }) => {
 	const dispatch = useDispatch()
 	const visible = useVisible()
 	const handleClick = () => {
@@ -54,4 +55,12 @@ export const PopularCard = ({ info }) => {
 			</Link>
 		</div>
 	)
+}
+
+PopularCard.propTypes = {
+	info: PropTypes.object.isRequired
+}
+
+export {
+	PopularCard
 }

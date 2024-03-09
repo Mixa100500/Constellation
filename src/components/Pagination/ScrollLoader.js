@@ -1,8 +1,8 @@
 import React from "react"
 import { useDispatch } from "react-redux"
+import PropTypes from 'prop-types'
 
-
-export const ScrollLoader = (props) => {
+const ScrollLoader = (props) => {
   const fetchData = props.fetchData
   const query = props.query
   const dispatch = useDispatch()
@@ -42,4 +42,12 @@ export const ScrollLoader = (props) => {
       {props.children}
     </div>
   )
+}
+
+ScrollLoader.propTypes = {
+  fetchData: PropTypes.func.isRequired
+}
+
+export { 
+  ScrollLoader
 }

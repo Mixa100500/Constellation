@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import Slider from 'react-slick'
 import { useDispatch, useSelector } from 'react-redux'
 import left48 from '../../../images/icons8-chevron-left-48.png'

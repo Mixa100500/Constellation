@@ -49,7 +49,8 @@ const Reviews = (props) => {
 			{!loaded ? (
 				<ScrollLoader
 					fetchData={fetchReviews}
-					query={query}>
+					query={query}
+        >
 					<div>loading...</div>
 				</ScrollLoader>
 			) : (

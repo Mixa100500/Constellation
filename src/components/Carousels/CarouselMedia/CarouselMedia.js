@@ -56,6 +56,7 @@ const settings = {
 	slidesToShow: 6,
 	slidesToScroll: 5,
 	pauseOnHover: true,
+	swipeToSlide: true,
 	responsive,
 }
 

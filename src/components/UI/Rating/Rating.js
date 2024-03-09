@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const styleRating = {
 	display: 'flex',
 	justifyContent: 'space-between',
@@ -9,11 +11,21 @@ const styleOwnerRating = {
 }
 
 
-export const Rating = ({ label, rating }) => {
+
+const Rating = ({ label, rating }) => {
 	return (
 		<div style={styleRating}>
 			<div style={styleOwnerRating}>{label}</div>
 			<div>{rating}</div>
 		</div>
 	)
+}
+
+Rating.propTypes = {
+  label: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired
+}
+
+export {
+	Rating
 }

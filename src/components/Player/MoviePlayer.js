@@ -39,4 +39,6 @@ const VideoPlayer = ({ imdbId }) => {
     </VideoContianer>
 }
 
+
+
 export default VideoPlayer;

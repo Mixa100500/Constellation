@@ -1,12 +1,13 @@
 import { DatePlaceholder, PlaceholderDescription, TitlePlaceholder } from ".";
 import { useVisible } from "../../../../context/VirtualVisibility";
+import PropTypes from 'prop-types'
 
 const height = { height: '37px' }
 
 const ItemDesription = (props) => {
   const visible = useVisible()
-
   const film = props.film
+
   return (
     <PlaceholderDescription style={height}>
       {visible ?
@@ -22,6 +23,10 @@ const ItemDesription = (props) => {
       }
     </PlaceholderDescription>
   )
+}
+
+ItemDesription.propTypes = {
+  film: PropTypes.object.isRequired
 }
 
 

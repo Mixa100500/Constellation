@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react'
-
+import PropTypes from 'prop-types'
 const VisibleContect = createContext(null)
 
 export const useVisible = () => {
@@ -44,6 +44,11 @@ const VirtualVisibility = (prop) => {
 			</VisibleContect.Provider>
 		</div>
 	)
+}
+
+VirtualVisibility.propTypes = {
+  children: PropTypes.node.isRequired,
+	visible: PropTypes.bool
 }
 
 export default VirtualVisibility
