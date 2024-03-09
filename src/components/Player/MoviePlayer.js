@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types'
+
 const apiKey = process.env.REACT_APP_PLAYER_API_KEY
 const VideoContianer = styled.div`
 position: relative;
@@ -37,6 +39,10 @@ const VideoPlayer = ({ imdbId }) => {
         />
       </>}
     </VideoContianer>
+}
+
+VideoPlayer.propTypes = {
+  imdbId: PropTypes.string
 }
 
 

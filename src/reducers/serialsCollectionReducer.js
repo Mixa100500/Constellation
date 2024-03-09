@@ -7,7 +7,7 @@ export const nameSliceSerialCollection = 'serialCollection'
 const serialsSlice = createSlice({
   name: nameSliceSerialCollection,
   initialState: {
-    serials: null,
+    serials: [],
     loaded: false,
   },
   reducers: {

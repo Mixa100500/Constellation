@@ -6,7 +6,7 @@ export const nameSliceMovieCollection = 'movieCollection'
 const moviesSlice = createSlice({
   name: nameSliceMovieCollection,
   initialState: {
-    movies: null,
+    movies: [],
     loaded: false,
   },
   reducers: {

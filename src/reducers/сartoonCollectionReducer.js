@@ -7,7 +7,7 @@ export const nameSliceCartoonCollection = 'cartoonCollection'
 const cartoonSlice = createSlice({
   name: nameSliceCartoonCollection,
   initialState: {
-    cartoons: null,
+    cartoons: [],
     loaded: false,
   },
   reducers: {

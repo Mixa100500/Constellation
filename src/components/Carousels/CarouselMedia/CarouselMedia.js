@@ -7,6 +7,7 @@ import { PosterCardPlaceholder } from '../../UI/Cards/PosterCard/PosterCardPlace
 import { createArray } from '../../../helpers/simple'
 import Gallery from '../../../blocks/Gallery/index.js'
 import VirtualVisibility from '../../../context/VirtualVisibility.js'
+import PropTypes from 'prop-types'
 
 const responsive = [
 	{
@@ -92,6 +93,12 @@ const MediaCarousel = ({ list, label, loaded }) => {
 			</VirtualVisibility>
 		</Gallery>
 	)
+}
+
+MediaCarousel.propTypes = {
+  list: PropTypes.array.isRequired,
+  label: PropTypes.string.isRequired,
+  loaded: PropTypes.bool.isRequired,
 }
 
 export default MediaCarousel

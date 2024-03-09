@@ -8,7 +8,7 @@ import {
 import { useSelector } from 'react-redux'
 import { ScrollLoader } from '../../Pagination/ScrollLoader'
 
-const CarouselFilms = () => {
+const CarouselMovies = () => {
 	const loaded = useSelector(selectMoviesLoadingState)
 	const films = useSelector(selectMoviesState)
 
@@ -25,4 +25,4 @@ const CarouselFilms = () => {
 	)
 }
 
-export default CarouselFilms
+export default CarouselMovies

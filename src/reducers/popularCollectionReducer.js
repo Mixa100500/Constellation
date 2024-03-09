@@ -6,7 +6,7 @@ export const nameSlicePopularCollection = 'popularCollection'
 const popularSlice = createSlice({
   name: nameSlicePopularCollection,
   initialState: {
-    popular: null,
+    popular: [],
     loaded: false,
   },
   reducers: {
