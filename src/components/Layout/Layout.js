@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from "styled-components"
+import PropTypes from 'prop-types'
 
 const Content = styled.div`
   max-width: var(--main-max-width);
@@ -25,8 +26,8 @@ Content.defaultProps = {
 };
 
 Content.shouldForwardProp = (prop) => {
-  return prop !== 'top' && prop !== 'bottom';
-};
+  return prop !== 'top' && prop !== 'bottom'
+}
 
 const Layout = (props) => {
   return (
@@ -36,6 +37,10 @@ const Layout = (props) => {
       </Content>
     </div>
   )
+}
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired
 }
 
 export default Layout;

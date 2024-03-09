@@ -16,7 +16,7 @@ import { useClearWhenExitWath, useInitializationWatch } from '../../../hooks/Ini
 import { Rating } from '../../UI/Rating/Rating'
 import { DescriptionHeader, Flex, GridTwoColumn, InfoColumnStyled, OverviewHeader, PosterContainer } from './styled'
 import { useParams } from 'react-router-dom'
-
+import PropTypes from 'prop-types'
 
 const margened = { marginBottom: '15px' }
 
@@ -86,6 +86,10 @@ const Watch = ({ isMovie }) => {
 			</Layout>
 		</div>
 	)
+}
+
+Watch.propTypes = {
+  isMovie: PropTypes.bool.isRequired
 }
 
 export default Watch

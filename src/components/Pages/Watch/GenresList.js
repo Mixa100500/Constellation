@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 const noMargin = { marginTop: "0px" }
 
 const GenresList = ({ genres }) => {
@@ -13,7 +14,11 @@ const GenresList = ({ genres }) => {
         ))}
       </div>
     )
-  );
-};
+  )
+}
+
+GenresList.propType = {
+  genres: PropTypes.array.isRequired,
+}
 
 export default GenresList;

@@ -4,6 +4,7 @@ import { Link } from '../../../elements/Link'
 import { H2 } from '../../../elements/H2'
 import { ButtonImg } from '../../../elements/BottonImg'
 import Gallery from '../../../blocks/Gallery'
+import PropTypes from 'prop-types'
 
 const GalleryHeader = (props) => {
 	const label = props.label
@@ -29,4 +30,9 @@ const GalleryHeader = (props) => {
 	)
 }
 
+GalleryHeader.propTypes = {
+  label: PropTypes.string.isRequired,
+}
+
 export default GalleryHeader
+

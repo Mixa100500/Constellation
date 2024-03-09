@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types'
 
 const MoviePosterStyled = styled.div`
   position: relative;
@@ -38,7 +39,11 @@ const MoviePoster = ({ mediaInfo }) => {
       </picture>
       <BageDateStyled>{mediaInfo.date}</BageDateStyled>
     </MoviePosterStyled>
-  );
-};
+  )
+}
+
+MoviePoster.propType = {
+  mediaInfo: PropTypes.object.isRequired
+}
 
 export default MoviePoster;
