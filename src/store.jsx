@@ -7,6 +7,7 @@ import { nameSliceSerialCollection } from './reducers/serialsCollectionReducer'
 import displayCollectionReducer, { nameSliceDisplayCollection } from './reducers/displayCollectionReducer'
 import cartoonCollectionReducer, { nameSliceCartoonCollection } from './reducers/сartoonCollectionReducer'
 import popularcollectionReducer, { nameSlicePopularCollection } from './reducers/popularCollectionReducer'
+
 const store = configureStore({
   reducer: {
     currentWatch: currentWatchReducer,

@@ -1,4 +1,3 @@
-import React from 'react'
 import MediaCarousel from '../../Carousels/CarouselMedia/CarouselMedia'
 import {
 	selectMoviesState,

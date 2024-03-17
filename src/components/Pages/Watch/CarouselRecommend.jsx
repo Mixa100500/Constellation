@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import MediaCarousel from '../../Carousels/CarouselMedia/CarouselMedia'
 import recommendResponse from '../../recommend'
 

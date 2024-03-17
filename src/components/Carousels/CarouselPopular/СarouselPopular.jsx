@@ -1,6 +1,5 @@
-import React from 'react'
 import Slider from 'react-slick'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import left48 from '../../../images/icons8-chevron-left-48.png'
 import right48 from '../../../images/icons8-chevron-right-48.png'
 import {

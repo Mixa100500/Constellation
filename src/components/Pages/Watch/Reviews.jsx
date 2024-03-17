@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import {
 	fetchReviews,
 	selectOpenedMovieReview,
@@ -35,7 +34,7 @@ ReviewItem.propTypes = {
 const Reviews = (props) => {
 	const isMovie = props.isMovie
 	const id = useParams().id
-	const { list, loaded, error } = useSelector(selectOpenedMovieReview)
+	const { list, loaded } = useSelector(selectOpenedMovieReview)
 	const query = { isMovie, id }
 
 	return (

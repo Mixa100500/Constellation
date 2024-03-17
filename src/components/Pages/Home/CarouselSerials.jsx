@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import MediaCarousel from '../../Carousels/CarouselMedia/CarouselMedia'
 import { useSelector } from 'react-redux'
 import {

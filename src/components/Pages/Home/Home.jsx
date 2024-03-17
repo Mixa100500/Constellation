@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import CarouselPopular from '../../Carousels/CarouselPopular/СarouselPopular'
 import CarouselMovies from './CarouselMovies'
 import CarouselSerials from './CarouselSerials'
