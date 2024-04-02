@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { fetchNewPageCollection } from '../reducers/displayCollectionReducer'
 import { checkHeight } from '../helpers/simple'
 import { useParams } from 'react-router-dom'

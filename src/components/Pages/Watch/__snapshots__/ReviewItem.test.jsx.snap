@@ -1,0 +1,44 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ReviewItem component > matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-beySPh hJOgUm review"
+  >
+    <div
+      class="review__icon-contrainer"
+    >
+      <div
+        class="review__icon-content"
+      >
+        <div
+          class="review__icon"
+        />
+        <div
+          class="review__icon-text"
+        >
+          J
+        </div>
+      </div>
+    </div>
+    <div
+      class="review__text"
+    >
+      <h3
+        class="review__author"
+      >
+        John Doe
+      </h3>
+      <p
+        class="review__content"
+      >
+        This is a review content.
+      </p>
+      <p>
+        Rating: 
+        8
+      </p>
+    </div>
+  </div>
+</div>
+`;

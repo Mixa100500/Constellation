@@ -6,55 +6,43 @@ const InfiniteScrolling = (props) => {
 	const fetchData = props.fetchData
 	const query = props.query
 	const dispatch = useDispatch()
-	const ref = React.useRef()
-	let delayFetch = false
-  let countQuickScrolls = 0;
+	const elementRef = React.useRef()
+	const visibleRef = React.useRef(false)
+	const delayRef = React.useRef(false)
 	
-	const isElementVisible = () => {
-		return (
-			document.documentElement.offsetHeight -
-				(document.documentElement.scrollTop + window.innerHeight) <
-			ref.current.offsetHeight * 1.1
-      )
-    }
-    
-    const isBottomHalfVisible = () => {
-      return (
-      document.documentElement.offsetHeight -
-        (document.documentElement.scrollTop + window.innerHeight) <
-      ref.current.offsetHeight * 0.65
-    )
+	const scrollToSkeletonTop = () => {
+		const rect = elementRef.current.getBoundingClientRect()
+		if(rect.top < 0) {
+			window.scrollBy(0, rect.top - rect.height)
+		}
   }
 
-	async function delayloadWhenCheck() {
-		if (delayFetch) {
+	async function delayloadWhenVisible() {
+		scrollToSkeletonTop()
+		if (delayRef.current) {
 			return
 		}
-		if (isElementVisible()) {
+		if (visibleRef.current) {
+			delayRef.current = true
 			await dispatch(fetchData(query))
-      if(isBottomHalfVisible()) {
-        countQuickScrolls++;
-      }
-      if(countQuickScrolls > 0) {
-        window.scrollBy(0, ref.current.offsetHeight * -1)
-        countQuickScrolls = 0;
-      }
+
 			setTimeout(() => {
-				delayFetch = false
-				if (isElementVisible()) {
-					delayloadWhenCheck()
-				}
-			}, 800)
+				delayRef.current = false
+				delayloadWhenVisible()
+			}, 600)
 		}
 	}
-
+	
 	React.useEffect(
 		() => {
 			const observer = new IntersectionObserver(
 				async (entries) => {
 					if (entries[0].isIntersecting) {
-						delayloadWhenCheck()
+						visibleRef.current = true
+						delayloadWhenVisible()
+						return
 					}
+					visibleRef.current = false
 				},
 				{
 					root: null,
@@ -63,8 +51,8 @@ const InfiniteScrolling = (props) => {
 				}
 			)
 
-			if (ref.current) {
-				observer.observe(ref.current)
+			if (elementRef.current) {
+				observer.observe(elementRef.current)
 			}
 
 			return () => {
@@ -74,10 +62,11 @@ const InfiniteScrolling = (props) => {
 		[]
 	)
 
-	return <div ref={ref}>{props.children}</div>
+	return <div ref={elementRef}>{props.children}</div>
 }
 
 InfiniteScrolling.propTypes = {
+	children: PropTypes.node.isRequired,
   query: PropTypes.object.isRequired,
   fetchData: PropTypes.func.isRequired,
 }

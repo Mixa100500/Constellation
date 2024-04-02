@@ -6,11 +6,10 @@ export const useVisible = () => {
 	return useContext(VisibleContect)
 }
 
-
 const VirtualVisibility = (prop) => {
 	const children = prop.children
 	const isVisible = prop.visible
-	const elementRef = React.useRef(null)
+	const ref = React.useRef(null)
 	const [visible, setVisible] = React.useState(isVisible || false)
 
 	React.useEffect(() => {
@@ -24,20 +23,17 @@ const VirtualVisibility = (prop) => {
 				rootMargin: '500px 0px 500px 0px',
 			}
 		)
-
-		if (elementRef.current) {
-			observer.observe(elementRef.current)
-		}
+		observer.observe(ref.current)
 
 		return () => {
 			observer.disconnect()
 		}
-	}, [elementRef])
+	}, [])
 
 	return (
 		<div
 			className='virtual-visibility'
-			ref={elementRef}
+			ref={ref}
 		>
 			<VisibleContect.Provider value={visible}>
 				{children}

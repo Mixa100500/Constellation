@@ -6,10 +6,15 @@ import react from '@vitejs/plugin-react-swc'
   // plugins: [react()],
   // })
   export default defineConfig(() => ({
-    esbuild: {
-      loader: 'jsx',
-    },
+    // esbuild: {
+    //   loader: 'jsx',
+    // },
     plugins: [react()],
+    test: {
+      environment: 'jsdom',
+      globals: true,
+      setupFiles: './testSetup.js', 
+    }
   // optimizeDeps: {
   //   esbuildOptions: {
   //     loader: {

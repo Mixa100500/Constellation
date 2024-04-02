@@ -25,7 +25,7 @@ const Article = () => {
     }
 	}, [type])
 
-	const placeholders = createArray(60)
+	const placeholders = createArray(12)
 
 	return (
 		<>

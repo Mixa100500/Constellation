@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, } from 'react'
+import { useSelector } from 'react-redux'
 import {
 	selectOpenedMovieInfo,
 } from '../../../reducers/currentWatchReducer'
@@ -38,7 +38,8 @@ const Watch = ({ isMovie }) => {
 			<Layout
 				top='20'
 				bottom='20'
-				dark={true}>
+				dark={true}
+			>
 				<Flex>
 					<PosterContainer>
 						<MoviePoster mediaInfo={mediaInfo} />

@@ -41,8 +41,13 @@ const MoviePoster = ({ mediaInfo }) => {
   )
 }
 
-MoviePoster.propType = {
-  mediaInfo: PropTypes.object.isRequired
+MoviePoster.propTypes = {
+  mediaInfo: PropTypes.shape({
+    poster_path: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    original_title: PropTypes.string,
+    date: PropTypes.string.isRequired
+  }).isRequired
 }
 
 export default MoviePoster;

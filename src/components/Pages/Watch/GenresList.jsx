@@ -16,8 +16,8 @@ const GenresList = ({ genres }) => {
   )
 }
 
-GenresList.propType = {
-  genres: PropTypes.array.isRequired,
+GenresList.propTypes = {
+  genres: PropTypes.arrayOf(PropTypes.string.isRequired),
 }
 
 export default GenresList;

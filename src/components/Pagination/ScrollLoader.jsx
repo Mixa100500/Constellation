@@ -45,7 +45,9 @@ const ScrollLoader = (props) => {
 }
 
 ScrollLoader.propTypes = {
-  fetchData: PropTypes.func.isRequired
+  fetchData: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  query: PropTypes.query.isRequired,
 }
 
 export { 

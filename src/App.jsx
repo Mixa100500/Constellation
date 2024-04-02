@@ -3,7 +3,7 @@ import Router from './сompositions/Router'
 
 function App() {
 	return (
-		<div className='ContainerApp'>
+		<div className='containerApp'>
 			<Header/>
 			<main>
 				<Router />
