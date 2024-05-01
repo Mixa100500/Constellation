@@ -1,11 +1,11 @@
 import React from "react"
-import { useDispatch } from "react-redux"
+// import { useDispatch } from "react-redux"
 import PropTypes from 'prop-types'
 
 const ScrollLoader = (props) => {
   const fetchData = props.fetchData
   const query = props.query
-  const dispatch = useDispatch()
+
   const [isLoaded, setIsLoaded] = React.useState(true)
   const ref = React.useRef()
 
@@ -14,7 +14,7 @@ const ScrollLoader = (props) => {
       async (entries) => {
 				if(entries[0].isIntersecting && isLoaded) {
           setIsLoaded(false)
-          await dispatch(fetchData(query))
+          fetchData(query)
         }
 
         if(!isLoaded) {
@@ -47,7 +47,6 @@ const ScrollLoader = (props) => {
 ScrollLoader.propTypes = {
   fetchData: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
-  query: PropTypes.query.isRequired,
 }
 
 export { 

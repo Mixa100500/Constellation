@@ -1,11 +1,8 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
 const InfiniteScrolling = (props) => {
-	const fetchData = props.fetchData
-	const query = props.query
-	const dispatch = useDispatch()
+	const addPage = props.addPage
 	const elementRef = React.useRef()
 	const visibleRef = React.useRef(false)
 	const delayRef = React.useRef(false)
@@ -17,19 +14,19 @@ const InfiniteScrolling = (props) => {
 		}
   }
 
-	async function delayloadWhenVisible() {
+	async function delayLoadWhenVisible() {
 		scrollToSkeletonTop()
 		if (delayRef.current) {
 			return
 		}
 		if (visibleRef.current) {
 			delayRef.current = true
-			await dispatch(fetchData(query))
+			addPage()
 
 			setTimeout(() => {
 				delayRef.current = false
-				delayloadWhenVisible()
-			}, 600)
+				delayLoadWhenVisible()
+			}, 1500)
 		}
 	}
 	
@@ -39,7 +36,7 @@ const InfiniteScrolling = (props) => {
 				async (entries) => {
 					if (entries[0].isIntersecting) {
 						visibleRef.current = true
-						delayloadWhenVisible()
+						delayLoadWhenVisible()
 						return
 					}
 					visibleRef.current = false
@@ -54,9 +51,11 @@ const InfiniteScrolling = (props) => {
 			if (elementRef.current) {
 				observer.observe(elementRef.current)
 			}
-
+			
 			return () => {
-				observer.disconnect()
+				if (elementRef.current) {
+					observer.observe(elementRef.current)
+				}
 			}
 		},
 		[]
@@ -67,8 +66,7 @@ const InfiniteScrolling = (props) => {
 
 InfiniteScrolling.propTypes = {
 	children: PropTypes.node.isRequired,
-  query: PropTypes.object.isRequired,
-  fetchData: PropTypes.func.isRequired,
+  addPage: PropTypes.func.isRequired,
 }
 
 export {

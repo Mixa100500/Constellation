@@ -1,9 +1,9 @@
 import React, { createContext, useContext } from 'react'
 import PropTypes from 'prop-types'
-const VisibleContect = createContext(null)
+const VisibleContext = createContext(null)
 
 export const useVisible = () => {
-	return useContext(VisibleContect)
+	return useContext(VisibleContext)
 }
 
 const VirtualVisibility = (prop) => {
@@ -35,9 +35,9 @@ const VirtualVisibility = (prop) => {
 			className='virtual-visibility'
 			ref={ref}
 		>
-			<VisibleContect.Provider value={visible}>
+			<VisibleContext.Provider value={visible}>
 				{children}
-			</VisibleContect.Provider>
+			</VisibleContext.Provider>
 		</div>
 	)
 }

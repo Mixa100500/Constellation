@@ -1,27 +1,20 @@
-import { useDispatch } from "react-redux"
-import { openMovie } from "../../../../reducers/currentWatchReducer"
 import { Link } from "react-router-dom"
 import play from '../../../../images/play.svg'
-import { BackdropImg, ImgContiner, PlaceholderContent, PopularImgPlaceholder } from "."
+import { BackdropImg, ImgContainer, PlaceholderContent, PopularImgPlaceholder } from "."
 import { PopularCardPlaceholder } from "./PopularCardPlaceholder"
 import { useVisible } from "../../../../context/VirtualVisibility"
 import PropTypes from 'prop-types'
 const basePictureUrl = 'https://image.tmdb.org/t/p'
 
 const PopularCard = ({ info }) => {
-	const dispatch = useDispatch()
 	const visible = useVisible()
-	const handleClick = () => {
-		dispatch(openMovie(info))
-	}
 
 	return (
 		<div className='padding-horizontal'>
 			<Link
 				to={`/watch/${info.title ? 'movie' : 'serial'}/${info.id}`}
-				onClick={handleClick}
 			>
-				<ImgContiner>
+				<ImgContainer>
 					<>
 						{info.backdrop_path &&
 						<PopularImgPlaceholder >
@@ -51,7 +44,7 @@ const PopularCard = ({ info }) => {
 							<img src={play} />
 						</div>
 					</>
-				</ImgContiner>
+				</ImgContainer>
 			</Link>
 		</div>
 	)

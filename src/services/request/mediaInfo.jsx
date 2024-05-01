@@ -1,27 +1,27 @@
 import axios from "axios"
 import { option } from "./options"
-const baseUrl = 'https://api.themoviedb.org/3'
+import { URLs } from "./URL"
 const paramExternalIds = 'external_ids'
-const paramLenguage = 'language=en-US'
+const paramLanguage = 'language=en-US'
 
 
 export const getMovieInfo = async (id) => {
-  const url = `${baseUrl}/movie/${id}?${paramLenguage}`
+  const url = `${URLs.themoviedbBaseURL}/movie/${id}?${paramLanguage}`
   
-  const resposne = await axios.get(url, option)
-  return resposne.data
+  const response = await axios.get(url, option)
+  return response.data
 }
 
 export const getSerialInfo = async (id) => {
-  const url = `${baseUrl}/tv/${id}?${paramLenguage}`
+  const url = `${URLs.themoviedbBaseURL}/tv/${id}?${paramLanguage}`
 
-  const resposne = await axios.get(url, option)
-  return resposne.data
+  const response = await axios.get(url, option)
+  return response.data
 }
 
 export const getSerialIMDBID = async (id) => {
-  const url = `${baseUrl}/tv/${id}/${paramExternalIds}`
+  const url = `${URLs.themoviedbBaseURL}/tv/${id}/${paramExternalIds}`
 
-  const resposne = await axios.get(url, option)
-  return resposne.data
+  const response = await axios.get(url, option)
+  return response.data
 }

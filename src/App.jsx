@@ -1,7 +1,8 @@
 import { Header } from "./components/Layout/Header"
-import Router from './сompositions/Router'
+import { Router } from './compositions/Router/Router'
 
 function App() {
+	
 	return (
 		<div className='containerApp'>
 			<Header/>

@@ -7,6 +7,7 @@ import { createArray } from '../../../helpers/simple.jsx'
 import Gallery from '../../../blocks/Gallery/index.jsx'
 import VirtualVisibility from '../../../context/VirtualVisibility.jsx'
 import PropTypes from 'prop-types'
+import { LazyLoadContent } from '../../Pagination/LazyLoadContent.jsx'
 
 const responsive = [
 	{
@@ -62,21 +63,29 @@ const settings = {
 
 const placeholders = createArray(6)
 
-const MediaCarousel = ({ list, label, loaded }) => {
+
+const MediaCarousel = ({ list, description, loaded }) => {
 	const {sliderRef, prev, next} = useCarouselButton()
+
 
 	return (
 		<Gallery $paddingBottom='lg'>
 			<GalleryHeader
 				next={next}
 				prev={prev}
-				label={label}
+				description={description}
 			/>
 			<VirtualVisibility>
 				<Slider
 					ref={sliderRef}
 					{...settings}
 				>
+					{/* <LazyLoadContent
+						isLoaded={loaded}
+						loadingContent={<LoadingContent />}
+					>
+						<ListPoster list={list} />
+					</LazyLoadContent> */}
 					{loaded ?
 						list.map((film) => (
 							<PosterCard
@@ -96,8 +105,11 @@ const MediaCarousel = ({ list, label, loaded }) => {
 
 MediaCarousel.propTypes = {
   list: PropTypes.array.isRequired,
-  label: PropTypes.string.isRequired,
   loaded: PropTypes.bool.isRequired,
+	description: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }),
 }
 
 export default MediaCarousel

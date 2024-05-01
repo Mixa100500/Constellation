@@ -1,13 +1,13 @@
 import axios from "axios"
 import { option } from "./options"
-const baseUrl = 'https://api.themoviedb.org/3'
+import { URLs } from "./URL"
 const param = 'language=en-US'
 const lastUrl = 'trending/all/day'
 
 
 export const getPopular = async () => {
-  const url = `${baseUrl}/${lastUrl}?${param}`
+  const url = `${URLs.themoviedbBaseURL}/${lastUrl}?${param}`
   
-  const resposne = await axios.get(url, option)
-  return resposne.data.results
+  const response = await axios.get(url, option)
+  return response.data.results
 }

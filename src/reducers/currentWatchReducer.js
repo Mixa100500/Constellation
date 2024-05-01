@@ -11,40 +11,37 @@ import {
 } from '../services/request/mediaInfo'
 
 
-const initialReviws = {
-	reviews: {
-		list: [],
-		loaded: false,
-		error: null,
-	}
+const initialReviews = {
+	list: [],
+	loaded: false,
+	error: null,
 }
 
 const initialState = {
-	openedMovie: null,
-	reviews: initialReviws,
+	openedMovie: {
+		loaded: false,
+		info: {},
+	},
+	reviews: initialReviews,
 }
 
 const currentMovieSlice = createSlice({
 	name: 'currentWatch',
 	initialState,
 	reducers: {
-		openMovie: (state, { payload }) => {
-			state.openedMovie = {
-				...payload,
-				date: getYear(payload),
-			}
-		},
-		clearReview: (state) => {
-			state.reviews = initialReviws
-		},
 		addMainInfo: (state, { payload }) => {
-			state.openedMovie = {
+			state.openedMovie.loaded = true;
+
+			state.openedMovie.info = {
 				...payload,
 				date: getYear(payload),
 				genres: getGenres(payload.genres),
 			}
 		},
-		closeMovie: () => initialState,
+		clearReview: (state) => {
+			state.reviews = initialReviews
+		},
+		clearMovie: () => initialState,
 		fetchReviewsSuccess: (state, { payload }) => {
 			state.reviews.list = payload.results
 			state.reviews.loaded = true
@@ -83,17 +80,25 @@ export const initializeMedia = (IsMovie, id) => {
 		if (IsMovie) {
 			info = await getMovieInfo(id)
 		} else {
-			info = await getSerialInfo(id)
-			const data = await getSerialIMDBID(id)
-			info.imdb_id = data.imdb_id
+			const fetchSerial = getSerialInfo(id)
+			const fetchIds = getSerialIMDBID(id)
+
+			const [serialInfo, ids] = await Promise
+				.all([fetchSerial, fetchIds])
+
+			info = serialInfo
+			info.imdb_id = ids.imdb_id
 		}
 		dispatch(addMainInfo(info))
 	}
 }
 
-export const { openMovie, closeMovie, addMainInfo, clearReview } = currentMovieSlice.actions
-export const selectOpenedMovieId = (state) => state.currentWatch.openedMovie.id
-export const selectOpenedMovieInfo = (state) => state.currentWatch.openedMovie
-export const selectOpenedMovieReview = (state) => state.currentWatch.reviews
+export const { clearMovie, addMainInfo, clearReview } = currentMovieSlice.actions
+export const selectOpenedMovieId = (state) => state.currentWatch.openedMovie.info.id
+export const selectOpenedMovieInfo = (state) => state.currentWatch.openedMovie.info
+export const selectOpenedMovieLoaded = (state) => state.currentWatch.openedMovie.loaded
+export const selectOpenedMovieReviewList = (state) => state.currentWatch.reviews.list
+export const selectOpenedMovieReviewLoaded = (state) => state.currentWatch.reviews.loaded
+
 
 export default currentMovieSlice.reducer

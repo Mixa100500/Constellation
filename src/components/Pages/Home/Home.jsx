@@ -1,21 +1,14 @@
-import { useEffect } from 'react'
-import CarouselPopular from '../../Carousels/CarouselPopular/СarouselPopular'
-import CarouselMovies from './CarouselMovies'
-import CarouselSerials from './CarouselSerials'
+import CarouselMovies from '../../../compositions/Carousel/MoviesCarousel'
+import CarouselSerials from '../../../compositions/Carousel/SerialsCarousel'
 import Layout from '../../Layout/Layout'
-import CarouselCartoons from './CarouselCartoons'
-import { useInitializationHome } from '../../../hooks/Initializer'
+import { PopularCarousel } from '../../../compositions/Carousel/PopularCarousel'
+import CarouselCartoons from '../../../compositions/Carousel/CartoonsCarousel'
 
 const Home = () => {
-	const stateInitializerHome = useInitializationHome()
-
-	useEffect(() => {
-    stateInitializerHome()
-  }, [])
 
 	return (
 			<>
-				<CarouselPopular />
+				<PopularCarousel />
 				<Layout>
 					<CarouselMovies />
 					<CarouselSerials />

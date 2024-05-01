@@ -19,29 +19,42 @@ code {
 :root {
   --main-bg-color: #070717;
   --button-bg-color: #fdd10f;
-  --bage-bg-color: #FCCD00;
+  --badge-bg-color: #FCCD00;
   --secondary-color: #7b7a8f;
   --primary-color: #7e79ff;
   --dark-color: #797979;
   --hover-bg-color: #440097;
-  --second-bg-color: #110e15;
-  --primory-bg-color: rgba(255, 255, 255, .08);
+  --second-bg-color: #1f1b2e;
+  --primary-bg-color: rgba(255, 255, 255, .08);
   --dots-bg-color: #e4e4e3;
   --dots-hover-bg-color: #404040;
+}
 
+:root {
+  --silver-08: #7e798f;
+  --silver-06: #312b45;
+  --silver-05: #231f34;
+}
+
+:root {
+  --filter-color: var(--second-bg-color);
+
+  --color-second: var(--silver-06);
+  --color-second-hover: var(--silver-05);
+  --color-second-inactive: var(--silver-08);
 }
 
 
 :root {
   --main-max-width: 1048px;
   --carousel-button-width: 48px;
-  --carousel-midle-button-width: 40px;
+  --carousel-middle-button-width: 40px;
   --carousel-min-button-width: 36px;
 }
 
 :root {
   --backdrop-radius: 5px;
-  --poster-redius: 8px;
+  --poster-radius: 8px;
 }
 
 

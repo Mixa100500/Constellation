@@ -5,7 +5,7 @@ const MoviePosterStyled = styled.div`
   position: relative;
 `
 
-const BageDateStyled = styled.div`
+const BadgeDateStyled = styled.div`
   position: absolute;
   top: 10px;
   background-color: var(--hover-bg-color);
@@ -13,14 +13,14 @@ const BageDateStyled = styled.div`
   border-radius: 8px;
   padding: 2px 6px;
   font-weight: 600;
-  background-color: var(--bage-bg-color);
+  background-color: var(--badge-bg-color);
   color: var(--main-bg-color);
 `
 
 const ImgStyled = styled.img`
   max-width: 100%;
   aspect-ratio: 2 / 3;
-  border-radius: var(--poster-redius);
+  border-radius: var(--poster-radius);
 `
 
 const MoviePoster = ({ mediaInfo }) => {
@@ -36,7 +36,7 @@ const MoviePoster = ({ mediaInfo }) => {
           alt={mediaInfo.name || mediaInfo.original_title}
         />
       </picture>
-      <BageDateStyled>{mediaInfo.date}</BageDateStyled>
+      <BadgeDateStyled>{mediaInfo.date}</BadgeDateStyled>
     </MoviePosterStyled>
   )
 }

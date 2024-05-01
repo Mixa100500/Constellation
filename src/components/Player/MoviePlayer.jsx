@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types'
+import { useEffect } from 'react';
+import { selectKinoboxPlayerLoaded, setLoaded } from '../../reducers/kinoboxPlayerReducer';
+import { useDispatch, useSelector } from 'react-redux';
 
 const apiKey = import.meta.env.VITE_PLAYER_API_KEY
-const VideoContianer = styled.div`
+const VideoContainer = styled.div`
 position: relative;
 width: 100%;
-height: 480px;
 background-color: black;
+aspect-ratio: 16/9;
 
   .loading-text {
     position: absolute;
@@ -17,27 +20,39 @@ background-color: black;
   }
 `
 
-const Iframe = styled.iframe`
-  position: absolute;
-  top: 0;
-  left: 0; width: 100%;
-  height: 100%;
-  z-index: 1;
-`
+const KinoboxPlayer = ({ imdbId }) => {
+  const loaded = useSelector(selectKinoboxPlayerLoaded)
+  const dispatch = useDispatch()
 
+  useEffect(() => {
+    if(imdbId && !loaded) {
+      const script = document.createElement('script')
+      script.src = 'https://kinobox.tv/kinobox.min.js'
+      script.async = true
+      script.onload = () => {
+        kbox('.kinobox_player', {search: {imdb: imdbId }})
+        dispatch(setLoaded())
+      }
+      document.body.appendChild(script)
+      return
+    }
+    if(loaded) {
+      kbox('.kinobox_player', {search: {imdb: imdbId }})
+    }
+  }, [imdbId])
+  return (
+    <div className="kinobox_player"></div>
+  )
+}
 
 const VideoPlayer = ({ imdbId }) => {
-  return <VideoContianer>
+  
+  return <VideoContainer>
       {imdbId && <>
         <div className='loading-text'>loading...</div>
-        <Iframe
-          height={480}
-          src={`//4425413.svetacdn.in/${apiKey}?imdb_id=${imdbId}`}
-          allowFullScreen
-          frameBorder={0}
-        />
+        <KinoboxPlayer imdbId={imdbId}/>
       </>}
-    </VideoContianer>
+    </VideoContainer>
 }
 
 VideoPlayer.propTypes = {

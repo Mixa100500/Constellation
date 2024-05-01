@@ -1,22 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
-import filmCollectionReducer from './reducers/moviesCollectionReducer'
 import currentWatchReducer from './reducers/currentWatchReducer'
-import serialsCollectionReducer from './reducers/serialsCollectionReducer'
-import { nameSliceMovieCollection } from './reducers/moviesCollectionReducer'
-import { nameSliceSerialCollection } from './reducers/serialsCollectionReducer'
-import displayCollectionReducer, { nameSliceDisplayCollection } from './reducers/displayCollectionReducer'
-import cartoonCollectionReducer, { nameSliceCartoonCollection } from './reducers/сartoonCollectionReducer'
-import popularcollectionReducer, { nameSlicePopularCollection } from './reducers/popularCollectionReducer'
+import { themoviedbApi } from './services/request/themoviedbService'
+import pageCollectionReducer, { nameSlicePageCollection } from './reducers/pageCollectionReducer'
+import kinoboxPlayerReducer, { nameSliceKinoboxPlayer } from './reducers/kinoboxPlayerReducer'
 
 const store = configureStore({
   reducer: {
     currentWatch: currentWatchReducer,
-    [nameSliceDisplayCollection]: displayCollectionReducer,
-    [nameSliceMovieCollection]: filmCollectionReducer,
-    [nameSliceSerialCollection]: serialsCollectionReducer,
-    [nameSliceCartoonCollection]: cartoonCollectionReducer,
-    [nameSlicePopularCollection]: popularcollectionReducer,
+    [nameSlicePageCollection]: pageCollectionReducer,
+    [nameSliceKinoboxPlayer]: kinoboxPlayerReducer,
+    [themoviedbApi.reducerPath]: themoviedbApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(themoviedbApi.middleware),
 })
 
 export default store

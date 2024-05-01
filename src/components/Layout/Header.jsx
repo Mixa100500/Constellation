@@ -1,7 +1,7 @@
 import logo from '../../logoWhite.png'
 import { Link } from '../../elements/Link'
 import styled from 'styled-components'
-import { collections } from '../../сompositions/Router'
+import { collections } from '../../compositions/Router/options'
 import { H2 } from '../../elements/H2'
 
 const paddingStyle = { padding: '0 20px' }
@@ -49,15 +49,15 @@ export const Header = () => {
 			<ContainerHeader className='padding-horizontal'>
 					<div className='container-logo'>
 						<Link to='/' >
-						<div className='content-logo'>
-							<H2 $paddingTop='xl' $paddingBottom='xl'>Constellation</H2>
-							<img
-								className='container-logo__logo'
-								src={logo}
-								alt='Logo'
-							/>
-						</div>
-					</Link>
+							<div className='content-logo'>
+								<H2 $paddingTop='xl' $paddingBottom='xl'>Constellation</H2>
+								<img
+									className='container-logo__logo'
+									src={logo}
+									alt='Logo'
+								/>
+							</div>
+						</Link>
 					</div>
 				<nav>
 					<ul className='menu'>
@@ -66,7 +66,7 @@ export const Header = () => {
 								<li key={c.name}>
 									<Link 
 										$padding='md'
-										to={`/popular/${c.name}`}>
+										to={`/popular/${c.url}`}>
 										{c.name}
 									</Link>
 								</li>

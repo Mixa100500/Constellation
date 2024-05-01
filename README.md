@@ -46,16 +46,18 @@ Front-end application for searching and watching movies. Demo: [https://constell
 
 # Technology Stack:
 
+Main:
+
 -   React + React Hooks
 -   Redux-Toolkit
 -   styled-components
 
 Testing:
 
-- Vitest
-- react-testing-library
-- jest-dom
-- user-event
+-   Vitest
+-   react-testing-library
+-   jest-dom
+-   user-event
 
 # File Structure:
 

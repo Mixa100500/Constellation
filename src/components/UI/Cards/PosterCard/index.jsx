@@ -16,33 +16,32 @@ export const PosterContainer = styled.div`
     margin-top: 5px;
   }
 `
-
 export const PlaceholderImg = styled.div`
 	max-width: 100%;
 	aspect-ratio: 2/3;
-	border-radius: var(--poster-redius);
-	background-color: var(--primory-bg-color);
+	border-radius: var(--poster-radius);
+	background-color: var(--primary-bg-color);
 `
 
 export const TitlePlaceholder = styled.div`
 	height: 15px;
 	width: 90%;
 	border-radius: 5px;
-	background-color: var(--primory-bg-color);
+	background-color: var(--primary-bg-color);
 `
 
 export const DatePlaceholder = styled.div`
 	height: 14px;
 	width: 75%;
 	border-radius: 4px;
-	background-color: var(--primory-bg-color);
+	background-color: var(--primary-bg-color);
   `
   
   export const PosterImg = styled.img`
   display: block;
   max-width: 100%;
   aspect-ratio: 2 / 3;
-  border-radius: var(--poster-redius);
+  border-radius: var(--poster-radius);
   `
   
   export const PosterImgPlaceholder = styled.div`
@@ -51,8 +50,8 @@ export const DatePlaceholder = styled.div`
     display: block;
     max-width: 100%;
     aspect-ratio: 2/3;
-    border-radius: var(--poster-redius);
-    background-color: var(--primory-bg-color);
+    border-radius: var(--poster-radius);
+    background-color: var(--primary-bg-color);
 
     &:hover {
       transform: scaleY(1.04) scaleX(1.03);

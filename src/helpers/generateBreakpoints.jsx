@@ -41,7 +41,7 @@ function generateBreakpointsByPopularCarousel(start, end, step) {
 	return breakpoints
 }
 
-export function getPopularCorouselBrakepoints() {
+export function getPopularCarouselBreakpoints() {
 	let responsive = [
 		{
 			breakpoint: 400,

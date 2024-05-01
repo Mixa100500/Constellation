@@ -1,11 +1,11 @@
-import { PlaceholderContent, PlaceholderContiner } from "."
+import { PlaceholderContent, PlaceholderContainer } from "."
 
 export const PopularCardPlaceholder = () => {
   return (
     <>
-      <PlaceholderContiner className='padding-horizontal'>
+      <PlaceholderContainer className='padding-horizontal'>
         <PlaceholderContent />
-      </PlaceholderContiner>
+      </PlaceholderContainer>
     </>
   )
 }

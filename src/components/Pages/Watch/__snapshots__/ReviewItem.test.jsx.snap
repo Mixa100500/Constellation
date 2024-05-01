@@ -6,7 +6,7 @@ exports[`ReviewItem component > matches snapshot 1`] = `
     class="sc-beySPh hJOgUm review"
   >
     <div
-      class="review__icon-contrainer"
+      class="review__icon-container"
     >
       <div
         class="review__icon-content"

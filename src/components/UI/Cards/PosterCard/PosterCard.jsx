@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import ItemDesription from './ItemDesription'
 import { useDispatch } from 'react-redux'
-import { openMovie } from '../../../../reducers/currentWatchReducer'
 import { PosterImg, PosterContainer, PosterImgPlaceholder } from '.'
 import { useVisible } from '../../../../context/VirtualVisibility'
 import PropTypes from 'prop-types'
@@ -17,10 +16,6 @@ const pictureBaseUrl = 'https://image.tmdb.org/t/p'
 
 const PosterCard = (props) => {
 	const film = props.film
-	const dispatch = useDispatch()
-	const handleClick = () => {
-		dispatch(openMovie(film))
-	}
 	const visible = useVisible()
 	const showWhenVisible = {
 		display: visible ? 'block' : 'none'
@@ -31,7 +26,7 @@ const PosterCard = (props) => {
 			<Link
 				to={`/watch/${film.title ? 'movie' : 'serial'}/${film.id}`}
 				style={linkStyle}
-				onClick={handleClick}>
+			>
 				<PosterContainer
 					className='padding-horizontal padding-top'
 				>

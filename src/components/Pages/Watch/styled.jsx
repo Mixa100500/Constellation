@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const Review = styled.div`
   display: flex;
 
-  .review__icon-contrainer {
+  .review__icon-container {
     margin-right: 12px;
   }
 

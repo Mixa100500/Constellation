@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 
-export const ImgContiner = styled.div`
+export const ImgContainer = styled.div`
 	position: relative;
 	overflow: hidden;
 	transition: all 0.3s ease;
@@ -50,20 +50,20 @@ export const BackdropImg = styled.img`
 	max-width: 100%;
 	border-radius: var(--backdrop-radius);
 `
-export const PlaceholderContiner = styled.div`
+export const PlaceholderContainer = styled.div`
 aspect-ratio: 500 / 281;
 max-width: 500px;
 `
 
 export const PlaceholderContent = styled.div`
 height: 100%;
-background-color: var(--primory-bg-color);
+background-color: var(--primary-bg-color);
 border-radius: var(--backdrop-radius);
 `
 
 export const PopularImgPlaceholder = styled.div`
 	aspect-ratio: 500 / 281;
 	max-width: 500px;
-	background-color: var(--primory-bg-color);
+	background-color: var(--primary-bg-color);
 	border-radius: var(--backdrop-radius);
 `

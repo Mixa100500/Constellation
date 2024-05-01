@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 export const ReviewItem = ({ review }) => {
 	return (
 		<Review className='review'>
-			<div className='review__icon-contrainer'>
+			<div className='review__icon-container'>
 				<div className='review__icon-content'>
 					<div className='review__icon'></div>
 					<div className='review__icon-text'>{review.author[0]}</div>

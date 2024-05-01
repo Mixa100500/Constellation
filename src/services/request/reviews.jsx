@@ -1,19 +1,19 @@
 import axios from "axios"
 import { option } from "./options"
-const baseUrl = 'https://api.themoviedb.org/3'
+import { URLs } from "./URL"
 const params = 'language=en-US&page=1'
 
 
 export const getReviewsByFilm = async (id) => {
-  const url = `${baseUrl}/movie/${id}/reviews?${params}`
+  const url = `${URLs.themoviedbBaseURL}/movie/${id}/reviews?${params}`
   
-  const resposne = await axios.get(url, option)
-  return resposne.data
+  const response = await axios.get(url, option)
+  return response.data
 }
 
 export const getReviewsBySerial = async (id) => {
-  const url = `${baseUrl}/tv/${id}/reviews?${params}`
+  const url = `${URLs.themoviedbBaseURL}/tv/${id}/reviews?${params}`
   
-  const resposne = await axios.get(url, option)
-  return resposne.data
+  const response = await axios.get(url, option)
+  return response.data
 }
