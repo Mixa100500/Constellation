@@ -10,7 +10,6 @@ import { ReviewItem } from './ReviewItem'
 import { useEffect } from 'react'
 import { useWatchParams } from '../../../hooks'
 import { LazyLoadContent } from '../../Pagination/LazyLoadContent'
-import { createArray } from '../../../helpers/simple'
 
 const Reviews = () => {
 	const { isMovie, id } = useWatchParams()
@@ -58,8 +57,6 @@ const Reviews = () => {
 				renderContent={renderContent}
 			>
 			</LazyLoadContent>
-			{<listDivs/>}
-			{<listDivs/>}
 		</div>
 	)
 }

@@ -18,10 +18,8 @@ export const LazyLoadContent = ({hello, renderContent, loadingContent, isLoaded,
 	
 	const content = renderContent()
 	const contentCount = React.Children.count(content)
-	console.log('log', hello, contentCount)
 	
   if (contentCount > 0) {
-		console.log('content', content)
     return content
   }
 
