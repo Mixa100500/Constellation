@@ -1,25 +1,25 @@
 import {
-	clearReview,
-	fetchReviews,
 	selectOpenedMovieReviewList,
 	selectOpenedMovieReviewLoaded,
-} from '../../../reducers/currentWatchReducer'
+} from '../../../reducers/CurrentWatch/selectors'
+import { clearReview } from "../../../reducers/CurrentWatch/currentWatchReducer";
 import { useDispatch, useSelector } from 'react-redux'
 import { H2 } from '../../../elements/H2'
 import { ReviewItem } from './ReviewItem'
 import { useEffect } from 'react'
-import { useWatchParams } from '../../../hooks'
-import { LazyLoadContent } from '../../Pagination/LazyLoadContent'
+import { useFetchReviewsByType } from '../../../hooks'
+import { useLazyLoadContent } from '../../../hooks/useLazyLoadContent'
+import { useParams } from 'react-router-dom'
 
 const Reviews = () => {
-	const { isMovie, id } = useWatchParams()
 	const list = useSelector(selectOpenedMovieReviewList)
 	const loaded = useSelector(selectOpenedMovieReviewLoaded)
 	const dispatch = useDispatch()
-	const query = { isMovie, id }
-	
+	const { id } = useParams()
+
+	const fetchReviews = useFetchReviewsByType();
 	const fetchData = () => {
-		dispatch(fetchReviews(query))
+		dispatch(fetchReviews(id))
 	}
 
 	useEffect(() => {
@@ -37,9 +37,17 @@ const Reviews = () => {
 		))
 	)
 
-
 	const loadingContent = () => <div>loading</div>
 	const fallbackContent = () => <div>No reviews yet.</div>
+
+	const result = useLazyLoadContent({
+		isLoaded: loaded,
+		fetchData,
+		loadingContent,
+		fallbackContent,
+		renderContent,
+	})
+
 	return (
 		<div>
 			<H2
@@ -48,15 +56,7 @@ const Reviews = () => {
       >
 				Reviews
 			</H2>
-			<LazyLoadContent
-				hello={'hello'}
-				isLoaded={loaded}
-				fetchData={fetchData}
-				loadingContent={loadingContent}
-				fallbackContent={fallbackContent}
-				renderContent={renderContent}
-			>
-			</LazyLoadContent>
+			{result}
 		</div>
 	)
 }

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const ButtonImg = styled.img`
+export const ButtonCarousel = styled.button`
+
+background-color: inherit;
 cursor: pointer;
 opacity: 0.75;
 width: var(--carousel-min-button-width);

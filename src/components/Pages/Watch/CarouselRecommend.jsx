@@ -1,25 +1,27 @@
-import { useEffect, useState } from 'react'
 import MediaCarousel from '../../Carousels/MediaCarousel/MediaCarousel'
-import recommendResponse from '../../recommend'
+import { ScrollLoader } from '../../Pagination/ScrollLoader'
+import { useLazyGetRecommendationsQuery } from '../../../services/request/themoviedbService'
+import { useParams } from 'react-router-dom'
+import { collectionsNames } from '../../../compositions/Router/options'
+
+const description = collectionsNames.recommendation
 
 const CarouselRecommend = () => {
-	const [recommend, setRecommend] = useState([])
-	useEffect(() => {
-		setRecommend(recommendResponse)
-	}, [])
+	const { type, id } = useParams()
 
-	if (recommend.length === 0) {
-		return <div>loading...</div>
-	}
-
+	const [fetch, { data, isSuccess }] = useLazyGetRecommendationsQuery()
+	const initializeRecommend = () => {
+    fetch({ id, type })
+  }
+	
 	return (
-		<>
+		<ScrollLoader fetchData={initializeRecommend}>
 			<MediaCarousel
-				loaded={true}
-				list={recommend}
-				description={{ name: 'Recommend', url: 'recommend'}}
+				loaded={isSuccess}
+				list={data || []}
+				description={description}
 			/>
-		</>
+		</ScrollLoader>
 	)
 }
 

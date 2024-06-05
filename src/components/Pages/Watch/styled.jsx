@@ -52,7 +52,7 @@ export const Flex = styled.div`
 	flex-wrap: wrap;
 `
 
-export const InfoColumnStyled = styled.div`
+export const InfoColumn = styled.div`
 	& {
 		display: flex;
 		justify-content: center;
@@ -76,7 +76,7 @@ export const OverviewHeader = styled.h3`
 export const DescriptionHeader = styled.div`
 	& {
 		font-size: 1.17em;
-		font-weight: bold;
+		/* font-weight: bold; */
 		text-align: left;
 		color: var(--secondary-color);
 	}

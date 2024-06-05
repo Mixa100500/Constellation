@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 export const nameSliceKinoboxPlayer = 'kinoboxPlayer'
+export const selectKinoboxPlayerLoaded = (state) => state[nameSliceKinoboxPlayer].loaded
 
 const initialState = {
   loaded: false
@@ -17,5 +18,4 @@ const cartoonSlice = createSlice({
 
 export const { setLoaded } = cartoonSlice.actions
 
-export const selectKinoboxPlayerLoaded = (state) => state[nameSliceKinoboxPlayer].loaded
 export default cartoonSlice.reducer

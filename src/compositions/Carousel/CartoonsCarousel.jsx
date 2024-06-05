@@ -18,7 +18,7 @@ const CarouselCartoons = () => {
 			<ScrollLoader fetchData={initializeCartoon}>
 				<MediaCarousel
 					loaded={isSuccess}
-					list={data || []}
+					list={data?.list || []}
 					description={description}
 				/>
 			</ScrollLoader>

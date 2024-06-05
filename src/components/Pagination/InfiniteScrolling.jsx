@@ -6,16 +6,20 @@ const InfiniteScrolling = (props) => {
 	const elementRef = React.useRef()
 	const visibleRef = React.useRef(false)
 	const delayRef = React.useRef(false)
+	const unmountRef = React.useRef(false)
 	
-	const scrollToSkeletonTop = () => {
-		const rect = elementRef.current.getBoundingClientRect()
-		if(rect.top < 0) {
-			window.scrollBy(0, rect.top - rect.height)
-		}
-  }
+	// const scrollToSkeletonTop = () => {
+	// 	const rect = elementRef.current.getBoundingClientRect()
+	// 	if(rect.top < 0) {
+	// 		window.scrollBy(0, rect.top - rect.height)
+	// 	}
+  // }
 
-	async function delayLoadWhenVisible() {
-		scrollToSkeletonTop()
+	function delayLoadWhenVisible() {
+		if(unmountRef.current) {
+			return
+		}
+		// scrollToSkeletonTop()
 		if (delayRef.current) {
 			return
 		}
@@ -30,6 +34,12 @@ const InfiniteScrolling = (props) => {
 		}
 	}
 	
+	React.useEffect(() => {
+		return () => {
+			unmountRef.current = true
+		}
+	}, [])
+
 	React.useEffect(
 		() => {
 			const observer = new IntersectionObserver(
@@ -57,8 +67,7 @@ const InfiniteScrolling = (props) => {
 					observer.observe(elementRef.current)
 				}
 			}
-		},
-		[]
+		}, [addPage]
 	)
 
 	return <div ref={elementRef}>{props.children}</div>

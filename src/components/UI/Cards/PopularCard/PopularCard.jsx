@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
 import play from '../../../../images/play.svg'
-import { BackdropImg, ImgContainer, PlaceholderContent, PopularImgPlaceholder } from "."
-import { PopularCardPlaceholder } from "./PopularCardPlaceholder"
+import { BackdropImg, ImgContainer, PopularImgPlaceholder } from "."
 import { useVisible } from "../../../../context/VirtualVisibility"
 import PropTypes from 'prop-types'
+import { collectionsNames } from "../../../../compositions/Router/options"
 const basePictureUrl = 'https://image.tmdb.org/t/p'
 
 const PopularCard = ({ info }) => {
@@ -12,7 +12,7 @@ const PopularCard = ({ info }) => {
 	return (
 		<div className='padding-horizontal'>
 			<Link
-				to={`/watch/${info.title ? 'movie' : 'serial'}/${info.id}`}
+				to={`/watch/${info.type}/${info.id}`}
 			>
 				<ImgContainer>
 					<>

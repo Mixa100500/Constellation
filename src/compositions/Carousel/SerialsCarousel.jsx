@@ -15,7 +15,7 @@ const CarouselSerials = () => {
 			<ScrollLoader fetchData={initializeSerials} >
 				<MediaCarousel
 					loaded={isSuccess}
-					list={data || []}
+					list={data?.list || []}
 					description={collectionsNames.serials}
 				/>
 				</ScrollLoader>

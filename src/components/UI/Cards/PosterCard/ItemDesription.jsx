@@ -4,9 +4,12 @@ import PropTypes from 'prop-types'
 
 const height = { height: '37px' }
 
-const ItemDesription = (props) => {
-  const visible = useVisible()
+const ItemDescription = (props) => {
   const film = props.film
+  let visible = useVisible()
+	if(visible === null) {
+    visible = true;
+	}
 
   return (
     <PlaceholderDescription style={height}>
@@ -25,9 +28,9 @@ const ItemDesription = (props) => {
   )
 }
 
-ItemDesription.propTypes = {
+ItemDescription.propTypes = {
   film: PropTypes.object.isRequired
 }
 
 
-export default ItemDesription
+export default ItemDescription

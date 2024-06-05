@@ -10,30 +10,15 @@ import { getPopularCarouselBreakpoints } from '../../../helpers/generateBreakpoi
 import { useCarouselButton } from '../../../hooks'
 import { PopularCardPlaceholder } from '../../UI/Cards/PopularCard/PopularCardPlaceholder'
 import { createArray } from '../../../helpers/simple'
-import { ButtonImg } from '../../../elements/ButtonImg'
+import { ButtonCarousel } from '../../../elements/ButtonCarousel'
 import VirtualVisibility from '../../../context/VirtualVisibility'
 import { ScrollLoader } from '../../Pagination/ScrollLoader'
+import { settingMain } from './settingsMainCarousel'
 
-const settings = {
-	dots: true,
-	infinite: true,
-	speed: 500,
-	autoplaySpeed: 5000,
-	centerMode: true,
-	// autoplay: true,
-	lazyLoad: true,
-	cssEase: 'linear',
-	swipeToSlide: true,
-	initialSlide: 10,
-	slidesToShow: 2,
-	slidesToScroll: 3,
-	pauseOnHover: true,
-	responsive: getPopularCarouselBreakpoints(),
-}
 
-const placeholders = createArray(20)
+const placeholders = createArray(8)
 
-export function MainCarousel({ initializePopular, popular }) {
+export function MainCarousel({ initializePopular, list }) {
 
 
 	const { sliderRef, prev, next } = useCarouselButton()
@@ -45,9 +30,9 @@ export function MainCarousel({ initializePopular, popular }) {
 					<VirtualVisibility>
 						<Slider
 							ref={sliderRef}
-							{...settings}>
-							{popular.length > 0 ?
-								popular.map((info) => (
+							{...settingMain}>
+							{list.length > 0 ?
+								list.map((info) => (
 									<PopularCard
 										info={info}
 										key={info.name || info.original_title}
@@ -63,16 +48,18 @@ export function MainCarousel({ initializePopular, popular }) {
 				</ScrollLoader>
 			</ContainerPopular>
 			<PopularButtonContainer>
-				<ButtonImg
+				<ButtonCarousel
 					onClick={prev}
-					src={left48}
 					className='carousel-popular__button'
-				/>
-				<ButtonImg
+				>
+					<img src={left48} alt="left" />
+				</ButtonCarousel>
+				<ButtonCarousel
 					onClick={next}
-					src={right48}
 					className='carousel-popular__button'
-				/>
+				>
+					<img src={right48} alt="right" />
+				</ButtonCarousel>
 			</PopularButtonContainer>
 		</>
 	)

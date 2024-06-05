@@ -2,7 +2,7 @@ import left48 from '../../../images/icons8-chevron-left-48.png'
 import right48 from '../../../images/icons8-chevron-right-48.png'
 import { Link } from '../../../elements/Link'
 import { H2 } from '../../../elements/H2'
-import { ButtonImg } from '../../../elements/ButtonImg'
+import { ButtonCarousel } from '../../../elements/ButtonCarousel'
 import Gallery from '../../../blocks/Gallery'
 import PropTypes from 'prop-types'
 
@@ -15,16 +15,18 @@ const GalleryHeader = (props) => {
         <H2 $paddingTop='xl' $paddingBottom='xl'>Popular {description.name}</H2>
       </Link>
       <Gallery.Nav>
-        <ButtonImg
-          onChange={props.prev}
-          src={left48}
+        <ButtonCarousel
+          onClick={props.prev}
           className='carousel-media__button'
-        />
-        <ButtonImg
-          onChange={props.next}
-          src={right48}
+        >
+          <img src={left48} alt="left" />
+        </ButtonCarousel>
+        <ButtonCarousel
+          onClick={props.next}
           className='carousel-media__button'
-        />
+        >
+          <img src={right48} alt="right" />
+        </ButtonCarousel>
       </Gallery.Nav>
 		</Gallery.Header>
 	)

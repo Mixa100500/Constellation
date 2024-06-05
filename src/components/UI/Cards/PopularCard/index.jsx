@@ -50,16 +50,6 @@ export const BackdropImg = styled.img`
 	max-width: 100%;
 	border-radius: var(--backdrop-radius);
 `
-export const PlaceholderContainer = styled.div`
-aspect-ratio: 500 / 281;
-max-width: 500px;
-`
-
-export const PlaceholderContent = styled.div`
-height: 100%;
-background-color: var(--primary-bg-color);
-border-radius: var(--backdrop-radius);
-`
 
 export const PopularImgPlaceholder = styled.div`
 	aspect-ratio: 500 / 281;

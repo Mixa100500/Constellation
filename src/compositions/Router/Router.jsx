@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
-import Home from '../../components/Pages/Home/Home'
-import Watch from '../../components/Pages/Watch/Watch'
-import Collection from "../../components/Pages/Collection/Collection"
+// import { CollectionScreen } from '../../components/Pages/Collection/CollectionScreen'
+import { HomeScreen } from '../../components/Pages/Home/HomeScreen'
+// import { WatchScreen } from '../../components/Pages/Watch/WatchScreen'
 
 export const Router = () => {
   return (
@@ -9,25 +9,21 @@ export const Router = () => {
       <Routes>
         <Route
           path='/'
-          element={<Home />}
+          element={<HomeScreen />}
         />
-        <Route path='/popular'>
+        {/* <Route path='/popular'>
           <Route
             path=':type'
-            element={<Collection />}
+            element={<CollectionScreen />}
           />
         </Route>
 
         <Route path='/watch'>
           <Route
             path=':type/:id'
-            element={<Watch isMovie={false} />}
+            element={<WatchScreen />}
           />
-          <Route
-            path=':type/:id'
-            element={<Watch isMovie={true} />}
-          />
-        </Route>
+        </Route> */}
       </Routes>
       {/* <Route path='/new/book' element={<NewBook setError={notify}/>} />
       <Route path='/login' element={

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useEffect } from 'react';
 import { selectKinoboxPlayerLoaded, setLoaded } from '../../reducers/kinoboxPlayerReducer';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectOpenedMovieImdbId } from '../../reducers/CurrentWatch/selectors';
 
 const apiKey = import.meta.env.VITE_PLAYER_API_KEY
 const VideoContainer = styled.div`
@@ -30,7 +31,21 @@ const KinoboxPlayer = ({ imdbId }) => {
       script.src = 'https://kinobox.tv/kinobox.min.js'
       script.async = true
       script.onload = () => {
-        kbox('.kinobox_player', {search: {imdb: imdbId }})
+        kbox('.kinobox_player', {
+          search: {imdb: imdbId },
+          params: {
+            // all: {
+            //   autoplay: 1,
+            //   poster: 'https://example.org/poster.jpg',
+            // },
+          },
+          // players: {
+          //   videocdn: {
+          //     enable: true,
+          //       autoplay: 1,
+          //     position: 1, domain: `https://442534688564.svetacdn.in/MHQVotA92Rvf`}
+          // }
+        })
         dispatch(setLoaded())
       }
       document.body.appendChild(script)
@@ -45,8 +60,9 @@ const KinoboxPlayer = ({ imdbId }) => {
   )
 }
 
-const VideoPlayer = ({ imdbId }) => {
-  
+const VideoPlayer = () => {
+  const imdbId = useSelector(selectOpenedMovieImdbId)
+
   return <VideoContainer>
       {imdbId && <>
         <div className='loading-text'>loading...</div>

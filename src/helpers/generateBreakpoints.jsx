@@ -41,43 +41,45 @@ function generateBreakpointsByPopularCarousel(start, end, step) {
 	return breakpoints
 }
 
+export const brakePointsMainCarouselPlaceHolder = [
+	{
+		breakpoint: 400,
+		settings: {
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			centerPadding: '20px',
+		},
+	},
+	{
+		breakpoint: 552 + 17,
+		settings: {
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			centerPadding: '20px',
+		},
+	},
+	{
+		breakpoint: 1100,
+		settings: {
+			slidesToShow: 2,
+			slidesToScroll: 2,
+			centerPadding: '20px',
+		},
+	},
+	{
+		breakpoint: 1200,
+		settings: {
+			centerPadding: '76px',
+			slidesToScroll: 2,
+			slidesToShow: 2,
+		},
+	},
+]
+
 export function getPopularCarouselBreakpoints() {
-	let responsive = [
-		{
-			breakpoint: 400,
-			settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				centerPadding: '20px',
-			},
-		},
-		{
-			breakpoint: 552 + 17,
-			settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				centerPadding: '20px',
-			},
-		},
-		{
-			breakpoint: 1100,
-			settings: {
-				slidesToShow: 2,
-				slidesToScroll: 2,
-				centerPadding: '20px',
-			},
-		},
-		{
-			breakpoint: 1200,
-			settings: {
-				centerPadding: '76px',
-				slidesToScroll: 2,
-				slidesToShow: 2,
-			},
-		},
-	]
+
 	
-	return responsive.concat(generateBreakpointsByPopularCarousel(1600, 10100, 400))
+	return brakePointsMainCarouselPlaceHolder.concat(generateBreakpointsByPopularCarousel(1600, 10100, 400))
 }
 
 export function generateContainerStyles() {

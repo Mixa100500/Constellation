@@ -1,19 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Montserrat, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+  /* font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal; */
 }
 
 html {
   overflow-x: hidden;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 :root {
@@ -96,7 +91,7 @@ nav li:first-of-type {
   padding-top: 12px;
 }
 
-@media screen and (min-width: 1101px) {
+@media (min-width: 1101px) {
 
   .padding-horizontal {
     padding-left: 12px;
@@ -108,5 +103,64 @@ nav li:first-of-type {
   }
   .padding-top {
     padding-top: 12px;
+  }
+}
+
+
+/* 
+ */
+
+.placeholder_container {
+  aspect-ratio: 516 / 290;
+  max-width: 516px;
+  box-sizing: border-box;
+
+  @media (min-width: 1101px) {
+    aspect-ratio: 524 / 294.5;
+    max-width: 524px;
+  }
+}
+.placeholder_content {
+  /* /* aspect-ratio: 500 / 281; */
+  height: 100%;
+  /* max-width: 500px; */
+  max-height: 281px;
+  background-color: var(--primary-bg-color);
+  border-radius: var(--backdrop-radius);
+}
+
+ .embla {
+  /* overflow: hidden; */
+  /* margin: 0 20px; */
+}
+.embla__container {
+  display: flex;
+  /* gap: 8px; */
+  /* max-width: 1048px;
+  margin: 0 auto; */
+}
+
+@media (min-width: 1100px) {
+  .embla__container {
+    display: flex;
+  }
+}
+.embla__slide {
+  flex: 0 0 calc(100% - 40px);
+  min-width: 0;
+}
+
+/* @media (min-width: 1032px) {
+  .embla__container {
+    width: 1032px;
+    margin: 0 auto;
+  }
+} */
+
+
+@media (min-width: 517px) {
+  .embla__slide {
+    flex: 0 0 calc(50% - 20px);
+    flex: 0 0 50%; /* Breakpoint SM slide covers 50% of the viewport */
   }
 }

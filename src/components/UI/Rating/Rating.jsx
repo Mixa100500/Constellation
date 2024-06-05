@@ -1,29 +1,35 @@
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-const styleRating = {
-	display: 'flex',
-	justifyContent: 'space-between',
-	marginTop: '30px',
-}
+const RatingWrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+	margin-top: 30px;
+`
 
-const styleOwnerRating = {
-	color: 'var(--primary-color)',
-}
+const Label = styled.div`
+	color: var(--primary-color);
+`
 
 
 
-const Rating = ({ label, rating }) => {
+const Rating = ({ mediaInfo, label }) => {
+
+	let rating = mediaInfo.vote_average || ' '
+
 	return (
-		<div style={styleRating}>
-			<div style={styleOwnerRating}>{label}</div>
+		<RatingWrapper>
+			<Label>{label}</Label>
 			<div>{rating}</div>
-		</div>
+		</RatingWrapper>
 	)
 }
 
 Rating.propTypes = {
   label: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired
+	mediaInfo: PropTypes.shape({
+    vote_average: PropTypes.number,
+  }),
 }
 
 export {

@@ -7,20 +7,20 @@ import { createArray } from '../../../helpers/simple.jsx'
 import Gallery from '../../../blocks/Gallery/index.jsx'
 import VirtualVisibility from '../../../context/VirtualVisibility.jsx'
 import PropTypes from 'prop-types'
-import { LazyLoadContent } from '../../Pagination/LazyLoadContent.jsx'
+import { useLazyLoadContent } from '../../../hooks/useLazyLoadContent.jsx'
 
 const responsive = [
-	{
-		breakpoint: 238,
-		settings: {
-			slidesToShow: 0,
-		},
-	},
+	// {
+	// 	breakpoint: 238,
+	// 	settings: {
+	// 		slidesToShow: 0,
+	// 	},
+	// },
 	{
 		breakpoint: 498,
 		settings: {
 			slidesToShow: 2,
-			slidesToScroll: 2,
+			slidesToScroll: 1,
 		},
 	},
 	{
@@ -50,13 +50,13 @@ const settings = {
 	infinite: true,
 	speed: 500,
 	autoplaySpeed: 5000,
-	adaptiveHeight: true,
+	// adaptiveHeight: true,
 	// autoplay: true,
 	lazyLoad: true,
-	cssEase: 'linear',
+	// cssEase: 'linear',
 	slidesToShow: 6,
 	slidesToScroll: 5,
-	pauseOnHover: true,
+	// pauseOnHover: true,
 	swipeToSlide: true,
 	responsive,
 }
@@ -67,6 +67,41 @@ const placeholders = createArray(6)
 const MediaCarousel = ({ list, description, loaded }) => {
 	const {sliderRef, prev, next} = useCarouselButton()
 
+	// const loader = () => {
+	// 	if(list.length) {
+	// 		return (
+	// 			list.map((film) => (
+	// 				<PosterCard
+	// 					film={film}
+	// 					key={film.id}
+	// 				/>
+	// 			))
+	// 		)
+	// 	}
+	// 	return (placeholders.map((index) => (
+	// 		<PosterCardPlaceholder key={index}/>
+	// 	)))
+	// }
+
+	const renderContent = () => (
+		list.map((info) => (
+			<PosterCard key={info.id} info={info}/>
+		))
+	)
+
+	const loadingContent = () => (
+		placeholders.map((index) => (
+		<PosterCardPlaceholder key={index}/>
+	)))
+
+	const result = useLazyLoadContent({
+		isLoaded: loaded,
+		loadingContent,
+		renderContent,
+		fallbackContent: loadingContent,
+	})
+
+	// const result = loadingContent()
 
 	return (
 		<Gallery $paddingBottom='lg'>
@@ -80,23 +115,7 @@ const MediaCarousel = ({ list, description, loaded }) => {
 					ref={sliderRef}
 					{...settings}
 				>
-					{/* <LazyLoadContent
-						isLoaded={loaded}
-						loadingContent={<LoadingContent />}
-					>
-						<ListPoster list={list} />
-					</LazyLoadContent> */}
-					{loaded ?
-						list.map((film) => (
-							<PosterCard
-								film={film}
-								key={film.id}
-							/>
-						))
-						:
-						placeholders.map((index) => (
-							<PosterCardPlaceholder key={index}/>
-						))}
+					{result}
 				</Slider>
 			</VirtualVisibility>
 		</Gallery>

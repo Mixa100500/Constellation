@@ -1,14 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
-import currentWatchReducer from './reducers/currentWatchReducer'
 import { themoviedbApi } from './services/request/themoviedbService'
 import pageCollectionReducer, { nameSlicePageCollection } from './reducers/pageCollectionReducer'
 import kinoboxPlayerReducer, { nameSliceKinoboxPlayer } from './reducers/kinoboxPlayerReducer'
+import currentWatchReducer from './reducers/CurrentWatch/currentWatchReducer'
+// import paginationCollationReducer, { nameSlicePaginationCollection } from './reducers/paginationCollationReducer'
 
 const store = configureStore({
   reducer: {
     currentWatch: currentWatchReducer,
     [nameSlicePageCollection]: pageCollectionReducer,
     [nameSliceKinoboxPlayer]: kinoboxPlayerReducer,
+    // [nameSlicePaginationCollection]: paginationCollationReducer,
     [themoviedbApi.reducerPath]: themoviedbApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
