@@ -7,7 +7,7 @@ cursor: pointer;
 opacity: 0.75;
 width: var(--carousel-min-button-width);
 height: var(--carousel-min-button-width);
-
+z-index: 1;
 &:hover {
   opacity: 1;
 }

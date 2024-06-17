@@ -1,107 +1,101 @@
-import Slider from 'react-slick'
 import GalleryHeader from './GalleryHeader.jsx'
 import PosterCard from '../../UI/Cards/PosterCard/PosterCard.jsx'
-import { useCarouselButton } from '../../../hooks/index.jsx'
 import { PosterCardPlaceholder } from '../../UI/Cards/PosterCard/PosterCardPlaceholder.jsx'
-import { createArray } from '../../../helpers/simple.jsx'
+import { calcMediaSlidePerView, createArray } from '../../../helpers/simple.jsx'
 import Gallery from '../../../blocks/Gallery/index.jsx'
 import VirtualVisibility from '../../../context/VirtualVisibility.jsx'
 import PropTypes from 'prop-types'
 import { useLazyLoadContent } from '../../../hooks/useLazyLoadContent.jsx'
-
-const responsive = [
-	// {
-	// 	breakpoint: 238,
-	// 	settings: {
-	// 		slidesToShow: 0,
-	// 	},
-	// },
-	{
-		breakpoint: 498,
-		settings: {
-			slidesToShow: 2,
-			slidesToScroll: 1,
-		},
-	},
-	{
-		breakpoint: 758,
-		settings: {
-			slidesToShow: 3,
-			slidesToScroll: 2,
-		},
-	},
-	{
-		breakpoint: 850,
-		settings: {
-			slidesToShow: 4,
-			slidesToScroll: 3,
-		},
-	},
-	{
-		breakpoint: 1018,
-		settings: {
-			slidesToShow: 5,
-			slidesToScroll: 4,
-		},
-	},
-]
-
-const settings = {
-	infinite: true,
-	speed: 500,
-	autoplaySpeed: 5000,
-	// adaptiveHeight: true,
-	// autoplay: true,
-	lazyLoad: true,
-	// cssEase: 'linear',
-	slidesToShow: 6,
-	slidesToScroll: 5,
-	// pauseOnHover: true,
-	swipeToSlide: true,
-	responsive,
-}
-
-const placeholders = createArray(6)
+import useEmblaCarousel from 'embla-carousel-react'
+import { usePrevNextButtons } from '../../../hooks/usePrevNextButtons.jsx'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 
-const MediaCarousel = ({ list, description, loaded }) => {
-	const {sliderRef, prev, next} = useCarouselButton()
+const placeholders = createArray(20)
 
-	// const loader = () => {
-	// 	if(list.length) {
-	// 		return (
-	// 			list.map((film) => (
-	// 				<PosterCard
-	// 					film={film}
-	// 					key={film.id}
-	// 				/>
-	// 			))
-	// 		)
-	// 	}
-	// 	return (placeholders.map((index) => (
-	// 		<PosterCardPlaceholder key={index}/>
-	// 	)))
-	// }
-
-	const renderContent = () => (
-		list.map((info) => (
-			<PosterCard key={info.id} info={info}/>
-		))
-	)
-
-	const loadingContent = () => (
-		placeholders.map((index) => (
-		<PosterCardPlaceholder key={index}/>
-	)))
-
-	const result = useLazyLoadContent({
-		isLoaded: loaded,
-		loadingContent,
-		renderContent,
-		fallbackContent: loadingContent,
+const MediaCarousel = ({ list, description, loaded, lazyImage }) => {
+	const ref = useRef({
+		firstRender: true,
+		lastImage: null
 	})
 
-	// const result = loadingContent()
+	const [lastImageLoaded, setLastImageLoaded] = useState(false);
+
+	const [slidesInView, setSlidesInView] = useState([])
+	const [emblaRef, emblaApi] = useEmblaCarousel({
+    slidesToScroll: 2,
+		breakpoints: {
+			'(min-width: 420px)': { slidesToScroll: 3 },
+			'(min-width: 620px)': { slidesToScroll: 4 },
+			'(min-width: 820px)': { slidesToScroll: 5 },
+			'(min-width: 1018px)': { slidesToScroll: 6 },
+		},
+    loop: true,
+  })
+	
+	const updateSlidesInView = useCallback((emblaApi) => {
+    setSlidesInView((slidesInView) => {
+      if (slidesInView.length === emblaApi.slideNodes().length) {
+        emblaApi.off('slidesInView', updateSlidesInView)
+      }
+			let currentSlidesInView = emblaApi
+				.slidesInView()
+
+			if(ref.current.firstRender) {
+				const slide = calcMediaSlidePerView()
+				currentSlidesInView = currentSlidesInView.slice(0, slide)
+				ref.current.lastImage = slide
+			}
+
+			ref.current.firstRender = false;
+			const inView = currentSlidesInView
+        .filter((index) => !slidesInView.includes(index))
+      return slidesInView.concat(inView)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!emblaApi) return
+
+    updateSlidesInView(emblaApi)
+    emblaApi.on('slidesInView', updateSlidesInView)
+    emblaApi.on('reInit', updateSlidesInView)
+  }, [emblaApi, updateSlidesInView])
+
+	const {
+		onPrevButtonClick: prev,
+		onNextButtonClick: next,
+	} = usePrevNextButtons(emblaApi)
+
+	let slides
+
+	if(lastImageLoaded) {
+		slides = placeholders
+	} else {
+		slides = placeholders.slice(0, 6)
+	}
+
+	const renderContent = () => (
+		slides.map((index) => {
+			const inView = slidesInView.indexOf(index - 1) > -1
+			const info = list[index - 1]
+			const propInfo = (loaded && inView) ? info : undefined
+			const currentIsLast = ref.current.lastImage === index
+			const propSetLastImage = currentIsLast ? setLastImageLoaded : undefined
+
+			return (
+				<PosterCard
+					key={index}
+					index={index}
+					checkView={true}
+					lazy={lazyImage}
+					// key={info.id}
+					info={propInfo}
+					setLastImageLoaded={propSetLastImage}
+					// inView={inView}
+				/>
+		)}
+	))
 
 	return (
 		<Gallery $paddingBottom='lg'>
@@ -109,15 +103,15 @@ const MediaCarousel = ({ list, description, loaded }) => {
 				next={next}
 				prev={prev}
 				description={description}
+				showButton={lastImageLoaded}
 			/>
-			<VirtualVisibility>
-				<Slider
-					ref={sliderRef}
-					{...settings}
-				>
-					{result}
-				</Slider>
-			</VirtualVisibility>
+			{/* <VirtualVisibility> */}
+				<div className="media_carousel__wrapper" ref={emblaRef} >
+					<Gallery.Body>
+						{renderContent()}
+					</Gallery.Body>
+				</div>
+			{/* </VirtualVisibility> */}
 		</Gallery>
 	)
 }
@@ -129,6 +123,7 @@ MediaCarousel.propTypes = {
     name: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
   }),
+	lazyImage: PropTypes.bool,
 }
 
 export default MediaCarousel

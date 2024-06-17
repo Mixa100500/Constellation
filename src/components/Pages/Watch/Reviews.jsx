@@ -1,8 +1,8 @@
 import {
 	selectOpenedMovieReviewList,
 	selectOpenedMovieReviewLoaded,
-} from '../../../reducers/CurrentWatch/selectors'
-import { clearReview } from "../../../reducers/CurrentWatch/currentWatchReducer";
+} from '../../../reducers/currentWatch/selectors'
+import { clearReview } from "../../../reducers/currentWatch/currentWatchReducer";
 import { useDispatch, useSelector } from 'react-redux'
 import { H2 } from '../../../elements/H2'
 import { ReviewItem } from './ReviewItem'

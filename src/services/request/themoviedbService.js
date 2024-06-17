@@ -56,6 +56,7 @@ export const themoviedbApi = createApi({
 // https://api.themoviedb.org/3/tv/series_id/recommendations?language=en-US&page=1
 export const { 
   useGetSectionQuery,
-  useLazyGetSectionQuery,
-  useLazyGetRecommendationsQuery,
+  useGetRecommendationsQuery,
+  // useLazyGetSectionQuery,
+  // useLazyGetRecommendationsQuery,
 } = themoviedbApi

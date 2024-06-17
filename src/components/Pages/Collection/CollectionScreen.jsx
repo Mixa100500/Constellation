@@ -13,7 +13,7 @@ export const CollectionScreen = () => {
   
   return (
     <Suspense fallback={skeleton}>
-        <Component />
+      <Component />
     </Suspense>
   );
 };

@@ -1,47 +1,55 @@
-// import CarouselMovies from '../../../compositions/Carousel/MoviesCarousel'
-// import CarouselSerials from '../../../compositions/Carousel/SerialsCarousel'
-// import Layout from '../../Layout/Layout'
-import { PopularCarousel } from '../../../compositions/Carousel/PopularCarousel'
-// import CarouselCartoons from '../../../compositions/Carousel/CartoonsCarousel'
-import { createArray } from '../../../helpers/simple';
-import useEmblaCarousel from 'embla-carousel-react'
-import { PopularCardPlaceholder } from '../../UI/Cards/PopularCard/PopularCardPlaceholder';
+import CarouselMovies from '../../../compositions/Carousel/MoviesCarousel'
+import { MainCarousel } from '../../Carousels/MainCarousel/MainCarousel';
+import Layout from '../../Layout/Layout'
+// import { PopularCarousel } from '../../../compositions/Carousel/PopularCarousel'
 
-const placeholders = createArray(4)
+import { LazyHoneLoader } from './LazyHomeLoader';
 
-export const PopularSkeleton = () => {
-  const [emblaRef] = useEmblaCarousel({
-    // slidesToScroll: 'auto',
-		slidesToScroll: 2,
-		// breakpoints: {
-		// 	'(min-width: 517px)': { slidesToScroll: 2 }
-		// },
-    loop: true,
-		// containScroll: "trimSnaps"
-		containScroll: true
-  })
-
-  return (
-		<div className="embla"
-			ref={emblaRef}
-		>
-			<div className="embla__container">
-				{placeholders.map((item) => (
-					<PopularCardPlaceholder key={item} />
-				))}
-			</div>
-		</div>
-  )
-}
-
+// const mediaSlidesPlaceholders = createArray(6)
 const Home = () => {
-
 	return (
 		<>
-			<PopularSkeleton />
+			<MainCarousel />
+			<Layout>
+				<CarouselMovies />
+				<LazyHoneLoader />
+				
+
+				{/* <div className='padding-horizontal'>
+          <div className='media-carousel-placeholder__header-placeholder'>
+        </div>
+        </div>
+        <div className='media-carousel-placeholder__container'>
+          {mediaSlidesPlaceholders.map((item) => (
+            <div key={item} className='media-carousel__slide-container-placeholder padding-horizontal padding-top'>
+              <div className='media__slide__placeholder-content'></div>
+              <div className='title-placeholder'></div>
+              <div className='date-placeholder'></div>
+            </div>
+          ))}
+        </div>
+				<div className='padding-horizontal'>
+          <div className='media-carousel-placeholder__header-placeholder'>
+        </div>
+        </div>
+        <div className='media-carousel-placeholder__container'>
+          {mediaSlidesPlaceholders.map((item) => (
+            <div key={item} className='media-carousel__slide-container-placeholder padding-horizontal padding-top'>
+              <div className='media__slide__placeholder-content'></div>
+              <div className='title-placeholder'></div>
+              <div className='date-placeholder'></div>
+            </div>
+          ))}
+        </div> */}
+				{/* <CarouselSerials /> */}
+				{/* <CarouselCartoons /> */}
+			</Layout>
 		</>
 	)
 
+	// return (
+	// 	<PopularCarousel />
+	// )
 	// return (
 	// 		<>
 	// 			<PopularCarousel />

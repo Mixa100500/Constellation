@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {
-	getReviewsByFilm as getReviewsOfMovies,
-	getReviewsBySerial,
-} from '../../services/request/reviews'
+// import {
+// 	getReviewsByFilm as getReviewsOfMovies,
+// 	getReviewsBySerial,
+// } from '../../services/request/reviews'
 import { getGenres, getYear } from '../../helpers/simple'
-import {
-	getMovieInfo,
-	getSerialIMDBID,
-	getSerialInfo,
-} from '../../services/request/mediaInfo'
+// import {
+// 	getMovieInfo,
+// 	getSerialIMDBID,
+// 	getSerialInfo,
+// } from '../../services/request/mediaInfo'
 
 
 const initialReviews = {
@@ -54,10 +54,13 @@ const currentMovieSlice = createSlice({
 	},
 })
 
-export const { fetchReviewsStart, fetchReviewsFailure, fetchReviewsSuccess } =
-	currentMovieSlice.actions
-
-export const { clearMovie, addMainInfo, clearReview } = currentMovieSlice.actions
-
+export const {
+	fetchReviewsStart,
+	fetchReviewsFailure,
+	fetchReviewsSuccess,
+	clearMovie,
+	addMainInfo,
+	clearReview
+} = currentMovieSlice.actions
 
 export default currentMovieSlice.reducer

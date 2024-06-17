@@ -1,15 +1,21 @@
+import { memo, useState } from 'react'
 import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel'
 import { ScrollLoader } from '../../components/Pagination/ScrollLoader'
-import { useLazyGetSectionQuery } from '../../services/request/themoviedbService'
+// import { useLazyGetSectionQuery } from '../../services/request/themoviedbService'
 import { collectionsNames } from '../Router/options'
+import { useGetSectionQuery } from '../../services/request/themoviedbService'
 
 const description = collectionsNames.cartoons
 
-const CarouselCartoons = () => {
-	const [fetchPage, { data, isSuccess }] = useLazyGetSectionQuery()
+const CarouselCartoons = memo(() => {
+	const [startLoading, setStartLoading] = useState(false)
+	const query = { section: 1, type: collectionsNames.movies.name }
+	const { data, isSuccess } = useGetSectionQuery(query, {
+    skip: !startLoading
+  })
 	
 	const initializeCartoon = () => {
-    fetchPage({ section: 1, type: collectionsNames.movies.name, genres: '16' })
+		setStartLoading(true)
   }
 
 
@@ -17,6 +23,7 @@ const CarouselCartoons = () => {
 		<>
 			<ScrollLoader fetchData={initializeCartoon}>
 				<MediaCarousel
+					lazyImage={true}
 					loaded={isSuccess}
 					list={data?.list || []}
 					description={description}
@@ -24,6 +31,8 @@ const CarouselCartoons = () => {
 			</ScrollLoader>
 		</>
 	)
-}
+})
+
+CarouselCartoons.displayName  = 'CarouselCartoons'
 
 export default CarouselCartoons

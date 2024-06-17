@@ -7,6 +7,23 @@ export function checkHeight() {
 	)
 }
 
+export const calcMediaSlidePerView = () => {
+	const width = window.innerWidth
+	if(width > 1017) {
+		return 6
+	}
+	if(width > 819) {
+		return 5
+	}
+	if(width > 619) {
+		return 4
+	}
+	if(width > 419) {
+		return 3
+	}
+	return 2
+}
+
 export const getGenres = (genres) => {
 	return genres.map((genre) => genre.name.split(' & ')[0])
 }

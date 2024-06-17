@@ -1,6 +1,8 @@
 import { collectionsNames } from "../compositions/Router/options";
 
 export const getType = (type) => {
+  console.log('type', type)
+  
   switch (type) {
     case collectionsNames.movies.name:
       return 'movie';

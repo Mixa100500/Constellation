@@ -2,6 +2,8 @@ import styled from "styled-components"
 
 
 export const ImgContainer = styled.div`
+	height: 100%;
+	max-height: 281px;
 	position: relative;
 	overflow: hidden;
 	transition: all 0.3s ease;

@@ -2,11 +2,11 @@ import { useEffect, } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
 	clearMovie,
-} from '../../../reducers/CurrentWatch/currentWatchReducer'
+} from '../../../reducers/currentWatch/currentWatchReducer'
 import Reviews from './Reviews'
 import MoviePoster from './MoviePoster'
 import VideoPlayer from '../../Player/MoviePlayer'
-import CarouselRecommend from './CarouselRecommend'
+import CarouselRecommend from '../../../compositions/Carousel/CarouselRecommend'
 import Layout from '../../Layout/Layout'
 import { H2 } from '../../../elements/H2'
 import { Rating } from '../../UI/Rating/Rating'
@@ -20,7 +20,7 @@ import {
 import { useParams } from 'react-router-dom'
 import { useInitializeByType } from '../../../hooks'
 import { DescriptionContent } from './Description'
-import { selectOpenedMovieInfo, selectOpenedMovieLoaded } from '../../../reducers/CurrentWatch/selectors'
+import { selectOpenedMovieInfo, selectOpenedMovieLoaded } from '../../../reducers/currentWatch/selectors'
 
 const margined = { marginBottom: '15px' }
 

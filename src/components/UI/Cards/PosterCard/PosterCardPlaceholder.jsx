@@ -1,8 +1,8 @@
 import { DatePlaceholder, PlaceholderImg, PlaceholderDescription, TitlePlaceholder, PosterContainer } from "."
 
-const ItemDesription = () => {
+const ItemDescription = () => {
   return (
-    <PlaceholderDescription>
+    <PlaceholderDescription style={{ height: '37px' }}>
       <TitlePlaceholder className="title" />
       <DatePlaceholder className="date" />
     </PlaceholderDescription>
@@ -16,7 +16,7 @@ export const PosterCardPlaceholder = () => {
 				className='padding-horizontal padding-top'
       >
 				<PlaceholderImg />
-				<ItemDesription/>
+				<ItemDescription/>
 			</PosterContainer>
 	)
 }

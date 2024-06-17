@@ -1,21 +1,7 @@
 import { useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { collectionsNames } from '../compositions/Router/options'
-import { fetchMoviesReview, fetchSerialReview, initializeMovies, initializeSerials } from '../reducers/CurrentWatch/thunks'
-
-export function useCarouselButton() {
-	const sliderRef = useRef()
-
-	const next = () => {
-		sliderRef.current.slickNext()
-	}
-
-	const prev = () => {
-		sliderRef.current.slickPrev()
-	}
-
-	return {prev, next, sliderRef}
-}
+import { fetchMoviesReview, fetchSerialReview, initializeMovies, initializeSerials } from '../reducers/currentWatch/thunks'
 
 export const useWatchParams = () => {
 	const { id, type } = useParams()

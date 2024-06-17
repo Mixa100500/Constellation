@@ -1,19 +1,28 @@
 import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel'
 import { ScrollLoader } from '../../components/Pagination/ScrollLoader'
 import { collectionsNames } from '../Router/options'
-import { useLazyGetSectionQuery } from '../../services/request/themoviedbService'
+import { useGetSectionQuery } from '../../services/request/themoviedbService'
+import { useState } from 'react'
+// import { useSelector } from 'react-redux'
+// import { selectIsCurrentChunkLoading } from '../../reducers/homePageLoadingReducer/homePageLoadingReducer'
+import { memo } from 'react'
 
-const CarouselSerials = () => {
-
-	const [fetchPage, { data, isSuccess }] = useLazyGetSectionQuery()
+export const CarouselSerials = memo(() => {
+	const [startLoading, setStartLoading] = useState(false)
+	const query = { section: 1, type: collectionsNames.serials.name }
+	const { data, isSuccess } = useGetSectionQuery(query, {
+    skip: !startLoading
+  })
 	
 	const initializeSerials = () => {
-    fetchPage({ section: 1, type: collectionsNames.serials.name })
+		setStartLoading(true)
   }
 	return (
 		<>
+
 			<ScrollLoader fetchData={initializeSerials} >
 				<MediaCarousel
+					lazyImage={true}
 					loaded={isSuccess}
 					list={data?.list || []}
 					description={collectionsNames.serials}
@@ -21,6 +30,7 @@ const CarouselSerials = () => {
 				</ScrollLoader>
 		</>
 	)
-}
+})
 
-export default CarouselSerials
+CarouselSerials.displayName = 'CarouselSerials'
+

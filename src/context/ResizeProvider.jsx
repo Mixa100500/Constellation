@@ -6,22 +6,22 @@ const ContextHeight = React.createContext(null)
 export const ResizeProvider = ({ children }) => {
   const ref = useRef(null)
   const [height, setHeight] = useState(0)
-  // useEffect(() => {
-  //   const nameCustomEvent = "optimizedResize"
-  //   const [type, func] = throttle("resize", nameCustomEvent)
+  useEffect(() => {
+    const nameCustomEvent = "optimizedResize"
+    const [type, func] = throttle("resize", nameCustomEvent)
 
-  //   function resize() {
-  //     setHeight(ref.current.clientHeight)
-  //   }
+    function resize() {
+      setHeight(ref.current.clientHeight)
+    }
 
-  //   window.addEventListener(nameCustomEvent, resize)
-  //   resize()
+    window.addEventListener(nameCustomEvent, resize)
+    resize()
 
-  //   return () => {
-  //     window.removeEventListener(type, func)
-  //     window.removeEventListener(nameCustomEvent, resize)
-  //   }
-  // }, [])
+    return () => {
+      window.removeEventListener(type, func)
+      window.removeEventListener(nameCustomEvent, resize)
+    }
+  }, [])
 
   return (
     <ContextRef.Provider value={ref}>

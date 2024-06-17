@@ -1,10 +1,10 @@
 body {
   margin: 0;
 
-  /* font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
-  font-style: normal; */
+  font-style: normal;
 }
 
 html {
@@ -37,6 +37,11 @@ html {
   --color-second: var(--silver-06);
   --color-second-hover: var(--silver-05);
   --color-second-inactive: var(--silver-08);
+}
+
+:root {
+  --xl: 1.7rem;
+  --md: 1rem
 }
 
 
@@ -106,61 +111,184 @@ nav li:first-of-type {
   }
 }
 
+.padding-vertical--xl {
+  padding-top: var(--xl);
+  padding-bottom: var(--xl);
+}
+
+.padding--md {
+  padding: var(--md);
+}
+
 
 /* 
  */
 
-.placeholder_container {
-  aspect-ratio: 516 / 290;
+
+.main__slide {
   max-width: 516px;
   box-sizing: border-box;
+  flex: 0 0 100%;
+  min-width: 0;
+}
 
-  @media (min-width: 1101px) {
-    aspect-ratio: 524 / 294.5;
+@media (min-width: 400px) {
+  .main__slide {
+    flex: 0 0 calc(100% - 40px);
+    min-width: 0;
+  }
+}
+
+@media (min-width: 517px) {
+  .main__slide {
+    flex: 0 0 calc(50% - 20px);
+  }
+}
+
+@media (min-width: 1101px) {
+  .main__slide {
     max-width: 524px;
   }
 }
-.placeholder_content {
-  /* /* aspect-ratio: 500 / 281; */
+
+.main__slide__placeholder-content {
+  aspect-ratio: 500 / 281; 
   height: 100%;
-  /* max-width: 500px; */
   max-height: 281px;
   background-color: var(--primary-bg-color);
   border-radius: var(--backdrop-radius);
 }
 
- .embla {
-  /* overflow: hidden; */
-  /* margin: 0 20px; */
-}
-.embla__container {
+.main-carousel__container {
   display: flex;
-  /* gap: 8px; */
-  /* max-width: 1048px;
-  margin: 0 auto; */
 }
 
-@media (min-width: 1100px) {
-  .embla__container {
-    display: flex;
-  }
+.main-carousel__placeholder {
+  display: flex;
+  max-width: 1048px;
 }
-.embla__slide {
-  flex: 0 0 calc(100% - 40px);
+
+.main-carousel__slide-container-placeholder {
+  max-width: 516px;
+  box-sizing: border-box;
+  flex: 0 0 100%;
   min-width: 0;
 }
 
-/* @media (min-width: 1032px) {
-  .embla__container {
-    width: 1032px;
+@media (min-width: 400px) {
+  .main-carousel__placeholder {
+    margin: 0 20px;
+  }
+}
+
+@media (min-width: 1088px) {
+  .main-carousel__placeholder {
     margin: 0 auto;
   }
-} */
-
+}
 
 @media (min-width: 517px) {
-  .embla__slide {
-    flex: 0 0 calc(50% - 20px);
-    flex: 0 0 50%; /* Breakpoint SM slide covers 50% of the viewport */
+  .main-carousel__slide-container-placeholder {
+    flex: 0 0 50%;
+    max-width: 524px;
   }
+}
+
+.media-carousel-placeholder__header-placeholder {
+  height: 32px;
+  margin: 27px 0;
+  background-color: var(--primary-bg-color);
+}
+
+.media-carousel-placeholder__container {
+  display: flex;
+  overflow: hidden;
+}
+
+.layout_placeholder {
+  max-width: 1048px;
+}
+
+@media (min-width: 400px) {
+  .layout_placeholder {
+    margin: 0 20px;
+  }
+}
+
+@media (min-width: 1088px) {
+  .layout_placeholder {
+    margin: 0 auto;
+  }
+}
+
+.media_carousel__wrapper {
+  overflow: hidden;
+}
+
+.media__slide__placeholder-content {
+  aspect-ratio: 2 / 3;
+  background-color: var(--primary-bg-color);
+  max-width: 200px;
+  border-radius: var(--poster-radius);
+}
+
+.media-carousel__slide-container-placeholder {
+  box-sizing: border-box;
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* @media (min-width: 472px) { */
+@media (min-width: 420px) {
+  .media-carousel__slide-container-placeholder {
+    flex: 0 0 33.33%;
+  }
+}
+
+/* @media (min-width: 688px) { */
+@media (min-width: 620px) {
+  .media-carousel__slide-container-placeholder {
+    flex: 0 0 25%;
+  }
+}
+
+/* @media (min-width: 904px) { */
+@media (min-width: 820px) {
+  .media-carousel__slide-container-placeholder {
+    flex: 0 0 20%;
+  }
+}
+
+@media (min-width: 1018px) {
+  .media-carousel__slide-container-placeholder {
+    flex: 0 0 16.6666%;
+  }
+}
+
+.title-placeholder {
+  height: 15px;
+	width: 90%;
+	border-radius: 5px;
+  margin-top: 5px;
+	background-color: var(--primary-bg-color);
+}
+
+.date-placeholder {
+  height: 14px;
+	width: 75%;
+	border-radius: 4px;
+  margin-top: 3px;
+	background-color: var(--primary-bg-color);
+}
+
+/*  */
+.main {
+  flex: 0 0 auto;
+}
+
+.containerApp {
+  display: flex;
+  flex-direction: column;
+  min-height: 120vh;
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-// import { CollectionList } from './styled';
-// import { PosterCardPlaceholder } from '../../UI/Cards/PosterCard/PosterCardPlaceholder';
-// import { createArray } from '../../../helpers/simple';
+import { CollectionList } from './styled';
+import { PosterCardPlaceholder } from '../../UI/Cards/PosterCard/PosterCardPlaceholder';
+import { createArray } from '../../../helpers/simple';
 
 const Layout = styled.div`
   max-width: var(--main-max-width);
@@ -24,19 +24,20 @@ const FilterPlaceholder = styled.div`
 const HeadPlaceholder = styled.div`
   height: 32px;
   margin: 27px 0;
-  background-color: var(--filter-color);
+  background-color: var(--primary-bg-color);
 `
 
 export const CollectionScreenSkeleton = () => {
+  const placeholders = createArray(20)
   return (
     <Layout>
       <FilterPlaceholder />
       <HeadPlaceholder />
-      {/* <CollectionList>
+      <CollectionList>
         {placeholders.map((item) => 
           <PosterCardPlaceholder key={item} />
         )}
-      </CollectionList> */}
+      </CollectionList>
     </Layout>
   )
 }

@@ -7,34 +7,35 @@ import Gallery from '../../../blocks/Gallery'
 import PropTypes from 'prop-types'
 
 const GalleryHeader = (props) => {
-	const description = props.description
-  
+	const { description, prev, next, showButton } = props
 	return (
 		<Gallery.Header className='padding-horizontal'>
       <Link to={`/popular/${description.url}`}>
         <H2 $paddingTop='xl' $paddingBottom='xl'>Popular {description.name}</H2>
       </Link>
-      <Gallery.Nav>
+      <Gallery.Nav $visible={showButton}>
         <ButtonCarousel
-          onClick={props.prev}
+          onClick={prev}
           className='carousel-media__button'
         >
           <img src={left48} alt="left" />
         </ButtonCarousel>
         <ButtonCarousel
-          onClick={props.next}
+          onClick={next}
           className='carousel-media__button'
         >
           <img src={right48} alt="right" />
         </ButtonCarousel>
       </Gallery.Nav>
 		</Gallery.Header>
+
 	)
 }
 
 GalleryHeader.propTypes = {
   prev: PropTypes.func,
   next: PropTypes.func,
+  showButton: PropTypes.bool.isRequired, 
   description: PropTypes.shape({
     name: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,

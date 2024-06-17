@@ -75,31 +75,33 @@ const createUrl = ({ type, genres }) => URLs.themoviedbBaseURL + `/discover/${ge
 //     .join(', ');
 // }
 
-export const selectMaxSectionCollection = (obj) => {
-  const key = createUrl(obj)
-  return (state) => {
-    const domain = state[nameSlicePageCollection]
-    return domain.general[key]?.total_pages
-  }
+const createUrlBySearch = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  const genres = searchParams.get('genres')
+  const type = searchParams.get('type')
+
+  return createUrl({genres, type})
+}
+export const selectMaxSectionCollection = (state) => {
+  const key = createUrlBySearch()
+  const domain = state[nameSlicePageCollection]
+  return domain.general[key]?.total_pages
 }
 
-export const selectMaxResultsCollection = (obj) => {
-  const key = createUrl(obj)
-  return (state) => {
-    const domain = state[nameSlicePageCollection]
-    return domain.general[key]?.total_results
-  }
+export const selectMaxResultsCollection = (state) => {
+  const key = createUrlBySearch()
+  const domain = state[nameSlicePageCollection]
+  return domain.general[key]?.total_results
 }
 
-export const selectHasMoreCollection = (obj) => {
-  const key = createUrl(obj)
-  return (state) => {
-    const domain = state[nameSlicePageCollection]
+export const selectHasMoreCollection = (state) => {
+  const key = createUrlBySearch()
+  const domain = state[nameSlicePageCollection]
 
-    const max = domain.general[key]?.total_pages
-    const countPage = domain.countPage
-    return max && countPage * 3 <= max
-  }
+  const max = domain.general[key]?.total_pages
+  const countPage = domain.countPage
+  return max && countPage * 3 <= max
 }
 
 export const selectCurrentLoadingSection = (state) => {

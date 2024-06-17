@@ -2,16 +2,21 @@ import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarouse
 // import { useSelector } from 'react-redux'
 import { ScrollLoader } from '../../components/Pagination/ScrollLoader'
 import { collectionsNames } from '../Router/options'
-import { useLazyGetSectionQuery } from '../../services/request/themoviedbService'
+import { useGetSectionQuery } from '../../services/request/themoviedbService'
+import { useState } from 'react'
+import { memo } from 'react'
 
 const CarouselMovies = () => {
-
-	const [fetchPage, { data, isSuccess }] = useLazyGetSectionQuery()
+	const [startLoading, setStartLoading] = useState(false)
+	const query = { section: 1, type: collectionsNames.movies.name }
+	const { data, isSuccess } = useGetSectionQuery(query, {
+    skip: !startLoading
+  })
 	
 	const initializeMovies = () => {
-    fetchPage({ section: 1, type: collectionsNames.movies.name })
+		setStartLoading(true)
   }
-
+	
 	return (
 		<>
 			<ScrollLoader fetchData={initializeMovies} >
@@ -24,5 +29,7 @@ const CarouselMovies = () => {
 		</>
 	)
 }
+
+CarouselMovies.displayName = 'CarouselMovies'
 
 export default CarouselMovies

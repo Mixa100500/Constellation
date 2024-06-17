@@ -26,8 +26,8 @@
 
 //padding-horizontal
 export const PopularCardPlaceholder = () => {
-  return <div className="placeholder_container embla__slide padding-horizontal">
-    <div className="placeholder_content">
+  return <div className="main__slide padding-horizontal">
+    <div className="main__slide__placeholder-content">
 
     </div>
   </div>

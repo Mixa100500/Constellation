@@ -1,38 +1,37 @@
-// import React from 'react';
-// import { ContainerPopular } from '../../Carousels/MainCarousel/styled';
-// import Slider from 'react-slick'
-// import { settingMainPlaceHolder } from '../../Carousels/MainCarousel/settingsMainCarousel';
+
 import { PopularCardPlaceholder } from '../../UI/Cards/PopularCard/PopularCardPlaceholder';
 import { createArray } from '../../../helpers/simple';
-// import useEmblaCarousel from 'embla-carousel-react'
 
-const placeholders = createArray(2)
+const mainSlidesPlaceholders = createArray(2)
+const mediaSlidesPlaceholders = createArray(6)
 
 export const HomeScreenSkeleton = () => {
-  // const [emblaRef] = useEmblaCarousel({
-  //   // slidesToScroll: 'auto',
-  //   // loop: true,
-  // })
 
   return (
-    <div className="embla"
-    // ref={emblaRef}
-    >
-      <div className="embla__container">
-        {placeholders.map((item) => (
-          <PopularCardPlaceholder key={item} />
+    <>
+      <div className="main-carousel__placeholder">
+        {mainSlidesPlaceholders.map((item) => (
+          <div key={item} className='main-carousel__slide-container-placeholder padding-horizontal'>
+            <div className='main__slide__placeholder-content'></div>
+          </div>
         ))}
       </div>
-    </div>
+      <div className='layout_placeholder'>
+        <div className='padding-horizontal'>
+          <div className='media-carousel-placeholder__header-placeholder'>
+        </div>
+        </div>
+        <div className='media-carousel-placeholder__container'>
+          {mediaSlidesPlaceholders.map((item) => (
+            <div key={item} className='media-carousel__slide-container-placeholder padding-horizontal padding-top'>
+              <div className='media__slide__placeholder-content'></div>
+              <div className='title-placeholder'></div>
+              <div className='date-placeholder'></div>
+            </div>
+          ))}
+        </div>
+      </div >
+    </>
   )
-  // return (
-  //   <ContainerPopular>
-  //     <Slider {...settingMainPlaceHolder} >
-  //       {placeholders.map((item) => (
-	// 				<PopularCardPlaceholder key={item}/>
-	// 			))}
-  //     </Slider>
-  //   </ContainerPopular>
-  // )
 }
 

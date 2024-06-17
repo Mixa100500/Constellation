@@ -2,44 +2,35 @@ import React from "react"
 // import { useDispatch } from "react-redux"
 import PropTypes from 'prop-types'
 
-const ScrollLoader = (props) => {
-  const fetchData = props.fetchData
-  const query = props.query
-
-  const [isLoaded, setIsLoaded] = React.useState(true)
+const ScrollLoader = ({ fetchData, children }) => {
+  const isVisibleRef = React.useRef(false)
   const ref = React.useRef()
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       async (entries) => {
-				if(entries[0].isIntersecting && isLoaded) {
-          setIsLoaded(false)
-          fetchData(query)
-        }
-
-        if(!isLoaded) {
+				if(entries[0].isIntersecting && !isVisibleRef.current) {
+          fetchData()
+          isVisibleRef.current = true
           observer.disconnect()
         }
 			},
 			{
 				root: null,
 				threshold: 0,
-				rootMargin: '100px 0px 100px 0px',
+				rootMargin: '200px 0px 200px 0px',
 			}
 		)
-
-		if (ref.current) {
-      observer.observe(ref.current)
-		}
+    observer.observe(ref.current)
 
     return () => {
       observer.disconnect()
     }
-	}, [isLoaded])
+	}, [])
 
   return (
     <div ref={ref}>
-      {props.children}
+      {children}
     </div>
   )
 }
