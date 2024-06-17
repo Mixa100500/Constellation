@@ -6,9 +6,9 @@ import { visualizer } from 'rollup-plugin-visualizer';
     plugins: [
       react({
         babel: {
-          plugins: [
-            ["babel-plugin-styled-components", { "minify": true, "transpileTemplateLiterals": true }]
-          ],
+          // plugins: [
+          //   ["babel-plugin-styled-components", { "minify": true, "transpileTemplateLiterals": true }]
+          // ],
         },
       }),
     ],
