@@ -1,5 +1,5 @@
 // import axios from "axios"
-import { option } from "./options"
+import { option } from "./options.jsx"
 import { URLs } from "./URL"
 const params = 'language=en-US&page=1'
 

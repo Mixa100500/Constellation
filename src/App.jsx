@@ -1,5 +1,5 @@
-import { Header } from "./components/Layout/Header"
-import { Router } from './compositions/Router/Router'
+import { Header } from "./components/Layout/Header.jsx"
+import { Router } from './compositions/Router/Router.jsx'
 
 function App() {
 	

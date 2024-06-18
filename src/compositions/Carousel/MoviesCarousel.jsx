@@ -4,7 +4,6 @@ import { ScrollLoader } from '../../components/Pagination/ScrollLoader'
 import { collectionsNames } from '../Router/options'
 import { useGetSectionQuery } from '../../services/request/themoviedbService'
 import { useState } from 'react'
-import { memo } from 'react'
 
 const CarouselMovies = () => {
 	const [startLoading, setStartLoading] = useState(false)

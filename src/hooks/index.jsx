@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { collectionsNames } from '../compositions/Router/options'
-import { fetchMoviesReview, fetchSerialReview, initializeMovies, initializeSerials } from '../reducers/currentWatch/thunks'
+import { fetchMoviesReview, fetchSerialReview, initializeMovies, initializeSerials } from '../reducers/CurrentWatch/thunks'
 
 export const useWatchParams = () => {
 	const { id, type } = useParams()

@@ -1,9 +1,9 @@
 import left48 from '../../../images/icons8-chevron-left-48.png'
 import right48 from '../../../images/icons8-chevron-right-48.png'
-import { Link } from '../../../elements/Link'
-import { H2 } from '../../../elements/H2'
-import { ButtonCarousel } from '../../../elements/ButtonCarousel'
-import Gallery from '../../../blocks/Gallery'
+import { Link } from '../../../elements/Link.jsx'
+import { H2 } from '../../../elements/H2.jsx'
+import { ButtonCarousel } from '../../../elements/ButtonCarousel.jsx'
+import Gallery from '../../../blocks/Gallery/index.jsx'
 import PropTypes from 'prop-types'
 
 const GalleryHeader = (props) => {

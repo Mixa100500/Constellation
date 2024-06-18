@@ -1,4 +1,4 @@
-import { option } from "./options"
+import { option } from "./options.jsx"
 import { URLs } from "./URL"
 const param = 'language=en-US'
 const lastUrl = 'trending/all/day'

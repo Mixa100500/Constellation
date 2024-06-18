@@ -1,10 +1,10 @@
 import styled from "styled-components"
-import { Header } from "./Header"
-import { Nav } from "./Nav"
-import { paddingReducer } from "../../modifiers/padding/reducer"
-import { Body } from "./Body"
+import { Header } from "./Header.jsx"
+import { Nav } from "./Nav.jsx"
+import { paddingReducer } from "../../modifiers/padding/reducer.jsx"
+import { Body } from "./Body.jsx"
 
-export const Gallery = styled.div`
+const Gallery = styled.div`
   position: relative;
 	${paddingReducer};
 `

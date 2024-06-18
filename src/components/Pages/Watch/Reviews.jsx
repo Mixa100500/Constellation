@@ -1,14 +1,14 @@
 import {
 	selectOpenedMovieReviewList,
 	selectOpenedMovieReviewLoaded,
-} from '../../../reducers/currentWatch/selectors'
-import { clearReview } from "../../../reducers/currentWatch/currentWatchReducer";
+} from '../../../reducers/CurrentWatch/selectors.jsx'
+import { clearReview } from "../../../reducers/CurrentWatch/currentWatchReducer.jsx";
 import { useDispatch, useSelector } from 'react-redux'
-import { H2 } from '../../../elements/H2'
-import { ReviewItem } from './ReviewItem'
+import { H2 } from '../../../elements/H2.jsx'
+import { ReviewItem } from './ReviewItem.jsx'
 import { useEffect } from 'react'
-import { useFetchReviewsByType } from '../../../hooks'
-import { useLazyLoadContent } from '../../../hooks/useLazyLoadContent'
+import { useFetchReviewsByType } from '../../../hooks/index.jsx'
+import { useLazyLoadContent } from '../../../hooks/useLazyLoadContent.jsx'
 import { useParams } from 'react-router-dom'
 
 const Reviews = () => {

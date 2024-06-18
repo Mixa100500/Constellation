@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useState } from "react"
-import { getPopular } from "../../../services/request/popular"
-import { collectionExtractor, createArray } from "../../../helpers/simple"
-import { usePrevNextButtons } from "../../../hooks/usePrevNextButtons"
-import { PopularCard } from "../../UI/Cards/PopularCard/PopularCard"
+import { getPopular } from "../../../services/request/popular.jsx"
+import { collectionExtractor, createArray } from "../../../helpers/simple.jsx"
+import { usePrevNextButtons } from "../../../hooks/usePrevNextButtons.jsx"
+import { PopularCard } from "../../UI/Cards/PopularCard/PopularCard.jsx"
 import useEmblaCarousel from 'embla-carousel-react'
-import { PopularCardPlaceholder } from "../../UI/Cards/PopularCard/PopularCardPlaceholder"
-import { ButtonCarousel } from "../../../elements/ButtonCarousel"
+import { PopularCardPlaceholder } from "../../UI/Cards/PopularCard/PopularCardPlaceholder.jsx"
+import { ButtonCarousel } from "../../../elements/ButtonCarousel.jsx"
 import left48 from "../../../images/icons8-chevron-left-48.png"
 import right48 from "../../../images/icons8-chevron-right-48.png"
 // import Autoplay from 'embla-carousel-autoplay'
 const placeholders = createArray(2)
-import { PopularButtonContainer } from "./styled"
+import { PopularButtonContainer } from "./styled.jsx"
 
 export const MainCarousel = () => {
 	const [popular, setPopular] = useState([])

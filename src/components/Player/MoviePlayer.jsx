@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types'
 import { useEffect } from 'react';
-import { selectKinoboxPlayerLoaded, setLoaded } from '../../reducers/kinoboxPlayerReducer';
+import { selectKinoboxPlayerLoaded, setLoaded } from '../../reducers/kinoboxPlayerReducer.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectOpenedMovieImdbId } from '../../reducers/currentWatch/selectors';
+import { selectOpenedMovieImdbId } from '../../reducers/CurrentWatch/selectors.jsx';
 
 const apiKey = import.meta.env.VITE_PLAYER_API_KEY
 const VideoContainer = styled.div`
@@ -31,6 +31,7 @@ const KinoboxPlayer = ({ imdbId }) => {
       script.src = 'https://kinobox.tv/kinobox.min.js'
       script.async = true
       script.onload = () => {
+        // eslint-disable-next-line no-undef
         kbox('.kinobox_player', {
           search: {imdb: imdbId },
           params: {
@@ -52,6 +53,7 @@ const KinoboxPlayer = ({ imdbId }) => {
       return
     }
     if(loaded) {
+      // eslint-disable-next-line no-undef
       kbox('.kinobox_player', {search: {imdb: imdbId }})
     }
   }, [imdbId])
