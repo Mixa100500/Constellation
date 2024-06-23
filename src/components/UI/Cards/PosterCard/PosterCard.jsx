@@ -23,7 +23,7 @@ const PosterCard = memo(({ info, index, lazy, lastImage, setLastImageLoaded }) =
 				setLastImageLoaded(true)
 			}
 		}
-		console.log('index', index)
+		// console.log('index', index)
 		return (
 			<PosterContainer
 				className='padding-horizontal padding-top'

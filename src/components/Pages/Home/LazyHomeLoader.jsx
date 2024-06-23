@@ -1,19 +1,25 @@
 import { useEffect, useState } from 'react';
-import { CarouselSerials } from '../../../compositions/Carousel/SerialsCarousel';
-import CarouselCartoons from '../../../compositions/Carousel/CartoonsCarousel';
-import CarouselMovies from '../../../compositions/Carousel/MoviesCarousel';
+import { CarouselSerials } from '../../../compositions/Carousel/SerialsCarousel.jsx';
+import CarouselCartoons from '../../../compositions/Carousel/CartoonsCarousel.jsx';
+// import CarouselMovies from '../../../compositions/Carousel/MoviesCarousel';
+import { usePageLoadedSet, } from '../../../context/PageLoadProvider.jsx';
 
 export const LazyHoneLoader = () => {
   const [loadingProgress, setLoadingProgress] = useState(0)
+  const pageLoaded = usePageLoadedSet()
+
   useEffect(() => {
     if(loadingProgress <= 2) {
       setLoadingProgress(prev => prev + 1)
+      return
     }
-  }, [loadingProgress]);
+    pageLoaded(true)
+  }, [loadingProgress, pageLoaded]);
 
   const checkLoading = (chunk) => {
     return loadingProgress >= chunk
   }
+  
   return (
     <>
       {checkLoading(1) && <CarouselCartoons />}

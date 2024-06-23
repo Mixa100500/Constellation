@@ -1,42 +1,25 @@
-import Page from '../../../compositions/Collection/Page'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-	addOnePage,
-	resetCountPage,
-	selectCurrentLoadingSection,
+	addPage,
+	// selectCurrentLoadingSection,
 	selectMaxResultsCollection,
 	selectMaxSectionCollection,
-	selectPaginationPage
-} from '../../../reducers/pageCollectionReducer'
-import { VirtualCollection } from './VirtualCollection';
-import { InfiniteScrolling } from '../../Pagination/InfiniteScrolling';
-import { SingleLineSkeleton } from './SingleLineSkeleton';
-import { useCollectionParams } from '../../../hooks/useCollectionParams';
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-
-const checkIsMore = (max, countPages) => {
-	return max && countPages * 3 <= max
-}
+	selectHasMorePage
+} from '../../../reducers/pageCollectionReducer.jsx'
+import { VirtualCollection } from './VirtualCollection.jsx'
+import { InfiniteScrolling } from '../../Pagination/InfiniteScrolling.jsx'
+import { SingleLineSkeleton } from './SingleLineSkeleton.jsx'
+import { useLocation } from 'react-router-dom'
 
 const PaginationCollection = () => {
-	const params = useParams()
-	const maxSection = useSelector(selectMaxSectionCollection)
+	useLocation()
 	const maxResults = useSelector(selectMaxResultsCollection)
-	const countPages = useSelector(selectPaginationPage)
-	const hasMore = checkIsMore(maxSection, countPages)
+	const hasMore = useSelector(selectHasMorePage)
+	const hasMoreOnePage = useSelector(selectHasMorePage)
 	const dispatch = useDispatch()
-	const isMoreOne = countPages > 1
-	
-	useEffect(() => {
-		return () => {
-			dispatch(resetCountPage())
-		}
-	}, [params])
-
-	const addPage = () => {
+	const addOnePage = () => {
 		if(hasMore) {
-			dispatch(addOnePage())
+			dispatch(addPage())
 		}
 	}
 	if(maxResults === 0) {
@@ -45,15 +28,11 @@ const PaginationCollection = () => {
 
 	return (
     <>
-			<Page
-				index={1}
-				maxSection={maxSection}
-			/>
-			{isMoreOne &&
-				<VirtualCollection maxSection={maxSection} />
+			{hasMoreOnePage &&
+				<VirtualCollection />
 			}
 			{hasMore &&
-				<InfiniteScrolling addPage={addPage}>
+				<InfiniteScrolling addPage={addOnePage}>
 					<SingleLineSkeleton />
 				</InfiniteScrolling>
 			}

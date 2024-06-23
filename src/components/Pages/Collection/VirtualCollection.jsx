@@ -1,16 +1,16 @@
 import { useWindowVirtualizer } from "@tanstack/react-virtual"
-import Page from "../../../compositions/Collection/Page"
-import { useHeight } from "../../../context/ResizeProvider"
-import { selectPaginationPage } from "../../../reducers/pageCollectionReducer"
+import Page from "../../../compositions/Collection/Page.jsx"
+import { useHeight } from "../../../context/ResizeProvider.jsx"
 import { useSelector } from "react-redux"
 import { useRef } from "react"
+import { selectMaxSectionCollection, selectPaginationPage } from "../../../reducers/pageCollectionReducer.jsx"
 
-export const VirtualCollection = ({ maxSection, loadingSection }) => {
+export const VirtualCollection = () => {
 	const countPages = useSelector(selectPaginationPage)
 	const height = useHeight()
 	const listRef = useRef()
 	const overscan = Math.min(countPages, 4)
-  
+  console.log('countPages', countPages)
   const virtualizer = useWindowVirtualizer({
     count: countPages - 1,
     estimateSize: () => height,
@@ -48,8 +48,6 @@ export const VirtualCollection = ({ maxSection, loadingSection }) => {
         >
           <Page
             index={item.index + 2}
-            loadingSection={loadingSection}
-            maxSection={maxSection}
           />
         </div>
       ))}

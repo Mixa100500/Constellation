@@ -1,20 +1,21 @@
-import Layout from '../../Layout/Layout'
-import PaginationCollection from './PaginationCollection'
-import { useParams } from 'react-router-dom'
-import { H2 } from '../../../elements/H2'
-import { Filter } from '../../../compositions/Filter/Filter'
-import { ResizeProvider } from '../../../context/ResizeProvider'
+import Layout from '../../Layout/Layout.jsx'
+import PaginationCollection from './PaginationCollection.jsx'
+import { Filter } from '../../../compositions/Filter/Filter.jsx'
+import { ResizeProvider } from '../../../context/ResizeProvider.jsx'
+import { HeaderCollection } from './HeaderCollection.jsx'
+import { CollectionPathReset } from './CollectionPathReset.jsx'
+import { FirstPage } from './FirstPage.jsx'
 
 const Collection = () => {
-	const type = useParams().type
-
 	return (
 		<Layout>
 			<Filter />
-			<H2 $paddingTop='xl' $paddingBottom='xl' className='padding-horizontal'>{type}</H2>
+			<HeaderCollection />
 			<ResizeProvider>
+				<FirstPage />
 				<PaginationCollection />
 			</ResizeProvider>
+			<CollectionPathReset />
 		</Layout>
 	)
 }

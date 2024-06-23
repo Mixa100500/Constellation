@@ -1,7 +1,6 @@
-import { collectionsNames } from "../compositions/Router/options";
+import { collectionsNames } from "../compositions/Router/options.jsx";
 
 export const getType = (type) => {
-  console.log('type', type)
   
   switch (type) {
     case collectionsNames.movies.name:

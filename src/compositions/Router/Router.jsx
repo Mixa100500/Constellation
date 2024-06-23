@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
-import { CollectionScreen } from '../../components/Pages/Collection/CollectionScreen'
-import { HomeScreen } from '../../components/Pages/Home/HomeScreen'
-import { WatchScreen } from '../../components/Pages/Watch/WatchScreen'
+import { CollectionScreen } from '../../components/Pages/Collection/CollectionScreen.jsx'
+import { HomeScreen } from '../../components/Pages/Home/HomeScreen.jsx'
+import { WatchScreen } from '../../components/Pages/Watch/WatchScreen.jsx'
 
 export const Router = () => {
   return (
@@ -12,16 +12,12 @@ export const Router = () => {
           element={<HomeScreen />}
         />
         <Route
-          path='/popular'
+          path='/popular/:type'
           element={<CollectionScreen />}
         />
-
-        <Route path='/watch'>
-          <Route
-            path=':type/:id'
-            element={<WatchScreen />}
-          />
-        </Route>
+        <Route path='/watch/:type/:id'
+          element={<WatchScreen />}
+        />
       </Routes>
       {/* <Route path='/new/book' element={<NewBook setError={notify}/>} />
       <Route path='/login' element={

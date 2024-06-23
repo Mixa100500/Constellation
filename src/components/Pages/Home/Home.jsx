@@ -1,18 +1,22 @@
-import CarouselMovies from '../../../compositions/Carousel/MoviesCarousel'
-import { MainCarousel } from '../../Carousels/MainCarousel/MainCarousel';
-import Layout from '../../Layout/Layout'
+import CarouselMovies from '../../../compositions/Carousel/MoviesCarousel.jsx'
+import { PageLoadProvider } from '../../../context/PageLoadProvider.jsx';
+import { MainCarousel } from '../../Carousels/MainCarousel/MainCarousel.jsx';
+import Layout from '../../Layout/Layout.jsx'
 // import { PopularCarousel } from '../../../compositions/Carousel/PopularCarousel'
 
-import { LazyHoneLoader } from './LazyHomeLoader';
+import { LazyHoneLoader } from './LazyHomeLoader.jsx';
 
 // const mediaSlidesPlaceholders = createArray(6)
 const Home = () => {
 	return (
 		<>
-			<MainCarousel />
-			<Layout>
-				<CarouselMovies />
-				<LazyHoneLoader />
+			<PageLoadProvider>
+				<MainCarousel />
+				<Layout>
+					<CarouselMovies />
+					<LazyHoneLoader />
+				</Layout>
+			</PageLoadProvider>
 				
 
 				{/* <div className='padding-horizontal'>
@@ -43,7 +47,6 @@ const Home = () => {
         </div> */}
 				{/* <CarouselSerials /> */}
 				{/* <CarouselCartoons /> */}
-			</Layout>
 		</>
 	)
 

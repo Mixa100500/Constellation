@@ -1,4 +1,4 @@
-import { collectionsNames } from "../compositions/Router/options"
+import { collectionsNames } from "../compositions/Router/options.jsx"
 
 export function checkHeight() {
 	return (

@@ -1,13 +1,13 @@
-import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel'
+import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel.jsx'
 // import { useSelector } from 'react-redux'
-import { ScrollLoader } from '../../components/Pagination/ScrollLoader'
-import { collectionsNames } from '../Router/options'
-import { useGetSectionQuery } from '../../services/request/themoviedbService'
+import { ScrollLoader } from '../../components/Pagination/ScrollLoader.jsx'
+import { allRequestParams, collectionsNames } from '../Router/options.jsx'
+import { useGetSectionQuery } from '../../services/request/themoviedbService.jsx'
 import { useState } from 'react'
 
 const CarouselMovies = () => {
 	const [startLoading, setStartLoading] = useState(false)
-	const query = { section: 1, type: collectionsNames.movies.name }
+	const query = { ...allRequestParams, section: 1, type: collectionsNames.movies.name, }
 	const { data, isSuccess } = useGetSectionQuery(query, {
     skip: !startLoading
   })

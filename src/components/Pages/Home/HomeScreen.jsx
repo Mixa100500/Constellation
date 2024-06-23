@@ -1,9 +1,9 @@
 import { Suspense, lazy } from "react";
-import { HomeScreenSkeleton } from "./HomeScreenSkeleton";
+import { HomeScreenSkeleton } from "./HomeScreenSkeleton.jsx";
 
 const Component = lazy(() =>
   import(
-    './Home'
+    './Home.jsx'
   )
 );
 

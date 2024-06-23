@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { URLs } from './URL'
-import { collectionExtractor, getYear } from '../../helpers/simple'
-import { option } from './options'
-import { genreExtractor, getType } from '../../helpers/url'
+import { collectionExtractor, getYear } from '../../helpers/simple.jsx'
+import { option } from './options.jsx'
+import { genreExtractor, getType } from '../../helpers/url.jsx'
 const mainParams = 'include_adult=false&include_video=false&language=en-US'
 const sortParams = 'sort_by=popularity.desc'
 // const start = `/discover/movie?${paramsMain}&`

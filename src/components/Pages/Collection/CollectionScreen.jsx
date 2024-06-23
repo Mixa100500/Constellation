@@ -1,14 +1,13 @@
 import { Suspense, lazy } from "react";
-import { CollectionScreenSkeleton } from "./CollectionScreenSkeleton";
+import { CollectionScreenSkeleton } from "./CollectionScreenSkeleton.jsx";
 
 const Component = lazy(() =>
   import(
-    './Collection'
+    './Collection.jsx'
   )
-);
+)
 
 export const CollectionScreen = () => {
-  
   const skeleton = <CollectionScreenSkeleton />;
   
   return (

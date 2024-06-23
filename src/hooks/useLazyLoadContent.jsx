@@ -1,5 +1,5 @@
 import React from "react"
-import { ScrollLoader } from "../components/Pagination/ScrollLoader"
+import { ScrollLoader } from "../components/Pagination/ScrollLoader.jsx"
 
 export const useLazyLoadContent = ({renderContent, loadingContent, isLoaded, fetchData, fallbackContent}) => {
 

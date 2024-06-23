@@ -1,7 +1,7 @@
 import logo from '../../logoWhite.png'
 // import { Link } from '../../elements/Link'
 // import styled from 'styled-components'
-import { collections } from '../../compositions/Router/options'
+import { collections } from '../../compositions/Router/options.jsx'
 // import { H2 } from '../../elements/H2'
 import './Header.css'
 import { Link } from 'react-router-dom'
@@ -63,7 +63,7 @@ export const Header = () => {
 								<li key={c.name}>
 									<Link
 										className='padding--md header__link'
-										to={`/popular?type=${c.url}`}>
+										to={`/popular/${c.url}`}>
 										{c.name}
 									</Link>
 								</li>

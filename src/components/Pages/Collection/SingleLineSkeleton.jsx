@@ -6,10 +6,11 @@ const skeletons = createArray(6)
 export const SingleLineSkeleton = () => {
   return (
 		<div className='layout_placeholder'>
-		<div className='padding-horizontal'>
-			<div className='media-carousel-placeholder__header-placeholder'>
-		</div>
-		</div>
+			{/* <div className='padding-horizontal'>
+				<div className='media-carousel-placeholder__header-placeholder'>
+				</div>
+			</div> */}
+		
 		<div className='media-carousel-placeholder__container'>
 			{skeletons.map((item) => (
 				<div key={item} className='media-carousel__slide-container-placeholder padding-horizontal padding-top'>

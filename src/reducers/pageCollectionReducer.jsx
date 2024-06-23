@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { themoviedbApi } from '../services/request/themoviedbService'
-import { genreExtractor, getType } from '../helpers/url'
+import { themoviedbApi } from '../services/request/themoviedbService.jsx'
+import { genreExtractor, getType } from '../helpers/url.jsx'
 import { URLs } from '../services/request/URL'
 const mainParams = 'include_adult=false&include_video=false&language=en-US'
 const sortParams = 'sort_by=popularity.desc'
@@ -17,19 +17,27 @@ const initialState = {
   general: {
 
   },
-  countPage: 1,
-  countLoadingSection: 1,
+  lastKey: undefined
 }
+// countPage: 1,
+// countLoadingSection: 1,
 
 const collectionSlice = createSlice({
   name: nameSlicePageCollection,
-  initialState,reducers: {
-    addOnePage: (state) => {
-      state.countPage++
+  initialState,
+  reducers: {
+    addOnePage: (state, { payload }) => {
+      const key = payload
+      const countPage = state.general[key].countPage
+      if(countPage) {
+        state.general[key].countPage++
+        return
+      }
+      state.general[key].countPage = 2
     },
-    resetCountPage: (state) => {
-      state.countPage = 1
-      state.countLoadingSection = 1
+    resetCountPage: (state, { payload }) => {
+      const key = payload
+      delete state.general[key].countPage
     },
   },
 
@@ -37,29 +45,30 @@ const collectionSlice = createSlice({
     builder.addMatcher(themoviedbApi.endpoints.getSection.matchFulfilled,
       (state, action) => {
         const key = createUrl(action.meta.arg.originalArgs)
-        const all = state.general[key]?.total_pages
         const section = action.meta.arg.originalArgs.section
-
         if(section !== 1) {
+          const all = state.general[key]?.total_pages
 
           if(all < section + 1) {
-            return 
+            return
           }
-          
-          state.countLoadingSection = section + 1
-          return 
+          state.general[key].countLoadingSection = section + 1
+          return
         }
         const {
           total_pages,
           total_results,
         } = action.payload.pages;
-        
-        if(total_results > 20) {
-          state.countLoadingSection = 2
-        }
+
         state.general[key] = {
           total_pages,
           total_results,
+        }
+        // console.log('key', key)
+        // console.log('key', key)
+        // console.log('count', state.general[key].countLoadingSection)
+        if(total_results > 20) {
+          state.general[key].countLoadingSection = 2;
         }
       }
     )
@@ -75,14 +84,19 @@ const createUrl = ({ type, genres }) => URLs.themoviedbBaseURL + `/discover/${ge
 //     .join(', ');
 // }
 
-const createUrlBySearch = () => {
-  const searchParams = new URLSearchParams(window.location.search);
-
+export const createUrlBySearch = () => {
+  const searchParams = new URLSearchParams(window.location.search)
+  const type = window.location.pathname.slice(9)
   const genres = searchParams.get('genres')
-  const type = searchParams.get('type')
 
   return createUrl({genres, type})
 }
+
+export const addPage = () => (dispatch) => {
+  const key = createUrlBySearch()
+  dispatch(addOnePage(key))
+}
+
 export const selectMaxSectionCollection = (state) => {
   const key = createUrlBySearch()
   const domain = state[nameSlicePageCollection]
@@ -105,12 +119,32 @@ export const selectHasMoreCollection = (state) => {
 }
 
 export const selectCurrentLoadingSection = (state) => {
+  const key = createUrlBySearch()
   const domain = state[nameSlicePageCollection]
-  return domain.countLoadingSection
+  return domain.general[key]?.countLoadingSection
 }
 
-export const selectPaginationPage = (state) => 
-  state[nameSlicePageCollection].countPage
+export const selectPaginationPage = (state) => {
+  const key = createUrlBySearch()
+  return state[nameSlicePageCollection].general[key]?.countPage
+}
+const checkIsMore = (max, currentPages) => {
+	return max && currentPages * 3 <= max
+}
+
+export const selectHasMorePage = (state) => {
+  const currentPages = selectPaginationPage(state) || 1
+  const maxSection = selectMaxSectionCollection(state)
+  const hasMore = checkIsMore(maxSection, currentPages)
+  return hasMore
+}
+
+export const selectHasMoreOnePage = (state) => {
+  const currentPages = selectPaginationPage(state) || 1
+  return currentPages > 1
+}
+
+
 
 
 export default collectionSlice.reducer

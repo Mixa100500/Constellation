@@ -1,8 +1,8 @@
-import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel'
-import { ScrollLoader } from '../../components/Pagination/ScrollLoader'
-import { useGetRecommendationsQuery } from '../../services/request/themoviedbService'
+import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel.jsx'
+import { ScrollLoader } from '../../components/Pagination/ScrollLoader.jsx'
+import { useGetRecommendationsQuery } from '../../services/request/themoviedbService.jsx'
 import { useParams } from 'react-router-dom'
-import { collectionsNames } from '../Router/options'
+import { collectionsNames } from '../Router/options.jsx'
 import { useState } from 'react'
 
 const description = collectionsNames.recommendation

@@ -1,11 +1,13 @@
 import { useState } from "react"
 import styled, { css } from "styled-components"
 import downSvg from "../../images/down.svg";
+import PropTypes from 'prop-types'
 
 const FilterDropdownContent = styled.div`
   position: absolute;
   margin-top: 4px;
   width: 100%;
+  z-index: 2;
 `
 const FilterDropdownInner = styled.div`
   padding: 16px;
@@ -73,4 +75,9 @@ export const DropDown = (props) => {
       }
     </DropdownWrapper>
   )
+}
+
+DropDown.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 }

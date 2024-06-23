@@ -1,14 +1,14 @@
-import { CollectionList } from "../../components/Pages/Collection/styled";
-import PosterCard from "../../components/UI/Cards/PosterCard/PosterCard";
-import { PosterCardPlaceholder } from "../../components/UI/Cards/PosterCard/PosterCardPlaceholder";
-import { createArray } from "../../helpers/simple";
-import { useGetSectionQuery } from "../../services/request/themoviedbService";
-import { useHeightRef } from "../../context/ResizeProvider";
-import { useCollectionParams } from "../../hooks/useCollectionParams";
+import { CollectionList } from "../../components/Pages/Collection/styled.jsx";
+import PosterCard from "../../components/UI/Cards/PosterCard/PosterCard.jsx";
+import { PosterCardPlaceholder } from "../../components/UI/Cards/PosterCard/PosterCardPlaceholder.jsx";
+import { createArray } from "../../helpers/simple.jsx";
+import { useGetSectionQuery } from "../../services/request/themoviedbService.jsx";
+import { useCollectionParams } from "../../hooks/useCollectionParams.jsx";
 import { memo } from "react";
 import { useSelector } from "react-redux";
-import { selectCurrentLoadingSection } from "../../reducers/pageCollectionReducer";
-
+import { selectCurrentLoadingSection, selectMaxSectionCollection } from "../../reducers/pageCollectionReducer.jsx";
+import PropTypes from 'prop-types'
+import { useHeightRef } from "../../context/ResizeProvider.jsx";
 
 const PageSection = memo(({ section, skip, }) => {
   const { type, genres } = useCollectionParams()
@@ -34,10 +34,11 @@ const PageSection = memo(({ section, skip, }) => {
 
 PageSection.displayName = 'PageSection'
 
-const Page = ({ index: page, maxSection }) => {
-  const loadingSection = useSelector(selectCurrentLoadingSection)
+const Page = ({ index: page }) => {
   const ref = useHeightRef()
-
+  const maxSection = useSelector(selectMaxSectionCollection)
+  const loadingSection = useSelector(selectCurrentLoadingSection)
+  console.log('loadignSection', loadingSection)
   let render
   if(maxSection === undefined) {
     render = () => (
@@ -88,5 +89,10 @@ const Page = ({ index: page, maxSection }) => {
 }
 
 Page.displayName = 'Page'
+
+Page.propTypes = {
+  index: PropTypes.number.isRequired,
+  maxSection: PropTypes.number,
+}
 
 export default Page

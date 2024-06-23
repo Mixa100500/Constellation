@@ -1,15 +1,15 @@
 import { memo, useState } from 'react'
-import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel'
-import { ScrollLoader } from '../../components/Pagination/ScrollLoader'
+import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel.jsx'
+import { ScrollLoader } from '../../components/Pagination/ScrollLoader.jsx'
 // import { useLazyGetSectionQuery } from '../../services/request/themoviedbService'
-import { collectionsNames } from '../Router/options'
-import { useGetSectionQuery } from '../../services/request/themoviedbService'
+import { allRequestParams, collectionsNames } from '../Router/options.jsx'
+import { useGetSectionQuery } from '../../services/request/themoviedbService.jsx'
 
 const description = collectionsNames.cartoons
 
 const CarouselCartoons = memo(() => {
 	const [startLoading, setStartLoading] = useState(false)
-	const query = { section: 1, type: collectionsNames.movies.name }
+	const query = { ...allRequestParams, section: 1, type: collectionsNames.movies.name, genres: '16' }
 	const { data, isSuccess } = useGetSectionQuery(query, {
     skip: !startLoading
   })

@@ -9,14 +9,14 @@ import { ButtonCarousel } from "../../../elements/ButtonCarousel.jsx"
 import left48 from "../../../images/icons8-chevron-left-48.png"
 import right48 from "../../../images/icons8-chevron-right-48.png"
 // import Autoplay from 'embla-carousel-autoplay'
-const placeholders = createArray(2)
+const placeholders = createArray(20)
 import { PopularButtonContainer } from "./styled.jsx"
+import { usePageLoaded } from "../../../context/PageLoadProvider.jsx"
 
 export const MainCarousel = () => {
 	const [popular, setPopular] = useState([])
 	const [slidesInView, setSlidesInView] = useState([])
-	// const [isPlaying, setIsPlaying] = useState(true)
-
+	const pageLoaded = usePageLoaded()
 	
 	const initializePopular = async () => {
 		const popular = await getPopular()
@@ -49,61 +49,82 @@ export const MainCarousel = () => {
 	}, []);
 
 	const updateSlidesInView = useCallback((emblaApi) => {
-    setSlidesInView((slidesInView) => {
-      if (slidesInView.length === emblaApi.slideNodes().length) {
-        emblaApi.off('slidesInView', updateSlidesInView)
-      }
-			// console.log('', emblaApi
-			// .slidesInView())
-      const inView = emblaApi
-        .slidesInView()
-        .filter((index) => !slidesInView.includes(index))
-      return slidesInView.concat(inView)
-    })
-  }, [])
+		setSlidesInView((slidesInView) => {
+			if (slidesInView.length === emblaApi.slideNodes().length) {
+				emblaApi.off('slidesInView', updateSlidesInView)
+			}
+			let inCurrentView = emblaApi.slidesInView()
+			const inView = inCurrentView
+				.filter((index) => !slidesInView.includes(index))
+			if(pageLoaded) {
+				return slidesInView.concat(inView)
+			}
+			console.log('inCurrentView', inCurrentView)
+			if(inCurrentView.length <= 2) {
+				return [0]
+			}
+			if(inCurrentView.length > 2) {
+				return [0, 1]
+			}
+		})
+  }, [pageLoaded])
 
   useEffect(() => {
     if (!emblaApi) return
-
-    updateSlidesInView(emblaApi)
+		updateSlidesInView(emblaApi)
     emblaApi.on('slidesInView', updateSlidesInView)
     emblaApi.on('reInit', updateSlidesInView)
-  }, [emblaApi, updateSlidesInView])
+		
+		return () => {
+			emblaApi.off('slidesInView', updateSlidesInView)
+			emblaApi.off('reInit', updateSlidesInView)
+		}
+  }, [emblaApi, updateSlidesInView, pageLoaded])
 
-	const list = popular.slice(0, 20)
+	let slides
+	if(pageLoaded) {
+		slides = placeholders
+	} else {
+		slides = placeholders.slice(0, 4)
+	}
+
+	const renderContent = () => (
+		slides.map((index) => {
+			const inView = slidesInView.indexOf(index - 1) > -1
+			const info = popular[index - 1]
+			const propInfo = (loaded && inView) ? info : undefined
+
+			return (
+				<PopularCard
+					key={index}
+					info={propInfo}
+				/>
+			)
+		}))
+
   return (
 		<div className="embla"
 			ref={emblaRef}
 		>
 			<div className="main-carousel__container">
-				{loaded ?
-					list.map((info, index) => (
-						<PopularCard
-							info={info}
-							key={info.name || info.original_title}
-							inView={slidesInView.indexOf(index) > -1}
-						/>
-					))
-					:
-					placeholders.map((item) => (
-						<PopularCardPlaceholder key={item}/>
-					))
-				}
+				{renderContent()}
 			</div>
-			<PopularButtonContainer>
-				<ButtonCarousel
-					onClick={onPrevButtonClick}
-					className='carousel-popular__button'
-				>
-					<img src={left48} alt="left" />
-				</ButtonCarousel>
-				<ButtonCarousel
-					onClick={onNextButtonClick}
-					className='carousel-popular__button'
-				>
-					<img src={right48} alt="right" />
-				</ButtonCarousel>
-			</PopularButtonContainer>
+			{pageLoaded && 
+				<PopularButtonContainer>
+					<ButtonCarousel
+						onClick={onPrevButtonClick}
+						className='carousel-popular__button'
+					>
+						<img src={left48} alt="left" />
+					</ButtonCarousel>
+					<ButtonCarousel
+						onClick={onNextButtonClick}
+						className='carousel-popular__button'
+					>
+						<img src={right48} alt="right" />
+					</ButtonCarousel>
+				</PopularButtonContainer>
+			}
 		</div>
   )
 }

@@ -1,7 +1,7 @@
-import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel'
-import { ScrollLoader } from '../../components/Pagination/ScrollLoader'
-import { collectionsNames } from '../Router/options'
-import { useGetSectionQuery } from '../../services/request/themoviedbService'
+import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel.jsx'
+import { ScrollLoader } from '../../components/Pagination/ScrollLoader.jsx'
+import { allRequestParams, collectionsNames } from '../Router/options.jsx'
+import { useGetSectionQuery } from '../../services/request/themoviedbService.jsx'
 import { useState } from 'react'
 // import { useSelector } from 'react-redux'
 // import { selectIsCurrentChunkLoading } from '../../reducers/homePageLoadingReducer/homePageLoadingReducer'
@@ -9,7 +9,7 @@ import { memo } from 'react'
 
 export const CarouselSerials = memo(() => {
 	const [startLoading, setStartLoading] = useState(false)
-	const query = { section: 1, type: collectionsNames.serials.name }
+	const query = { ...allRequestParams, section: 1, type: collectionsNames.serials.name }
 	const { data, isSuccess } = useGetSectionQuery(query, {
     skip: !startLoading
   })
