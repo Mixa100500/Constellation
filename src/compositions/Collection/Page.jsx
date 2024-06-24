@@ -38,7 +38,6 @@ const Page = ({ index: page }) => {
   const ref = useHeightRef()
   const maxSection = useSelector(selectMaxSectionCollection)
   const loadingSection = useSelector(selectCurrentLoadingSection)
-  console.log('loadignSection', loadingSection)
   let render
   if(maxSection === undefined) {
     render = () => (

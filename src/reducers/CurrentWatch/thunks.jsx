@@ -26,7 +26,6 @@ export const fetchMoviesReview = (id) => {
 export const initializeMovies = (id) => {
 	return async (dispatch) => {
 		let info = await getMovieInfo(id)
-		console.log('info', info)
 		dispatch(addMainInfo(info))
 	}
 }

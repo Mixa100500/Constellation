@@ -20,7 +20,6 @@ const MediaCarousel = ({ list, description, loaded, lazyImage }) => {
 	})
 
 	const [lastImageLoaded, setLastImageLoaded] = useState(false);
-
 	const [slidesInView, setSlidesInView] = useState([])
 	const [emblaRef, emblaApi] = useEmblaCarousel({
     slidesToScroll: 2,
@@ -35,7 +34,8 @@ const MediaCarousel = ({ list, description, loaded, lazyImage }) => {
 	
 	const updateSlidesInView = useCallback((emblaApi) => {
     setSlidesInView((slidesInView) => {
-      if (slidesInView.length === emblaApi.slideNodes().length) {
+			const length = emblaApi.slideNodes().length
+      if (slidesInView.length === length && length === 20) {
         emblaApi.off('slidesInView', updateSlidesInView)
       }
 			let currentSlidesInView = emblaApi
@@ -43,13 +43,14 @@ const MediaCarousel = ({ list, description, loaded, lazyImage }) => {
 
 			if(ref.current.firstRender) {
 				const slide = calcMediaSlidePerView()
-				currentSlidesInView = currentSlidesInView.slice(0, slide)
+				currentSlidesInView = currentSlidesInView.slice(0, slide + 1)
 				ref.current.lastImage = slide
 			}
 
 			ref.current.firstRender = false;
 			const inView = currentSlidesInView
         .filter((index) => !slidesInView.includes(index))
+				.slice(0, currentSlidesInView.length)
       return slidesInView.concat(inView)
     })
   }, [])
@@ -68,13 +69,11 @@ const MediaCarousel = ({ list, description, loaded, lazyImage }) => {
 	} = usePrevNextButtons(emblaApi)
 
 	let slides
-
 	if(lastImageLoaded) {
 		slides = placeholders
 	} else {
 		slides = placeholders.slice(0, 6)
 	}
-
 	const renderContent = () => (
 		slides.map((index) => {
 			const inView = slidesInView.indexOf(index - 1) > -1
@@ -82,7 +81,6 @@ const MediaCarousel = ({ list, description, loaded, lazyImage }) => {
 			const propInfo = (loaded && inView) ? info : undefined
 			const currentIsLast = ref.current.lastImage === index
 			const propSetLastImage = currentIsLast ? setLastImageLoaded : undefined
-
 			return (
 				<PosterCard
 					key={index}
@@ -103,6 +101,7 @@ const MediaCarousel = ({ list, description, loaded, lazyImage }) => {
 				next={next}
 				prev={prev}
 				description={description}
+				// showButton={lastImageLoaded}
 				showButton={lastImageLoaded}
 			/>
 			{/* <VirtualVisibility> */}

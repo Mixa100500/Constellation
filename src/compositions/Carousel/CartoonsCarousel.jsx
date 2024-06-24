@@ -17,8 +17,6 @@ const CarouselCartoons = memo(() => {
 	const initializeCartoon = () => {
 		setStartLoading(true)
   }
-
-
 	return (
 		<>
 			<ScrollLoader fetchData={initializeCartoon}>

@@ -10,7 +10,6 @@ export const VirtualCollection = () => {
 	const height = useHeight()
 	const listRef = useRef()
 	const overscan = Math.min(countPages, 4)
-  console.log('countPages', countPages)
   const virtualizer = useWindowVirtualizer({
     count: countPages - 1,
     estimateSize: () => height,

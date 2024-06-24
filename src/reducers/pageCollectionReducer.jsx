@@ -64,9 +64,6 @@ const collectionSlice = createSlice({
           total_pages,
           total_results,
         }
-        // console.log('key', key)
-        // console.log('key', key)
-        // console.log('count', state.general[key].countLoadingSection)
         if(total_results > 20) {
           state.general[key].countLoadingSection = 2;
         }

@@ -59,7 +59,6 @@ export const MainCarousel = () => {
 			if(pageLoaded) {
 				return slidesInView.concat(inView)
 			}
-			console.log('inCurrentView', inCurrentView)
 			if(inCurrentView.length <= 2) {
 				return [0]
 			}
