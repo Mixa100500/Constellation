@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { throttle } from '../helpers/throttleEvent'
+import { throttle } from '../helpers/throttleEvent.jsx'
 const ContextRef = React.createContext(null)
 const ContextHeight = React.createContext(null)
 

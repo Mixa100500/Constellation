@@ -1,7 +1,6 @@
-import { useWatchParams } from "../../../hooks"
-import { GenresList } from "./GenresList"
-import { DescriptionHeader } from "./styled"
-import { useLazyByType } from "../../../hooks/useLazyByType"
+import { GenresList } from "./GenresList.jsx"
+import { DescriptionHeader } from "./styled.jsx"
+import { useLazyByType } from "../../../hooks/useLazyByType.jsx"
 import PropTypes from "prop-types"
 
 export const DescriptionContent = ({ mediaInfo, loaded: isLoaded }) => {

@@ -1,4 +1,4 @@
-import CarouselCartoons from '../../../compositions/Carousel/CartoonsCarousel.jsx';
+// import CarouselCartoons from '../../../compositions/Carousel/CartoonsCarousel.jsx';
 import CarouselMovies from '../../../compositions/Carousel/MoviesCarousel.jsx'
 import { PageLoadProvider } from '../../../context/PageLoadProvider.jsx';
 import { MainCarousel } from '../../Carousels/MainCarousel/MainCarousel.jsx';
@@ -50,20 +50,6 @@ const Home = () => {
 				{/* <CarouselCartoons /> */}
 		</>
 	)
-
-	// return (
-	// 	<PopularCarousel />
-	// )
-	// return (
-	// 		<>
-	// 			<PopularCarousel />
-	// 			<Layout>
-	// 				<CarouselMovies />
-	// 				<CarouselSerials />
-	// 				<CarouselCartoons />
-	// 			</Layout>
-	// 		</>
-	// )
 }
 
 export default Home

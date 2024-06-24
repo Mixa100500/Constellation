@@ -1,21 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 export const nameSliceKinoboxPlayer = 'kinoboxPlayer'
-export const selectKinoboxPlayerLoaded = (state) => state[nameSliceKinoboxPlayer].loaded
 
 const initialState = {
   loaded: false
 }
 
-const cartoonSlice = createSlice({
-  name: nameSliceKinoboxPlayer,
+export const playerSlice = createSlice({
+  name: 'kinoboxPlayer',
   initialState,
   reducers: {
     setLoaded: (state) => {
       state.loaded = true
     },
   },
+  selectors: {
+    selectPlayerLoaded: (sliceState) => sliceState.loaded
+  }
 })
 
-export const { setLoaded } = cartoonSlice.actions
+export const { setLoaded } = playerSlice.actions
 
-export default cartoonSlice.reducer
+export const { selectPlayerLoaded } = playerSlice.selectors

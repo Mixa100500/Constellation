@@ -1,16 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { themoviedbApi } from './services/request/themoviedbService.jsx'
-import pageCollectionReducer, { nameSlicePageCollection } from './reducers/pageCollectionReducer.jsx'
-import kinoboxPlayerReducer, { nameSliceKinoboxPlayer } from './reducers/kinoboxPlayerReducer.jsx'
-import currentWatchReducer from './reducers/CurrentWatch/currentWatchReducer.jsx'
-// import paginationCollationReducer, { nameSlicePaginationCollection } from './reducers/pageCollectionReducer'
+import { playerSlice } from './reducers/kinoboxPlayerReducer.jsx'
+import { collectionSlice } from './reducers/pageCollectionReducer.jsx'
+import { currentMovieSlice } from './reducers/CurrentWatch/currentWatchReducer.jsx'
 
 const store = configureStore({
   reducer: {
-    currentWatch: currentWatchReducer,
-    [nameSlicePageCollection]: pageCollectionReducer,
-    [nameSliceKinoboxPlayer]: kinoboxPlayerReducer,
-    // [nameSlicePaginationCollection]: paginationCollationReducer,
+    [currentMovieSlice.reducerPath]: currentMovieSlice.reducer,
+    [collectionSlice.reducerPath]: collectionSlice.reducer,
+    [playerSlice.reducerPath]: playerSlice.reducer,
     [themoviedbApi.reducerPath]: themoviedbApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

@@ -5,8 +5,6 @@ import { URLs } from '../services/request/URL'
 const mainParams = 'include_adult=false&include_video=false&language=en-US'
 const sortParams = 'sort_by=popularity.desc'
 
-export const nameSlicePageCollection = 'pageCollection'
-
 // const initialState = {
 //   page: 1,
 //   total_pages: 0,
@@ -17,13 +15,10 @@ const initialState = {
   general: {
 
   },
-  lastKey: undefined
 }
-// countPage: 1,
-// countLoadingSection: 1,
 
-const collectionSlice = createSlice({
-  name: nameSlicePageCollection,
+export const collectionSlice = createSlice({
+  name: 'pageCollection',
   initialState,
   reducers: {
     addOnePage: (state, { payload }) => {
@@ -40,7 +35,6 @@ const collectionSlice = createSlice({
       delete state.general[key].countPage
     },
   },
-
   extraReducers(builder) {
     builder.addMatcher(themoviedbApi.endpoints.getSection.matchFulfilled,
       (state, action) => {
@@ -69,9 +63,13 @@ const collectionSlice = createSlice({
         }
       }
     )
-  }
+  },
+  selectors: {
+    selectGeneral: (sliceState) => sliceState.general,
+  },
 })
 export const { addOnePage, resetCountPage } = collectionSlice.actions
+const { selectGeneral } = collectionSlice.selectors
 
 const createUrl = ({ type, genres }) => URLs.themoviedbBaseURL + `/discover/${getType(type)}?${mainParams}&page=${1}&${sortParams}${genreExtractor(genres)}`
 
@@ -96,34 +94,35 @@ export const addPage = () => (dispatch) => {
 
 export const selectMaxSectionCollection = (state) => {
   const key = createUrlBySearch()
-  const domain = state[nameSlicePageCollection]
-  return domain.general[key]?.total_pages
+  const general = selectGeneral(state)
+  return general[key]?.total_pages
 }
 
 export const selectMaxResultsCollection = (state) => {
   const key = createUrlBySearch()
-  const domain = state[nameSlicePageCollection]
-  return domain.general[key]?.total_results
+  const general = selectGeneral(state)
+  return general[key]?.total_results
 }
 
 export const selectHasMoreCollection = (state) => {
   const key = createUrlBySearch()
-  const domain = state[nameSlicePageCollection]
+  const general = selectGeneral(state)
 
-  const max = domain.general[key]?.total_pages
-  const countPage = domain.countPage
+  const max = general[key]?.total_pages
+  const countPage = general[key].countPage
   return max && countPage * 3 <= max
 }
 
 export const selectCurrentLoadingSection = (state) => {
   const key = createUrlBySearch()
-  const domain = state[nameSlicePageCollection]
-  return domain.general[key]?.countLoadingSection
+  const general = selectGeneral(state)
+  return general[key]?.countLoadingSection
 }
 
 export const selectPaginationPage = (state) => {
   const key = createUrlBySearch()
-  return state[nameSlicePageCollection].general[key]?.countPage
+  const general = selectGeneral(state)
+  return general[key]?.countPage
 }
 const checkIsMore = (max, currentPages) => {
 	return max && currentPages * 3 <= max
@@ -140,8 +139,3 @@ export const selectHasMoreOnePage = (state) => {
   const currentPages = selectPaginationPage(state) || 1
   return currentPages > 1
 }
-
-
-
-
-export default collectionSlice.reducer

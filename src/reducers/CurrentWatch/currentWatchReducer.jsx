@@ -1,15 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import {
-// 	getReviewsByFilm as getReviewsOfMovies,
-// 	getReviewsBySerial,
-// } from '../../services/request/reviews'
-import { getGenres, getYear } from '../../helpers/simple'
-// import {
-// 	getMovieInfo,
-// 	getSerialIMDBID,
-// 	getSerialInfo,
-// } from '../../services/request/mediaInfo'
-
+import { getGenres, getYear } from '../../helpers/simple.jsx'
 
 const initialReviews = {
 	list: [],
@@ -25,7 +15,7 @@ const initialState = {
 	reviews: initialReviews,
 }
 
-const currentMovieSlice = createSlice({
+export const currentMovieSlice = createSlice({
 	name: 'currentWatch',
 	initialState,
 	reducers: {
@@ -52,7 +42,17 @@ const currentMovieSlice = createSlice({
 			state.reviews.loaded = false
 		},
 	},
+	selectors: {
+		selectOpenedMovie: (sliceState) => {
+			return sliceState.openedMovie
+		},
+		selectReviews: (sliceState) => {
+			return sliceState.reviews
+		}
+	}
 })
+
+const { selectOpenedMovie, selectReviews } = currentMovieSlice.selectors
 
 export const {
 	fetchReviewsStart,
@@ -63,4 +63,10 @@ export const {
 	clearReview
 } = currentMovieSlice.actions
 
-export default currentMovieSlice.reducer
+export const selectOpenedMovieId = (state) => selectOpenedMovie(state).info.id
+export const selectOpenedMovieInfo = (state) => selectOpenedMovie(state).info
+export const selectOpenedMovieImdbId = (state) => selectOpenedMovie(state).info.imdb_id
+export const selectOpenedMovieLoaded = (state) => selectOpenedMovie(state).loaded
+export const selectOpenedMovieReviewList = (state) => selectReviews(state).list
+export const selectOpenedMovieReviewLoaded = (state) => selectReviews(state).loaded
+

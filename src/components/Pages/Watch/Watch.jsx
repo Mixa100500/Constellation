@@ -2,6 +2,8 @@ import { useEffect, } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
 	clearMovie,
+	selectOpenedMovieInfo,
+	selectOpenedMovieLoaded,
 } from '../../../reducers/CurrentWatch/currentWatchReducer.jsx'
 import Reviews from './Reviews.jsx'
 import MoviePoster from './MoviePoster.jsx'
@@ -20,7 +22,6 @@ import {
 import { useParams } from 'react-router-dom'
 import { useInitializeByType } from '../../../hooks/index.jsx'
 import { DescriptionContent } from './Description.jsx'
-import { selectOpenedMovieInfo, selectOpenedMovieLoaded } from '../../../reducers/CurrentWatch/selectors.jsx'
 
 const margined = { marginBottom: '15px' }
 
