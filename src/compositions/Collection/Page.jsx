@@ -6,11 +6,12 @@ import { useGetSectionQuery } from "../../services/request/themoviedbService.jsx
 import { useCollectionParams } from "../../hooks/useCollectionParams.jsx";
 import { memo } from "react";
 import { useSelector } from "react-redux";
-import { selectCurrentLoadingSection, selectMaxSectionCollection } from "../../reducers/pageCollectionReducer.jsx";
+import { selectIsSkip, selectMaxSectionCollection, selectSections } from "../../reducers/pageCollectionReducer.jsx";
 import PropTypes from 'prop-types'
 import { useHeightRef } from "../../context/ResizeProvider.jsx";
 
-const PageSection = memo(({ section, skip, }) => {
+const PageSection = memo(({ section }) => {
+  const skip = useSelector(selectIsSkip(section))
   const { type, genres } = useCollectionParams()
   const { data, isSuccess } = useGetSectionQuery({ section, type, genres }, {
     skip
@@ -34,42 +35,36 @@ const PageSection = memo(({ section, skip, }) => {
 
 PageSection.displayName = 'PageSection'
 
-const Page = ({ index: page }) => {
+const Page = memo(({ index: page }) => {
   const ref = useHeightRef()
   const maxSection = useSelector(selectMaxSectionCollection)
-  const loadingSection = useSelector(selectCurrentLoadingSection)
+  const sections = useSelector(selectSections(page))
+  const prevSection = (page * 3) - 3
   let render
-  if(maxSection === undefined) {
+  if(maxSection === 0) {
     render = () => (
       <>
         <PageSection
           key={1}
           section={1}
-          skip={false}
         />
         <PageSection
           key={2}
           section={2}
-          skip={true}
         />
         <PageSection
           key={3}
           section={3}
-          skip={true}
         />
       </>
     )
   } else {
-    const prevSection = (page * 3) - 3
-    const diff = maxSection - prevSection
-    const sections = Math.min(diff, 3)
     const list = createArray(sections)
     render = () => 
       <>
         {list.map(index => <PageSection
             key={index}
             section={prevSection + index}
-            skip={loadingSection < prevSection + index}
           />
         )}
       </>
@@ -85,7 +80,7 @@ const Page = ({ index: page }) => {
       {render()}
     </CollectionList>
   )
-}
+})
 
 Page.displayName = 'Page'
 

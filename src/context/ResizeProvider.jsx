@@ -22,7 +22,7 @@ export const ResizeProvider = ({ children }) => {
       window.removeEventListener(nameCustomEvent, resize)
     }
   }, [])
-
+  
   return (
     <ContextRef.Provider value={ref}>
       <ContextHeight.Provider value={height}>

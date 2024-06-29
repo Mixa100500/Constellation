@@ -41,7 +41,8 @@ export const themoviedbApi = createApi({
           }
         }
         return result
-      }
+      },
+      keepUnusedDataFor: 60 * 60 * 60,
     }),
     getRecommendations: builder.query({
       query: ({ type, id }) => `/${getType(type)}/${id}/recommendations?language=en-US&page=1`,

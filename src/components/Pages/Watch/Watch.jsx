@@ -22,6 +22,8 @@ import {
 import { useParams } from 'react-router-dom'
 import { useInitializeByType } from '../../../hooks/index.jsx'
 import { DescriptionContent } from './Description.jsx'
+import { LazyWatchLoader } from './LazyWatchLoader.jsx'
+import { WatchScreenSkeleton } from './WatchScreenSkeleton.jsx'
 
 const margined = { marginBottom: '15px' }
 
@@ -77,8 +79,7 @@ const Watch = () => {
 						</div>
 					</InfoColumn>
 				</Flex>
-				<CarouselRecommend />
-				<Reviews/>
+				<LazyWatchLoader />
 			</Layout>
 		</div>
 	)

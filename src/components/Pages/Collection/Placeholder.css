@@ -1,0 +1,31 @@
+.filter__placeholder {
+  max-width: 400px;
+  border-radius: 6px;
+  height: 88px;
+  background-color: var(--filter-color);
+}
+
+.description__placeholder {
+  height: 32px;
+  margin: 27px 0;
+  background-color: var(--primary-bg-color);
+}
+
+.collection-list__placeholder {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  row-gap: 40px;
+  padding-bottom: 40px;
+  
+  @media screen and (min-width: 400px) {
+    grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+  }
+
+  @media screen and (min-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(146px, 1fr));
+  }
+
+  @media screen and (min-width: 800px) {
+    grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
+  } 
+}

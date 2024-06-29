@@ -3,7 +3,6 @@ import {
 	addPage,
 	// selectCurrentLoadingSection,
 	selectMaxResultsCollection,
-	selectMaxSectionCollection,
 	selectHasMorePage
 } from '../../../reducers/pageCollectionReducer.jsx'
 import { VirtualCollection } from './VirtualCollection.jsx'
@@ -18,9 +17,7 @@ const PaginationCollection = () => {
 	const hasMoreOnePage = useSelector(selectHasMorePage)
 	const dispatch = useDispatch()
 	const addOnePage = () => {
-		if(hasMore) {
-			dispatch(addPage())
-		}
+		dispatch(addPage())
 	}
 	if(maxResults === 0) {
 		return <div>No results found for this query</div>

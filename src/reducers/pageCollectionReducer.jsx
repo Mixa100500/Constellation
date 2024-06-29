@@ -32,7 +32,9 @@ export const collectionSlice = createSlice({
     },
     resetCountPage: (state, { payload }) => {
       const key = payload
-      delete state.general[key].countPage
+      if(state.general[key]?.countPage) {
+        delete state.general[key].countPage
+      }
     },
   },
   extraReducers(builder) {
@@ -40,6 +42,7 @@ export const collectionSlice = createSlice({
       (state, action) => {
         const key = createUrl(action.meta.arg.originalArgs)
         const section = action.meta.arg.originalArgs.section
+
         if(section !== 1) {
           const all = state.general[key]?.total_pages
 
@@ -87,7 +90,12 @@ export const createUrlBySearch = () => {
   return createUrl({genres, type})
 }
 
-export const addPage = () => (dispatch) => {
+export const addPage = () => (dispatch, getState) => {
+  const state = getState()
+  const needNextPage = selectLastPageLoaded(state)
+  if(!needNextPage) {
+    return
+  }
   const key = createUrlBySearch()
   dispatch(addOnePage(key))
 }
@@ -95,7 +103,7 @@ export const addPage = () => (dispatch) => {
 export const selectMaxSectionCollection = (state) => {
   const key = createUrlBySearch()
   const general = selectGeneral(state)
-  return general[key]?.total_pages
+  return general[key]?.total_pages || 0
 }
 
 export const selectMaxResultsCollection = (state) => {
@@ -116,26 +124,52 @@ export const selectHasMoreCollection = (state) => {
 export const selectCurrentLoadingSection = (state) => {
   const key = createUrlBySearch()
   const general = selectGeneral(state)
-  return general[key]?.countLoadingSection
+  return general[key]?.countLoadingSection || 1
 }
 
 export const selectPaginationPage = (state) => {
   const key = createUrlBySearch()
   const general = selectGeneral(state)
-  return general[key]?.countPage
+  return general[key]?.countPage || 1
 }
 const checkIsMore = (max, currentPages) => {
 	return max && currentPages * 3 <= max
 }
 
 export const selectHasMorePage = (state) => {
-  const currentPages = selectPaginationPage(state) || 1
+  const currentPages = selectPaginationPage(state)
   const maxSection = selectMaxSectionCollection(state)
   const hasMore = checkIsMore(maxSection, currentPages)
   return hasMore
 }
 
+export const selectLastPageLoaded = (state) => {
+  const currentPages = selectPaginationPage(state)
+  const maxSection = selectMaxSectionCollection(state)
+  const currentLoadingSection = selectCurrentLoadingSection(state)
+  const lastPageLoaded = currentPages * 3 <= currentLoadingSection - 1
+  const hasMore = checkIsMore(maxSection, currentPages)
+  return hasMore && lastPageLoaded
+}
+
 export const selectHasMoreOnePage = (state) => {
-  const currentPages = selectPaginationPage(state) || 1
+  const currentPages = selectPaginationPage(state)
   return currentPages > 1
 }
+
+export const selectSections = (page) => {
+  return (state) => {
+    const maxSection = selectMaxSectionCollection(state) || 1
+    const prevSection = (page * 3) - 3
+    const diff = maxSection - prevSection
+    return Math.min(diff, 3)
+  }
+}
+
+export const selectIsSkip = (section) => {
+  return (state) => {
+    const loadingSection = selectCurrentLoadingSection(state)
+    return loadingSection < section
+  }
+}
+// const loadingSection = selectCurrentLoadingSection(state)

@@ -81,6 +81,7 @@ export const Genres = () => {
   } = useSubParams('genres')
   const type = useType()
   const isMovies = useIsMovies()
+  
   const onChange = (e) => {
     const value = e.target.value
     if(e.target.checked) {

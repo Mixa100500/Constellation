@@ -3,13 +3,13 @@ import Page from "../../../compositions/Collection/Page.jsx"
 import { useHeight } from "../../../context/ResizeProvider.jsx"
 import { useSelector } from "react-redux"
 import { useRef } from "react"
-import { selectMaxSectionCollection, selectPaginationPage } from "../../../reducers/pageCollectionReducer.jsx"
+import { selectPaginationPage } from "../../../reducers/pageCollectionReducer.jsx"
 
 export const VirtualCollection = () => {
 	const countPages = useSelector(selectPaginationPage)
 	const height = useHeight()
 	const listRef = useRef()
-	const overscan = Math.min(countPages, 4)
+	const overscan = Math.min(countPages, 2)
   const virtualizer = useWindowVirtualizer({
     count: countPages - 1,
     estimateSize: () => height,

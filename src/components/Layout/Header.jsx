@@ -47,7 +47,7 @@ export const Header = () => {
 					<div className='header__logo-wrapper'>
 						<Link to='/' className='header__link' >
 							<div className='header__logo-container'>
-								<h2 className='padding-vertical--xl header__logo_text'>Constellation</h2>
+								<h2 className='padding-vertical--lg header__logo_text'>Constellation</h2>
 								<img
 									className='container-logo__logo'
 									src={logo}
@@ -62,7 +62,7 @@ export const Header = () => {
 							return (
 								<li key={c.name}>
 									<Link
-										className='padding--md header__link'
+										className='padding--sm header__link'
 										to={`/popular/${c.url}`}>
 										{c.name}
 									</Link>
