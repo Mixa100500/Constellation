@@ -101,16 +101,13 @@ const MediaCarousel = ({ list, description, loaded, lazyImage }) => {
 				next={next}
 				prev={prev}
 				description={description}
-				// showButton={lastImageLoaded}
 				showButton={lastImageLoaded}
 			/>
-			{/* <VirtualVisibility> */}
 				<div className="media_carousel__wrapper" ref={emblaRef} >
 					<Gallery.Body>
 						{renderContent()}
 					</Gallery.Body>
 				</div>
-			{/* </VirtualVisibility> */}
 		</Gallery>
 	)
 }

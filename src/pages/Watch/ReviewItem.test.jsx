@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { ReviewItem } from './ReviewItem';
+import { ReviewItem } from './ReviewItem.jsx';
 
 describe('ReviewItem component', () => {
   const review = {

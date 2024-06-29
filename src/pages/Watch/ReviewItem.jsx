@@ -1,4 +1,4 @@
-import { Review } from "./styled"
+import { Review } from "./styled.jsx"
 import PropTypes from 'prop-types'
 
 export const ReviewItem = ({ review }) => {

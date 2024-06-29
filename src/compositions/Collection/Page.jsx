@@ -1,4 +1,3 @@
-import { CollectionList } from "../../components/Pages/Collection/styled.jsx";
 import PosterCard from "../../components/UI/Cards/PosterCard/PosterCard.jsx";
 import { PosterCardPlaceholder } from "../../components/UI/Cards/PosterCard/PosterCardPlaceholder.jsx";
 import { createArray } from "../../helpers/simple.jsx";
@@ -9,6 +8,7 @@ import { useSelector } from "react-redux";
 import { selectIsSkip, selectMaxSectionCollection, selectSections } from "../../reducers/pageCollectionReducer.jsx";
 import PropTypes from 'prop-types'
 import { useHeightRef } from "../../context/ResizeProvider.jsx";
+import { CollectionList } from '../../pages/Collection/styled.jsx'
 
 const PageSection = memo(({ section }) => {
   const skip = useSelector(selectIsSkip(section))

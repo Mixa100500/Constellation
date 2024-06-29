@@ -1,17 +1,6 @@
 import { useEffect, } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-	clearMovie,
-	selectOpenedMovieInfo,
-	selectOpenedMovieLoaded,
-} from '../../../reducers/CurrentWatch/currentWatchReducer.jsx'
-import Reviews from './Reviews.jsx'
 import MoviePoster from './MoviePoster.jsx'
-import VideoPlayer from '../../Player/MoviePlayer.jsx'
-import CarouselRecommend from '../../../compositions/Carousel/CarouselRecommend.jsx'
-import Layout from '../../Layout/Layout.jsx'
-import { H2 } from '../../../elements/H2.jsx'
-import { Rating } from '../../UI/Rating/Rating.jsx'
 import {
 	Flex,
 	GridTwoColumn,
@@ -20,10 +9,18 @@ import {
 	PosterContainer
 } from './styled.jsx'
 import { useParams } from 'react-router-dom'
-import { useInitializeByType } from '../../../hooks/index.jsx'
 import { DescriptionContent } from './Description.jsx'
 import { LazyWatchLoader } from './LazyWatchLoader.jsx'
-import { WatchScreenSkeleton } from './WatchScreenSkeleton.jsx'
+import {
+	clearMovie,
+	selectOpenedMovieInfo,
+	selectOpenedMovieLoaded,
+} from '../../reducers/CurrentWatch/currentWatchReducer.jsx'
+import { useInitializeByType } from '../../hooks/index.jsx'
+import Layout from '../../components/Layout/Layout.jsx'
+import { Rating } from '../../components/UI/Rating/Rating.jsx'
+import VideoPlayer from '../../components/Player/MoviePlayer.jsx'
+import { H2 } from '../../elements/H2.jsx'
 
 const margined = { marginBottom: '15px' }
 
@@ -41,10 +38,6 @@ const Watch = () => {
     }
 	}, [id])
 
-
-	// if (!loaded) {
-	// 	return <div>loading...</div>
-	// }
 
 	const overview = mediaInfo.overview || ' '
 	const title = mediaInfo.title || ' '

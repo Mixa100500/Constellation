@@ -1,9 +1,9 @@
 import { useWindowVirtualizer } from "@tanstack/react-virtual"
-import Page from "../../../compositions/Collection/Page.jsx"
-import { useHeight } from "../../../context/ResizeProvider.jsx"
 import { useSelector } from "react-redux"
 import { useRef } from "react"
-import { selectPaginationPage } from "../../../reducers/pageCollectionReducer.jsx"
+import { selectPaginationPage } from '../../reducers/pageCollectionReducer.jsx'
+import { useHeight } from '../../context/ResizeProvider.jsx'
+import Page from '../Collection/Page.jsx'
 
 export const VirtualCollection = () => {
 	const countPages = useSelector(selectPaginationPage)

@@ -1,11 +1,15 @@
-import { clearReview, selectOpenedMovieReviewList, selectOpenedMovieReviewLoaded } from "../../../reducers/CurrentWatch/currentWatchReducer.jsx";
 import { useDispatch, useSelector } from 'react-redux'
-import { H2 } from '../../../elements/H2.jsx'
 import { ReviewItem } from './ReviewItem.jsx'
 import { useEffect } from 'react'
-import { useFetchReviewsByType } from '../../../hooks/index.jsx'
-import { useLazyLoadContent } from '../../../hooks/useLazyLoadContent.jsx'
 import { useParams } from 'react-router-dom'
+import { useFetchReviewsByType } from '../../hooks/index.jsx'
+import { useLazyLoadContent } from '../../hooks/useLazyLoadContent.jsx'
+import {
+	clearReview,
+	selectOpenedMovieReviewList,
+	selectOpenedMovieReviewLoaded,
+} from '../../reducers/CurrentWatch/currentWatchReducer.jsx'
+import { H2 } from '../../elements/H2.jsx'
 
 const Reviews = () => {
 	const list = useSelector(selectOpenedMovieReviewList)

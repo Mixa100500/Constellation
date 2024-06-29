@@ -1,5 +1,5 @@
 import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel.jsx'
-import { ScrollLoader } from '../../components/Pagination/ScrollLoader.jsx'
+import { ScrollLoader } from '../Pagination/ScrollLoader.jsx'
 import { allRequestParams, collectionsNames } from '../Router/options.jsx'
 import { useGetSectionQuery } from '../../services/request/themoviedbService.jsx'
 import { useState } from 'react'

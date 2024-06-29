@@ -1,6 +1,6 @@
 import { memo, useState } from 'react'
 import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel.jsx'
-import { ScrollLoader } from '../../components/Pagination/ScrollLoader.jsx'
+import { ScrollLoader } from '../Pagination/ScrollLoader.jsx'
 // import { useLazyGetSectionQuery } from '../../services/request/themoviedbService'
 import { allRequestParams, collectionsNames } from '../Router/options.jsx'
 import { useGetSectionQuery } from '../../services/request/themoviedbService.jsx'

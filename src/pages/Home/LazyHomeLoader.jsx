@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { CarouselSerials } from '../../../compositions/Carousel/SerialsCarousel.jsx';
-import CarouselCartoons from '../../../compositions/Carousel/CartoonsCarousel.jsx';
-// import CarouselMovies from '../../../compositions/Carousel/MoviesCarousel';
-import { usePageLoadedSet, } from '../../../context/PageLoadProvider.jsx';
+import CarouselCartoons from '../../compositions/Carousel/CartoonsCarousel.jsx'
+import { CarouselSerials } from '../../compositions/Carousel/SerialsCarousel.jsx'
+import { usePageLoadedSet } from '../../context/PageLoadProvider.jsx'
 
-export const LazyHoneLoader = () => {
+export const LazyHomeLoader = () => {
   const [loadingProgress, setLoadingProgress] = useState(0)
   const pageLoaded = usePageLoadedSet()
 

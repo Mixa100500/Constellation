@@ -1,7 +1,9 @@
 
-import { PopularCardPlaceholder } from '../../UI/Cards/PopularCard/PopularCardPlaceholder.jsx';
-import { createArray } from '../../../helpers/simple.jsx';
-import { MediaCarouselPlaceholder } from '../../UI/Carousel/MediaCarousel/Placeholder.jsx';
+// import { PopularCardPlaceholder } from '../../UI/Cards/PopularCard/PopularCardPlaceholder.jsx';
+import { MediaCarouselPlaceholder } from '../../components/UI/Carousel/MediaCarousel/Placeholder.jsx'
+import { createArray } from '../../helpers/simple.jsx'
+// import { createArray } from '../../../helpers/simple.jsx';
+// import { MediaCarouselPlaceholder } from '../../UI/Carousel/MediaCarousel/Placeholder.jsx';
 
 const mainSlidesPlaceholders = createArray(2)
 

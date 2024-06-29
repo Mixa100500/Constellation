@@ -1,5 +1,5 @@
-import Page from "../../../compositions/Collection/Page.jsx"
 import { useLocation } from "react-router-dom";
+import Page from '../../compositions/Collection/Page.jsx'
 
 
 export const FirstPage = () => {

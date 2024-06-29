@@ -1,7 +1,7 @@
 import { GenresList } from "./GenresList.jsx"
 import { DescriptionHeader } from "./styled.jsx"
-import { useLazyByType } from "../../../hooks/useLazyByType.jsx"
 import PropTypes from "prop-types"
+import { useLazyByType } from '../../hooks/useLazyByType.jsx'
 
 export const DescriptionContent = ({ mediaInfo, loaded: isLoaded }) => {
 

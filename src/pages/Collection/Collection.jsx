@@ -1,10 +1,10 @@
-import Layout from '../../Layout/Layout.jsx'
-import PaginationCollection from './PaginationCollection.jsx'
-import { Filter } from '../../../compositions/Filter/Filter.jsx'
-import { ResizeProvider } from '../../../context/ResizeProvider.jsx'
+import Layout from "../../components/Layout/Layout.jsx";
+import { Filter } from '../../compositions/Filter/Filter.jsx'
 import { HeaderCollection } from './HeaderCollection.jsx'
 import { CollectionPathReset } from './CollectionPathReset.jsx'
 import { FirstPage } from './FirstPage.jsx'
+import { ResizeProvider } from '../../context/ResizeProvider.jsx'
+import PaginationCollection from '../../compositions/Pagination/PaginationCollection.jsx'
 
 const Collection = () => {
 	return (

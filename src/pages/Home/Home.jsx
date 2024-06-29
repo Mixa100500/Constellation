@@ -1,11 +1,8 @@
-// import CarouselCartoons from '../../../compositions/Carousel/CartoonsCarousel.jsx';
-import CarouselMovies from '../../../compositions/Carousel/MoviesCarousel.jsx'
-import { PageLoadProvider } from '../../../context/PageLoadProvider.jsx';
-import { MainCarousel } from '../../Carousels/MainCarousel/MainCarousel.jsx';
-import Layout from '../../Layout/Layout.jsx'
-// import { PopularCarousel } from '../../../compositions/Carousel/PopularCarousel'
-
-import { LazyHoneLoader } from './LazyHomeLoader.jsx';
+import { LazyHomeLoader } from './LazyHomeLoader.jsx';
+import { MainCarousel } from '../../components/Carousels/MainCarousel/MainCarousel.jsx'
+import Layout from '../../components/Layout/Layout.jsx'
+import { PageLoadProvider } from '../../context/PageLoadProvider.jsx'
+import CarouselMovies from '../../compositions/Carousel/MoviesCarousel.jsx'
 
 // const mediaSlidesPlaceholders = createArray(6)
 const Home = () => {
@@ -15,7 +12,7 @@ const Home = () => {
 				<MainCarousel />
 				<Layout>
 					<CarouselMovies />
-					<LazyHoneLoader />
+					<LazyHomeLoader />
 				</Layout>
 			</PageLoadProvider>
 				

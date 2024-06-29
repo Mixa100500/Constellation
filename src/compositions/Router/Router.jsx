@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
-import { CollectionScreen } from '../../components/Pages/Collection/CollectionScreen.jsx'
-import { HomeScreen } from '../../components/Pages/Home/HomeScreen.jsx'
-import { WatchScreen } from '../../components/Pages/Watch/WatchScreen.jsx'
+import { HomeScreen } from '../../pages/Home/HomeScreen.jsx'
+import { CollectionScreen } from '../../pages/Collection/CollectionScreen.jsx'
+import { WatchScreen } from '../../pages/Watch/WatchScreen.jsx'
 
 export const Router = () => {
   return (

@@ -1,14 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux'
 import {
 	addPage,
-	// selectCurrentLoadingSection,
 	selectMaxResultsCollection,
 	selectHasMorePage
-} from '../../../reducers/pageCollectionReducer.jsx'
-import { VirtualCollection } from './VirtualCollection.jsx'
-import { InfiniteScrolling } from '../../Pagination/InfiniteScrolling.jsx'
-import { SingleLineSkeleton } from './SingleLineSkeleton.jsx'
+} from '../../reducers/pageCollectionReducer.jsx'
+import { InfiniteScrolling } from './InfiniteScrolling.jsx'
 import { useLocation } from 'react-router-dom'
+import { VirtualCollection } from './VirtualCollection.jsx'
+import { SingleLineSkeleton } from '../../pages/Collection/SingleLineSkeleton.jsx'
 
 const PaginationCollection = () => {
 	useLocation()

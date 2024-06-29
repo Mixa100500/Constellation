@@ -8,18 +8,11 @@ const InfiniteScrolling = (props) => {
 	const delayRef = React.useRef(false)
 	const unmountRef = React.useRef(false)
 	
-	// const scrollToSkeletonTop = () => {
-	// 	const rect = elementRef.current.getBoundingClientRect()
-	// 	if(rect.top < 0) {
-	// 		window.scrollBy(0, rect.top - rect.height)
-	// 	}
-  // }
 
 	function delayLoadWhenVisible() {
 		if(unmountRef.current) {
 			return
 		}
-		// scrollToSkeletonTop()
 		if (delayRef.current) {
 			return
 		}
