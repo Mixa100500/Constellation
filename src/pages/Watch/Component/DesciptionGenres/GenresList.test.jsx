@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import GenresList from "./GenresList";
+import GenresList from "./GenresList.jsx";
 
 describe('GenresList', () => {
   it('renders a list of genres correctly', () => {

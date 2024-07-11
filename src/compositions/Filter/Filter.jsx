@@ -9,14 +9,21 @@ const FilterInner = styled.div`
   background-color: var(--filter-color);
 `
 
+const FilterList = styled.ul`
+  display: flex;
+  flex-direction: column;
+`
+
 export const Filter = () => {
 
   return (
-      <FilterInner>
-        <DropDown title={'genres'}>
+    <FilterInner>
+      <DropDown title={'genres'}>
+        <FilterList>
           <Genres />
-        </DropDown>
-      </FilterInner>
+        </FilterList>
+      </DropDown>
+    </FilterInner>
   )
 }
 

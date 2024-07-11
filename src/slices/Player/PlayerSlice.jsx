@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-export const nameSliceKinoboxPlayer = 'kinoboxPlayer'
+import { rootReducer } from '../rootReducer.jsx'
 
 const initialState = {
   loaded: false
 }
 
 export const playerSlice = createSlice({
-  name: 'kinoboxPlayer',
+  name: 'player',
   initialState,
   reducers: {
     setLoaded: (state) => {
@@ -17,6 +17,8 @@ export const playerSlice = createSlice({
     selectPlayerLoaded: (sliceState) => sliceState.loaded
   }
 })
+
+rootReducer.inject(playerSlice)
 
 export const { setLoaded } = playerSlice.actions
 

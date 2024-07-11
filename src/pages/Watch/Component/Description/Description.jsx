@@ -1,8 +1,8 @@
-import { GenresList } from "./GenresList.jsx"
-import { DescriptionHeader } from "./styled.jsx"
+import { GenresList } from "../DesciptionGenres/GenresList.jsx"
+import { DescriptionHeader } from "../../styled.jsx"
 import PropTypes from "prop-types"
-import { useLazyByType } from '../../hooks/useLazyByType.jsx'
-
+import { SkeletonDescription } from './SkeletonDescription.jsx'
+import { useLazyByType } from "../../../../hooks/useWatch.jsx"
 export const DescriptionContent = ({ mediaInfo, loaded: isLoaded }) => {
 
 	const movieContent = () => <MovieDescription mediaInfo={mediaInfo}/>
@@ -10,7 +10,10 @@ export const DescriptionContent = ({ mediaInfo, loaded: isLoaded }) => {
 	const loadingContent = () => <SkeletonDescription />
 
 	const content = useLazyByType({
-		movieContent, serialContent, loadingContent, isLoaded
+		movieContent,
+		serialContent,
+		loadingContent,
+		isLoaded
 	})
 	
 	return (
@@ -69,17 +72,4 @@ SerialDescription.propTypes = {
       runtime: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
-}
-
-const SkeletonDescription = () => {
-	return (
-		<>
-			<DescriptionHeader>episodes:</DescriptionHeader>
-			<div>loading</div>
-			<DescriptionHeader>seasons:</DescriptionHeader>
-			<div>loading</div>
-			<DescriptionHeader>runtime:</DescriptionHeader>
-			<div>loading min</div>
-		</>
-	)
 }

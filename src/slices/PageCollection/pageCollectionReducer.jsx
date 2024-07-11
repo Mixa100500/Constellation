@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { themoviedbApi } from '../services/request/themoviedbService.jsx'
-import { genreExtractor, getType } from '../helpers/url.jsx'
-import { URLs } from '../services/request/URL'
+import { themoviedbApi } from '../../services/request/themoviedbService.jsx'
+import { genreExtractor, getType } from '../../helpers/url.jsx'
+import { URLs } from '../../services/request/URL.js'
 const mainParams = 'include_adult=false&include_video=false&language=en-US'
 const sortParams = 'sort_by=popularity.desc'
 
@@ -90,16 +90,6 @@ export const createUrlBySearch = () => {
   return createUrl({genres, type})
 }
 
-export const addPage = () => (dispatch, getState) => {
-  const state = getState()
-  const needNextPage = selectLastPageLoaded(state)
-  if(!needNextPage) {
-    return
-  }
-  const key = createUrlBySearch()
-  dispatch(addOnePage(key))
-}
-
 export const selectMaxSectionCollection = (state) => {
   const key = createUrlBySearch()
   const general = selectGeneral(state)
@@ -136,11 +126,11 @@ const checkIsMore = (max, currentPages) => {
 	return max && currentPages * 3 <= max
 }
 
-export const selectHasMorePage = (state) => {
+export const selectNeedSkeleton = (state) => {
   const currentPages = selectPaginationPage(state)
   const maxSection = selectMaxSectionCollection(state)
   const hasMore = checkIsMore(maxSection, currentPages)
-  return hasMore
+  return hasMore && selectLastPageLoaded(state)
 }
 
 export const selectLastPageLoaded = (state) => {
@@ -149,8 +139,11 @@ export const selectLastPageLoaded = (state) => {
   const currentLoadingSection = selectCurrentLoadingSection(state)
   const lastPageLoaded = currentPages * 3 <= currentLoadingSection - 1
   const hasMore = checkIsMore(maxSection, currentPages)
+  // console.log('loaded', currentPages * 3, currentLoadingSection - 1)
   return hasMore && lastPageLoaded
 }
+
+// export const select
 
 export const selectHasMoreOnePage = (state) => {
   const currentPages = selectPaginationPage(state)
@@ -173,3 +166,15 @@ export const selectIsSkip = (section) => {
   }
 }
 // const loadingSection = selectCurrentLoadingSection(state)
+
+// thunk
+
+export const addPage = () => (dispatch, getState) => {
+  const state = getState()
+  const needNextPage = selectLastPageLoaded(state)
+  if(!needNextPage) {
+    return
+  }
+  const key = createUrlBySearch()
+  dispatch(addOnePage(key))
+}

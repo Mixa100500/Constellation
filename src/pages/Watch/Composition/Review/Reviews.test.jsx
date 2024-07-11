@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Reviews } from './Reviews';
-import { ReviewItem } from './ReviewItem'; // предполагается, что компонент ReviewItem импортирован из файла ReviewItem
+import { Reviews } from './Reviews.jsx';
+import { ReviewItem } from '../../Component/ReviewItem/ReviewItem.jsx'; // предполагается, что компонент ReviewItem импортирован из файла ReviewItem
 
 vi.mock('react-router-dom', () => ({
   useParams: vi.fn()

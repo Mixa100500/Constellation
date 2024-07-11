@@ -1,9 +1,10 @@
 import { useWindowVirtualizer } from "@tanstack/react-virtual"
 import { useSelector } from "react-redux"
 import { useRef } from "react"
-import { selectPaginationPage } from '../../reducers/pageCollectionReducer.jsx'
+import { selectPaginationPage } from '../../slices/PageCollection/pageCollectionReducer.jsx'
 import { useHeight } from '../../context/ResizeProvider.jsx'
 import Page from '../Collection/Page.jsx'
+import { ShowSectionProvider } from "../../context/ShowSectionProvider.jsx"
 
 export const VirtualCollection = () => {
 	const countPages = useSelector(selectPaginationPage)
@@ -16,7 +17,6 @@ export const VirtualCollection = () => {
     overscan,
     scrollMargin: listRef.current?.offsetTop ?? 0,
   })
-
   return (
     <div
     ref={listRef}
@@ -45,9 +45,11 @@ export const VirtualCollection = () => {
             }px)`,
           }}
         >
-          <Page
-            index={item.index + 2}
-          />
+          <ShowSectionProvider>
+            <Page
+              index={item.index + 2}
+            />
+          </ShowSectionProvider>
         </div>
       ))}
     </div>

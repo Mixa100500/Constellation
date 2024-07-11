@@ -1,6 +1,6 @@
-import { getMovieInfo, getSerialIMDBID, getSerialInfo } from "../../services/request/mediaInfo"
-import { getReviewsByFilm, getReviewsBySerial } from "../../services/request/reviews"
-import { addMainInfo, fetchReviewsFailure, fetchReviewsSuccess } from "./currentWatchReducer"
+import { getMovieInfo, getSerialIMDBID, getSerialInfo } from "../../services/request/mediaInfo.jsx"
+import { getReviewsByFilm, getReviewsBySerial } from "../../services/request/reviews.jsx"
+import { addMainInfo, fetchReviewsFailure, fetchReviewsSuccess } from "./currentWatchReducer.jsx"
 
 export const fetchSerialReview = (id) => {
 	return (dispatch) => {

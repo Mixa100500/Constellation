@@ -1,11 +1,9 @@
 import { useSubParams } from "../../hooks/useSubParams.jsx"
-import { useDispatch } from "react-redux"
 import styled from "styled-components"
 import { Checkbox } from "../../components/Checkbox/Checkbox.jsx"
-import { useIsMovies, useType } from "../../hooks/useRouter.jsx"
-import { useLocation } from "react-router-dom"
-
-
+// import { useIsMovies, useType } from "../../hooks/useRouter.jsx"
+import { memo, } from "react"
+import PropTypes from 'prop-types';
 const genresMoviesAll = [
 	'28', '12', '16', '35',
   '80', '99', '18', '10751',
@@ -37,7 +35,6 @@ const genresMoviesObject = {
 	37: 'Western',
 }
 
-
 const genresSerialAll = [
   10759, 16, 35, 80,
   99, 18, 10751, 10762,
@@ -64,23 +61,33 @@ const genresSerialsObject = {
   37: 'Western',
 }
 
-const FilterList = styled.ul`
-  display: flex;
-  flex-direction: column;
-`
-
 const GenreItem = styled.li`
   margin-top: 12px;
 `
 
 export const Genres = () => {
-	const {
+
+  const {
     hasSubParam,
     setSubParam,
     deleteSubParam
   } = useSubParams('genres')
-  const type = useType()
-  const isMovies = useIsMovies()
+
+  return <GenresList
+    hasSubParam={hasSubParam}
+    setSubParam={setSubParam}
+    deleteSubParam={deleteSubParam}
+  />
+}
+
+export const GenresList = memo((props) => {
+  const {
+    hasSubParam,
+    setSubParam,
+    deleteSubParam
+  } = props
+
+  const isMovies = location.pathname.includes('/movies')
   
   const onChange = (e) => {
     const value = e.target.value
@@ -102,21 +109,27 @@ export const Genres = () => {
     genresObject = genresSerialsObject
   }
 
-	return (
-		<FilterList >
-      {genresList.map(id => {
-        const checked = hasSubParam(id)
-        return (
-          <GenreItem key={id + checked + type}>
-            <Checkbox
-              label={genresObject[id]}
-              checked={checked}
-              value={id}
-              onChange={onChange}
-            />
-          </GenreItem>
-        )
-      })}
-		</FilterList>
-	)
-}
+	return <>
+    {genresList.map(id => {
+      const checked = hasSubParam(id)
+      return (
+        <GenreItem key={id}>
+          <Checkbox
+            label={genresObject[id]}
+            checked={checked}
+            value={id}
+            onChange={onChange}
+          />
+        </GenreItem>
+      )
+    })}
+  </>
+})
+
+GenresList.propTypes = {
+  hasSubParam: PropTypes.func.isRequired,
+  setSubParam: PropTypes.func.isRequired,
+  deleteSubParam: PropTypes.func.isRequired
+};
+
+GenresList.displayName = 'Genres'

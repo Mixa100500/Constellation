@@ -1,17 +1,21 @@
+import { useCallback } from "react"
 import { useSearchParams } from "react-router-dom"
 
 export const useSubParams = (param) => {
-  const [searchParams, setSearchParams] = useSearchParams()
-
+  const [, setSearchParams] = useSearchParams()
+  const searchParams = new URLSearchParams(location.search);
   let paramString = searchParams.get(param) || ''
   let paramArray = paramString.split(',')
 	const subParams = new Set(paramArray)
 
-  const hasSubParam = (subParam) => {
+  const hasSubParam = useCallback((subParam) => {
     return subParams.has(subParam)
-  }
+  }, [])
 
-  const setSubParam = (subParam) => {
+  const setSubParam = useCallback((subParam) => {
+    const searchParams = new URLSearchParams(location.search);
+    let paramString = searchParams.get(param) || ''
+
     let newGenre = subParam
     if(paramString) {
       newGenre = paramString + ',' + subParam
@@ -21,9 +25,14 @@ export const useSubParams = (param) => {
       searchParams.set(param, newGenre)
       return searchParams
     })
-  }
+  }, [])
 
-  const deleteSubParam = (subParam) => {
+  const deleteSubParam = useCallback((subParam) => {
+    const searchParams = new URLSearchParams(location.search)
+    let paramString = searchParams.get(param) || ''
+    let paramArray = paramString.split(',')
+    const subParams = new Set(paramArray)
+
     const isOne = paramArray.length === 1
     const isFirst = paramArray[0] === subParam
 
@@ -40,7 +49,7 @@ export const useSubParams = (param) => {
       searchParams.set(param, newParam)
       return searchParams
     })
-  }
+  }, [])
 
   return {
     hasSubParam,

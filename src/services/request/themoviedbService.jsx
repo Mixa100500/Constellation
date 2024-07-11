@@ -42,7 +42,7 @@ export const themoviedbApi = createApi({
         }
         return result
       },
-      keepUnusedDataFor: 60 * 60 * 60,
+      keepUnusedDataFor: 60 * 60 * 60000,
     }),
     getRecommendations: builder.query({
       query: ({ type, id }) => `/${getType(type)}/${id}/recommendations?language=en-US&page=1`,
@@ -57,7 +57,7 @@ export const themoviedbApi = createApi({
 // https://api.themoviedb.org/3/tv/series_id/recommendations?language=en-US&page=1
 export const { 
   useGetSectionQuery,
-  useGetRecommendationsQuery,
-  // useLazyGetSectionQuery,
+  useLazyGetRecommendationsQuery,
+  useLazyGetSectionQuery,
   // useLazyGetRecommendationsQuery,
 } = themoviedbApi

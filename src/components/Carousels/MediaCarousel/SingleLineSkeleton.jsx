@@ -1,7 +1,7 @@
 // import { createArray } from "../../../helpers/simple.jsx"
 
 
-import { createArray } from '../../helpers/simple.jsx'
+import { createArray } from '../../../helpers/simple.jsx'
 
 const skeletons = createArray(6)
 

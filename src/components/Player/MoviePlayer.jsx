@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types'
 import { useEffect } from 'react';
-import { selectPlayerLoaded, setLoaded } from '../../reducers/kinoboxPlayerReducer.jsx';
+import { selectPlayerLoaded, setLoaded } from '../../slices/Player/PlayerSlice.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectOpenedMovieImdbId } from '../../reducers/CurrentWatch/currentWatchReducer.jsx';
+import { selectOpenedMovieImdbId } from '../../slices/CurrentWatch/currentWatchReducer.jsx';
 
 // const apiKey = import.meta.env.VITE_PLAYER_API_KEY
 const VideoContainer = styled.div`
@@ -20,7 +20,6 @@ aspect-ratio: 16/9;
     font-size: 1.5em;
   }
 `
-
 const KinoboxPlayer = ({ imdbId }) => {
   const loaded = useSelector(selectPlayerLoaded)
   const dispatch = useDispatch()

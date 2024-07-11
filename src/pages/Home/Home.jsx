@@ -1,4 +1,4 @@
-import { LazyHomeLoader } from './LazyHomeLoader.jsx';
+import { LazyHomeLoader } from './Compositions/LazyHomeLoader.jsx';
 import { MainCarousel } from '../../components/Carousels/MainCarousel/MainCarousel.jsx'
 import Layout from '../../components/Layout/Layout.jsx'
 import { PageLoadProvider } from '../../context/PageLoadProvider.jsx'
@@ -11,7 +11,6 @@ const Home = () => {
 			<PageLoadProvider>
 				<MainCarousel />
 				<Layout>
-					<CarouselMovies />
 					<LazyHomeLoader />
 				</Layout>
 			</PageLoadProvider>

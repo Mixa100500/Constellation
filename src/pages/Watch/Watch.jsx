@@ -1,6 +1,6 @@
 import { useEffect, } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import MoviePoster from './MoviePoster.jsx'
+import MoviePoster from './Component/WatchPoster/MoviePoster.jsx'
 import {
 	Flex,
 	GridTwoColumn,
@@ -9,14 +9,14 @@ import {
 	PosterContainer
 } from './styled.jsx'
 import { useParams } from 'react-router-dom'
-import { DescriptionContent } from './Description.jsx'
-import { LazyWatchLoader } from './LazyWatchLoader.jsx'
+import { DescriptionContent } from './Component/Description/Description.jsx'
+import { LazyWatchLoader } from './Composition/LazyPageLoader/LazyWatchLoader.jsx'
 import {
 	clearMovie,
 	selectOpenedMovieInfo,
 	selectOpenedMovieLoaded,
-} from '../../reducers/CurrentWatch/currentWatchReducer.jsx'
-import { useInitializeByType } from '../../hooks/index.jsx'
+} from '../../slices/CurrentWatch/currentWatchReducer.jsx'
+import { useInitializeByType } from '../../hooks/useWatch.jsx'
 import Layout from '../../components/Layout/Layout.jsx'
 import { Rating } from '../../components/UI/Rating/Rating.jsx'
 import VideoPlayer from '../../components/Player/MoviePlayer.jsx'
@@ -25,20 +25,19 @@ import { H2 } from '../../elements/H2.jsx'
 const margined = { marginBottom: '15px' }
 
 const Watch = () => {
+	
 	const dispatch = useDispatch()
 	const mediaInfo = useSelector(selectOpenedMovieInfo)
 	const loaded = useSelector(selectOpenedMovieLoaded)
 	const { id } = useParams()
 	const initialize = useInitializeByType()
-
 	useEffect(() => {
 		dispatch(initialize(id))
 		return () => {
       dispatch(clearMovie())
     }
 	}, [id])
-
-
+	
 	const overview = mediaInfo.overview || ' '
 	const title = mediaInfo.title || ' '
 

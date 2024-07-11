@@ -15,15 +15,12 @@ export const Router = () => {
           path='/popular/:type'
           element={<CollectionScreen />}
         />
-        <Route path='/watch/:type/:id'
+        <Route
+          path='/watch/:type/:id'
           element={<WatchScreen />}
         />
       </Routes>
-      {/* <Route path='/new/book' element={<NewBook setError={notify}/>} />
-      <Route path='/login' element={
-        <LoginForm setError={notify} setToken={setToken}/>
-      } />
-      <Route path='/recommend' element={<Recommend />} /> */}
+      {/* <Route path='/recommend' element={<Recommend />} /> */}
     </>
   )
 }

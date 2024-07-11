@@ -37,3 +37,5 @@ export const Checkbox = ({ label, checked, value, onChange }) => {
       </CheckboxContent>
 	)
 }
+
+Checkbox.displayName = 'Checkbox'

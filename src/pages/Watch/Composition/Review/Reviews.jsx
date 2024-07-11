@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { ReviewItem } from './ReviewItem.jsx'
+import { ReviewItem } from '../../Component/ReviewItem/ReviewItem.jsx'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useFetchReviewsByType } from '../../hooks/index.jsx'
-import { useLazyLoadContent } from '../../hooks/useLazyLoadContent.jsx'
+import { useFetchReviewsByType } from '../../../../hooks/useWatch.jsx'
+import { useLazyLoadContent } from '../../../../hooks/useLazyLoadContent.jsx'
 import {
 	clearReview,
 	selectOpenedMovieReviewList,
 	selectOpenedMovieReviewLoaded,
-} from '../../reducers/CurrentWatch/currentWatchReducer.jsx'
-import { H2 } from '../../elements/H2.jsx'
+} from '../../../../slices/CurrentWatch/currentWatchReducer.jsx'
+import { H2 } from '../../../../elements/H2.jsx'
 
 const Reviews = () => {
 	const list = useSelector(selectOpenedMovieReviewList)

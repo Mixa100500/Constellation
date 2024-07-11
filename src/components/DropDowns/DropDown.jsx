@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import styled, { css } from "styled-components"
 import downSvg from "../../images/down.svg";
 import PropTypes from 'prop-types'
@@ -52,13 +52,28 @@ const DropdownHeader = styled.button`
 
 
 export const DropDown = (props) => {
+  const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => {
     setIsOpen(prev => !prev)
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!dropdownRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
   return (
-    <DropdownWrapper>
+    <DropdownWrapper ref={dropdownRef}>
       <DropdownHeader onClick={toggle} $isActive={isOpen}>
         <div>
           {props.title}

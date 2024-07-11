@@ -16,7 +16,6 @@ export const useIsMovies = () => {
   return location.pathname.includes('/movies')
 }
 
-
 export const useTitleByFilter = () => {
   const type = useFullType()
   let title = filterNames[type]
