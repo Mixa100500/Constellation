@@ -18,8 +18,10 @@ html {
   --button-bg-color: #fdd10f;
   --badge-bg-color: #FCCD00;
   --secondary-color: #7b7a8f;
+
   --primary-color: #7e79ff;
-  --dark-color: #797979;
+  /* --dark-color: #797979; */
+  --dark-color: hsla(0,0%,100%,.72);
   --hover-bg-color: #440097;
   --second-bg-color: #1f1b2e;
   --primary-bg-color: rgba(255, 255, 255, .08);
@@ -42,17 +44,17 @@ html {
 }
 
 :root {
-  --lg: 1.7rem;
+  /* --lg: 1.7rem; */
+  --lg: 27px;
   --sm: 1rem;
-
 }
-
 
 :root {
   --main-max-width: 1048px;
   --carousel-button-width: 48px;
   --carousel-middle-button-width: 40px;
   --carousel-min-button-width: 36px;
+  --header-height: calc(var(--lg) * 2 + 32px)
 }
 
 :root {
@@ -126,6 +128,10 @@ nav li:first-of-type {
 
 .padding--sm {
   padding: var(--sm);
+}
+
+.transition--sm {
+  transition: color 0.5s ease;
 }
 
 
@@ -304,5 +310,5 @@ nav li:first-of-type {
 .containerApp {
   display: flex;
   flex-direction: column;
-  min-height: 120vh;
+  min-height: 101vh;
 }

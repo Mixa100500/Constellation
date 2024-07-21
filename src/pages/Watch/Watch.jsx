@@ -2,7 +2,7 @@ import { useEffect, } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import MoviePoster from './Component/WatchPoster/MoviePoster.jsx'
 import {
-	Flex,
+	WatchContent,
 	GridTwoColumn,
 	InfoColumn,
 	OverviewHeader,
@@ -47,7 +47,7 @@ const Watch = () => {
 				top='20'
 				bottom='20'
 			>
-				<Flex>
+				<WatchContent className='padding-horizontal'>
 					<PosterContainer>
 						<MoviePoster mediaInfo={mediaInfo} loaded={loaded} />
 						<Rating
@@ -70,7 +70,7 @@ const Watch = () => {
 							{overview}
 						</div>
 					</InfoColumn>
-				</Flex>
+				</WatchContent>
 				<LazyWatchLoader />
 			</Layout>
 		</div>

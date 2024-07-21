@@ -15,7 +15,7 @@ export const DescriptionContent = ({ mediaInfo, loaded: isLoaded }) => {
 		loadingContent,
 		isLoaded
 	})
-	
+console.log('type', mediaInfo.genres)		
 	return (
 		<>
 			<DescriptionHeader>genres:</DescriptionHeader>
@@ -32,7 +32,9 @@ DescriptionContent.propTypes = {
     last_episode_to_air: PropTypes.shape({
       runtime: PropTypes.number,
     }),
+		genres: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+
   loaded: PropTypes.bool.isRequired,
 }
 

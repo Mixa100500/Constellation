@@ -46,10 +46,11 @@ export const PosterContainer = styled.div`
 	}
 `
 
-export const Flex = styled.div`
+export const WatchContent = styled.div`
 	justify-content: center;
 	display: flex;
 	flex-wrap: wrap;
+		
 `
 
 export const InfoColumn = styled.div`

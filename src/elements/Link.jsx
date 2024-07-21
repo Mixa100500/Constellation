@@ -1,6 +1,6 @@
 import { Link as RouterLink } from "react-router-dom";
 import styled from "styled-components";
-import { paddingReducer } from "../modifiers/padding/reducer";
+import { paddingReducer } from "../modifiers/padding/reducer.jsx";
 
 export const Link = styled(RouterLink)`
   display: block;
@@ -12,4 +12,5 @@ export const Link = styled(RouterLink)`
   &:hover {
     color: var(--button-bg-color);
   }
+  
 `

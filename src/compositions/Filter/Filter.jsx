@@ -17,13 +17,15 @@ const FilterList = styled.ul`
 export const Filter = () => {
 
   return (
-    <FilterInner>
-      <DropDown title={'genres'}>
-        <FilterList>
-          <Genres />
-        </FilterList>
-      </DropDown>
-    </FilterInner>
+    <div className='padding-horizontal'>
+      <FilterInner>
+        <DropDown title={'genres'}>
+          <FilterList>
+            <Genres />
+          </FilterList>
+        </DropDown>
+      </FilterInner>
+    </div>
   )
 }
 
