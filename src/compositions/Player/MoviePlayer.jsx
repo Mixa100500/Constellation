@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useEffect } from 'react';
 import { selectPlayerLoaded, setLoaded } from '../../slices/Player/PlayerSlice.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectOpenedMovieImdbId } from '../../slices/CurrentWatch/currentWatchReducer.jsx';
+import { selectOpenedMovieImdbId } from '../../slices/CurrentWatch/currentWatchSlice.jsx';
 
 // const apiKey = import.meta.env.VITE_PLAYER_API_KEY
 const VideoContainer = styled.div`

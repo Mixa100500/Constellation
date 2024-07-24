@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from 'react'
 import { ScrollLoader } from "../compositions/Pagination/ScrollLoader.jsx"
 
 export const useLazyLoadContent = ({renderContent, loadingContent, isLoaded, fetchData, fallbackContent}) => {

@@ -1,18 +1,18 @@
-import React from "react"
-// import { useDispatch } from "react-redux"
 import PropTypes from 'prop-types'
+import { memo, useEffect, useRef } from 'react'
 
-const ScrollLoader = ({ fetchData, children }) => {
-  const isVisibleRef = React.useRef(false)
-  const ref = React.useRef()
+const ScrollLoader = memo(({ fetchData, children }) => {
+  const isVisibleRef = useRef(false)
+  const ref = useRef()
 
-  React.useEffect(() => {
+  useEffect(() => {
+		isVisibleRef.current = false
     const observer = new IntersectionObserver(
       async (entries) => {
 				if(entries[0].isIntersecting && !isVisibleRef.current) {
-          fetchData()
-          isVisibleRef.current = true
-          observer.disconnect()
+					isVisibleRef.current = true
+					observer.disconnect()
+					fetchData()
         }
 			},
 			{
@@ -26,14 +26,16 @@ const ScrollLoader = ({ fetchData, children }) => {
     return () => {
       observer.disconnect()
     }
-	}, [])
+	}, [fetchData])
 
   return (
     <div ref={ref}>
       {children}
     </div>
   )
-}
+})
+
+ScrollLoader.displayName = 'ScrollLoader'
 
 ScrollLoader.propTypes = {
   fetchData: PropTypes.func.isRequired,

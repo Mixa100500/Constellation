@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { getPopular } from "../../services/request/popular.jsx"
-import { MainCarousel } from "../../components/Carousels/MainCarousel/MainCarousel.jsx"
-import { collectionExtractor } from "../../helpers/simple.jsx"
+import { getPopular } from "../../../services/request/popular.jsx"
+import { MainCarousel } from "../MainCarousel/MainCarousel.jsx"
+import { collectionExtractor } from "../../../helpers/simple.jsx"
 
 export const PopularCarousel = () => {
   const [popular, setPopular] = useState([])

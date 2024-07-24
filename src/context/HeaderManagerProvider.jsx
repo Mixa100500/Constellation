@@ -1,10 +1,11 @@
-import { createContext, useCallback, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
 
 const ToggleContext = createContext(null)
 const CurrentDropdownContext = createContext(null)
+const IsActiveThemeContext = createContext(null)
+
 export const HeaderManagerProvider = (props) => {
 	const [dropDown, setDropDown] = useState('')
-
 	const toggle = useCallback((modalName) => {
 		setDropDown(modalName)
 	}, [])
@@ -12,13 +13,15 @@ export const HeaderManagerProvider = (props) => {
 	return (
 		<ToggleContext.Provider value={toggle}>
 			<CurrentDropdownContext.Provider value={dropDown}>
-				{props.children}
+				<IsActiveThemeContext.Provider value={dropDown !== ''}>
+					{props.children}
+				</IsActiveThemeContext.Provider>
 			</CurrentDropdownContext.Provider>
 		</ToggleContext.Provider>
 	)
 }
 
-export const useToggle = () => {
+const useToggle = () => {
 	const open = useContext(ToggleContext)
 	if (open === null) {
 		throw new Error('useToggle must be called in the context provider')
@@ -26,7 +29,15 @@ export const useToggle = () => {
 	return open
 }
 
-export const useDropdown = () => {
+const useIsActiveTheme = () => {
+	const open = useContext(IsActiveThemeContext)
+	if (open === null) {
+		throw new Error('useIsActiveTheme must be called in the context provider')
+	}
+	return open
+}
+
+const useDropdown = () => {
 	const dropDown = useContext(CurrentDropdownContext)
 
 	if (dropDown === null) {
@@ -38,4 +49,5 @@ export const useDropdown = () => {
 export const useHeader = {
 	useToggle,
 	useDropdown,
+	useIsActiveTheme,
 }

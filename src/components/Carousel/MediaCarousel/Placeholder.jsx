@@ -1,5 +1,5 @@
 import { PosterPlaceholder } from '../../Cards/PosterCard/PosterPlaceholder.jsx';
-import { createArray } from '../../../../helpers/simple.jsx';
+import { createArray } from '../../../helpers/simple.jsx';
 
 export const MediaCarouselPlaceholder = () => {
   const placeholders = createArray(6)

@@ -1,5 +1,5 @@
 import { DatePlaceholder, PlaceholderDescription, TitlePlaceholder } from "./index.jsx"
-import { useVisible } from "../../../../context/VirtualVisibility.jsx"
+import { useVisible } from "../../../context/VirtualVisibility.jsx"
 import PropTypes from 'prop-types'
 
 const height = {

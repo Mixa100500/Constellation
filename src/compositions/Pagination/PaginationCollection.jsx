@@ -7,7 +7,7 @@ import {
 } from '../../slices/PageCollection/pageCollectionReducer.jsx'
 import { InfiniteScrolling } from './InfiniteScrolling.jsx'
 import { VirtualCollection } from './VirtualCollection.jsx'
-import { SingleLineSkeleton } from '../../components/Carousels/MediaCarousel/SingleLineSkeleton.jsx'
+import { SingleLineSkeleton } from '../Carousels/MediaCarousel/SingleLineSkeleton.jsx'
 import { useLazyParams } from '../../context/PageSearchParamProvider.jsx'
 
 const PaginationCollection = () => {

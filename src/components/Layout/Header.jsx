@@ -11,10 +11,10 @@ import { HeaderDropdown } from '../../compositions/Navigation/Desktop/Component.
 
 export const Header = () => {
 	const toggle = useHeader.useToggle()
+	console.log('header')
 	const onEnter = (type, eventEnter) => {
 		toggle(type)
 	}
-
 	const leave = (event) => {
 		const dropdown = document.querySelector('#header__dropdown__body')
 		if(event.relatedTarget === window) {
@@ -30,7 +30,7 @@ export const Header = () => {
 		<header>
 			<Layout>
 				<div className="padding-horizontal">
-					<HeaderContainer>
+					<HeaderThemeConsumer>
 						<HeaderInner>
 							<LogoWrapper>
 								<NavBurger />
@@ -67,13 +67,28 @@ export const Header = () => {
 							</nav>
 						</HeaderInner>
 						<HeaderDropdown />
-					</HeaderContainer>
+					</HeaderThemeConsumer>
 				</div>
 			</Layout>
 		</header>
 	)
 }
 
+const HeaderThemeConsumer = (props) => {
+	const isActive = useHeader.useIsActiveTheme()
+	return <HeaderContainer $active={isActive}>
+		{props.children}
+	</HeaderContainer>
+}
+
+
+const HeaderContainer = styled.div`
+		
+    position: relative;
+    ${(p) => p.$active && css`
+        background-color: var(--second-bg-color);
+		`}
+`
 
 const MenuLink = styled(Link)`
     height: var(--header-height);
@@ -85,10 +100,6 @@ const MenuLink = styled(Link)`
     & .center {
         line-height: var(--header-height);
     }
-`
-
-const HeaderContainer = styled.div`
-    position: relative;
 `
 
 const HeaderInner = styled.div`

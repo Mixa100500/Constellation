@@ -1,17 +1,17 @@
-import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel.jsx'
-import { ScrollLoader } from '../Pagination/ScrollLoader.jsx'
-import { allRequestParams, collectionsNames } from '../Router/options.jsx'
-import { useLazyGetSectionQuery } from '../../services/request/themoviedbService.jsx'
+import MediaCarousel from '../MediaCarousel/MediaCarousel.jsx'
+import { ScrollLoader } from '../../Pagination/ScrollLoader.jsx'
+import { allRequestParams, collectionsNames } from '../../Router/options.jsx'
+import { useLazyGetSectionQuery } from '../../../slices/Api/movieApiSlice.js'
 // import { useSelector } from 'react-redux'
 // import { selectIsCurrentChunkLoading } from '../../slices/homePageLoadingReducer/homePageLoadingReducer'
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 
+const QUERY_SERIALS = { ...allRequestParams, section: 1, type: collectionsNames.serials.name }
 export const CarouselSerials = memo(() => {
-	const query = { ...allRequestParams, section: 1, type: collectionsNames.serials.name }
 	const [fetch, { data, isSuccess }] = useLazyGetSectionQuery()
-	const initializeSerials = () => {
-		fetch(query)
-  }
+	const initializeSerials = useCallback(() => {
+		fetch(QUERY_SERIALS)
+  }, [])
 
 	return (
 		<ScrollLoader fetchData={initializeSerials} >

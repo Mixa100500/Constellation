@@ -1,19 +1,19 @@
-import { memo, useState } from 'react'
-import MediaCarousel from '../../components/Carousels/MediaCarousel/MediaCarousel.jsx'
-import { ScrollLoader } from '../Pagination/ScrollLoader.jsx'
+import { memo, useCallback, useState } from 'react'
+import MediaCarousel from '../MediaCarousel/MediaCarousel.jsx'
+import { ScrollLoader } from '../../Pagination/ScrollLoader.jsx'
 // import { useLazyGetSectionQuery } from '../../services/request/themoviedbService'
-import { allRequestParams, collectionsNames } from '../Router/options.jsx'
-import { useLazyGetSectionQuery } from '../../services/request/themoviedbService.jsx'
+import { allRequestParams, collectionsNames } from '../../Router/options.jsx'
+import { useLazyGetSectionQuery } from '../../../slices/Api/movieApiSlice.js'
 import { useParams } from 'react-router-dom'
 
 const description = collectionsNames.cartoons
+const QUERY_CARTOONS = { ...allRequestParams, section: 1, type: collectionsNames.movies.name, genres: '16' }
 
 const CarouselCartoons = memo(() => {
-	const query = { ...allRequestParams, section: 1, type: collectionsNames.movies.name, genres: '16' }
 	const [fetch, { data, isSuccess }] = useLazyGetSectionQuery()
-	const initializeCartoon = () => {
-		fetch(query)
-	}
+	const initializeCartoon = useCallback(() => {
+		fetch(QUERY_CARTOONS)
+	}, [fetch])
 	
 	
 	return (

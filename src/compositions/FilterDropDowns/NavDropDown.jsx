@@ -67,16 +67,10 @@ const DropdownHeader = styled.button`
 	align-items: center;
 	gap: 15px;
 	cursor: pointer;
-
+	padding: 0 20px;
 	&:hover {
 		color: var(--button-bg-color);
 	}
-
-	&:hover {
-		${(props) => !props.$isActive && css``}
-	}
-
-	${(props) => props.$isActive && css``}
 `
 
 const ArrowSVG = styled.svg`
@@ -91,7 +85,8 @@ const ArrowSVG = styled.svg`
 
 const FilterDropdownContent = styled.div`
 	position: absolute;
-	padding: 24px 0 0;
+	padding: 24px 20px;
+	box-sizing: border-box;
 	width: 100%;
 	z-index: 2;
 	background-color: var(--main-bg-color);

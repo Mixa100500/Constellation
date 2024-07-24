@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { themoviedbApi } from '../../services/request/themoviedbService.jsx'
 import { genreExtractor, getType } from '../../helpers/url.jsx'
 import { URLs } from '../../services/request/URL.js'
+import { selectionApi } from '../Api/movieApiSlice.js'
 const mainParams = 'include_adult=false&include_video=false&language=en-US'
 const sortParams = 'sort_by=popularity.desc'
 
@@ -16,7 +16,6 @@ const initialState = {
 
   },
 }
-
 export const collectionSlice = createSlice({
   name: 'pageCollection',
   initialState,
@@ -38,7 +37,7 @@ export const collectionSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addMatcher(themoviedbApi.endpoints.getSection.matchFulfilled,
+    builder.addMatcher(selectionApi.endpoints.getSection.matchFulfilled,
       (state, action) => {
         const key = createUrl(action.meta.arg.originalArgs)
         const section = action.meta.arg.originalArgs.section

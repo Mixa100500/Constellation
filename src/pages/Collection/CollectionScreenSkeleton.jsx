@@ -2,7 +2,7 @@
 // import { PosterPlaceholder } from '../../UI/Cards/PosterCard/PosterPlaceholder.jsx';
 // import { MediaCarouselPlaceholder } from '../../UI/Carousel/MediaCarousel/Placeholder.jsx';
 import "./Placeholder.css";
-import { MediaCarouselPlaceholder } from '../../components/UI/Carousel/MediaCarousel/Placeholder.jsx'
+import { MediaCarouselPlaceholder } from '../../components/Carousel/MediaCarousel/Placeholder.jsx'
 
 export const CollectionScreenSkeleton = () => {
   return (

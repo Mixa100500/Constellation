@@ -15,11 +15,11 @@ import {
 	clearMovie,
 	selectOpenedMovieInfo,
 	selectOpenedMovieLoaded,
-} from '../../slices/CurrentWatch/currentWatchReducer.jsx'
+} from '../../slices/CurrentWatch/currentWatchSlice.jsx'
 import { useInitializeByType } from '../../hooks/useWatch.jsx'
 import Layout from '../../components/Layout/Layout.jsx'
-import { Rating } from '../../components/UI/Rating/Rating.jsx'
-import VideoPlayer from '../../components/Player/MoviePlayer.jsx'
+import { Rating } from '../../components/Rating/Rating.jsx'
+import VideoPlayer from '../../compositions/Player/MoviePlayer.jsx'
 import { H2 } from '../../elements/H2.jsx'
 
 const margined = { marginBottom: '15px' }

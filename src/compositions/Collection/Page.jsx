@@ -1,7 +1,7 @@
-import PosterCard from "../../components/UI/Cards/PosterCard/PosterCard.jsx";
-import { PosterCardPlaceholder } from "../../components/UI/Cards/PosterCard/PosterCardPlaceholder.jsx";
+import PosterCard from "../../components/Cards/PosterCard/PosterCard.jsx";
+import { PosterCardPlaceholder } from "../../components/Cards/PosterCard/PosterCardPlaceholder.jsx";
 import { createArray } from "../../helpers/simple.jsx";
-import { useGetSectionQuery } from "../../services/request/themoviedbService.jsx";
+import { useGetSectionQuery } from "../../slices/Api/movieApiSlice.js";
 // import { useCollectionParams } from "../../hooks/useCollectionParams.jsx";
 import { memo, useEffect } from "react";
 import { useSelector } from "react-redux";

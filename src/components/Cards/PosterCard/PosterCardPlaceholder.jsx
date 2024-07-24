@@ -1,4 +1,4 @@
-import { DatePlaceholder, PlaceholderImg, PlaceholderDescription, TitlePlaceholder, PosterContainer } from "."
+import { DatePlaceholder, PlaceholderImg, PlaceholderDescription, TitlePlaceholder, PosterContainer } from "./index.jsx"
 
 const ItemDescription = () => {
   return (

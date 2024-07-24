@@ -3,7 +3,7 @@ import { useCloseModal } from '../../../context/ModalManagerProvider.jsx'
 import { MoviesNav } from './components/MoviesNav.jsx'
 import { SerialsNav } from './components/SerialsNav.jsx'
 import { CartoonsNav } from './components/CartoonsNav.jsx'
-import { NavDropDown } from '../../../components/DropDowns/NavDropDown.jsx'
+import { NavDropDown } from '../../FilterDropDowns/NavDropDown.jsx'
 import { ModalWrapper } from './styled.jsx'
 import { useLayoutEffect } from 'react'
 
@@ -64,7 +64,7 @@ const MobileNav = () => {
 export default MobileNav
 
 const DropList = styled.div`
-	padding: 24px 20px;
+	padding: 24px 0;
 `
 const ModalCloser = styled.div`
 	position: absolute;
@@ -85,6 +85,9 @@ const ExitButton = styled.button`
 	background-color: inherit;
 	width: 33.5px;
 	height: 33.5px;
+	position: sticky;
+	top: 0;
+	right: 0;
 `
 
 const NavBar = styled.ul`

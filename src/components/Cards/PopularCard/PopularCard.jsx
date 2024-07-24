@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import play from '../../../../images/play.svg'
+import play from '../../../images/play.svg'
 import { BackdropImg, ImgContainer, } from "./index.jsx"
-import { useVisible } from "../../../../context/VirtualVisibility.jsx"
+import { useVisible } from "../../../context/VirtualVisibility.jsx"
 import PropTypes from 'prop-types'
 import { memo } from "react"
 const basePictureUrl = 'https://image.tmdb.org/t/p'

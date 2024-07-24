@@ -1,27 +1,26 @@
 import { getMovieInfo, getSerialIMDBID, getSerialInfo } from "../../services/request/mediaInfo.jsx"
-import { getReviewsByFilm, getReviewsBySerial } from "../../services/request/reviews.jsx"
-import { addMainInfo, fetchReviewsFailure, fetchReviewsSuccess } from "./currentWatchReducer.jsx"
+import { addMainInfo } from "./currentWatchSlice.jsx"
 
-export const fetchSerialReview = (id) => {
-	return (dispatch) => {
-		let info = getReviewsBySerial(id)
-		info
-			.then((reviews) => dispatch(fetchReviewsSuccess(reviews)))
-			.catch((error) => dispatch(fetchReviewsFailure(error)))
-	}
-}
-
-export const fetchMoviesReview = (id) => {
-	return (dispatch) => {
-		let info = getReviewsByFilm(id)
-
-		info
-			.then((reviews) => {
-				dispatch(fetchReviewsSuccess(reviews))
-			})
-			.catch((error) => dispatch(fetchReviewsFailure(error)))
-	}
-}
+// export const fetchSerialReview = (id) => {
+// 	return (dispatch) => {
+// 		let info = getReviewsBySerial(id)
+// 		info
+// 			.then((reviews) => dispatch(fetchReviewsSuccess(reviews)))
+// 			.catch((error) => dispatch(fetchReviewsFailure(error)))
+// 	}
+// }
+//
+// export const fetchMoviesReview = (id) => {
+// 	return (dispatch) => {
+// 		let info = getReviewsByFilm(id)
+//
+// 		info
+// 			.then((reviews) => {
+// 				dispatch(fetchReviewsSuccess(reviews))
+// 			})
+// 			.catch((error) => dispatch(fetchReviewsFailure(error)))
+// 	}
+// }
 
 export const initializeMovies = (id) => {
 	return async (dispatch) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Reviews from '../Review/Reviews.jsx';
-import CarouselRecommend from '../../../../compositions/Carousel/CarouselRecommend.jsx'
+import CarouselRecommend from '../../../../compositions/Carousels/fetchs/CarouselRecommend.jsx'
 
 export const LazyWatchLoader = () => {
   const [loadingProgress, setLoadingProgress] = useState(0)

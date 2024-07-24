@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Rating } from "./Rating";
+import { Rating } from "./Rating.jsx";
 
 test('renders content', () => {
   const rating = {

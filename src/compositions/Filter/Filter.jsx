@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { DropDown } from '../../components/DropDowns/DropDown.jsx'
+import { DropDown } from '../FilterDropDowns/DropDown.jsx'
 import { Genres } from './Genres.jsx'
 
 const FilterInner = styled.div`

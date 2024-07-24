@@ -1,24 +1,13 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { URLs } from './URL'
 import { collectionExtractor, getYear } from '../../helpers/simple.jsx'
-import { option } from './options.jsx'
+import { option } from '../../services/request/options.jsx'
 import { genreExtractor, getType } from '../../helpers/url.jsx'
+import { theMovieApiBase } from './baseApi.js'
 const mainParams = 'include_adult=false&include_video=false&language=en-US'
 const sortParams = 'sort_by=popularity.desc'
 // const start = `/discover/movie?${paramsMain}&`
 
 
-export const themoviedbApi = createApi({
-  reducerPath: 'themoviedbApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: URLs.themoviedbBaseURL,
-    prepareHeaders: (headers, { getState }) => {
-      headers.set('Accept', 'application/json')
-      headers.set('Authorization', option.headers.Authorization)
-      // headers.set('Authorization', `Bearer ${getState().auth.token}`);
-      return headers;
-    },
-  }),
+export const selectionApi = theMovieApiBase.injectEndpoints({
   endpoints: (builder) => ({
     getSection: builder.query({
       query: ({ section, type, genres }) => `/discover/${getType(type)}?${mainParams}&page=${section}&${sortParams}${genreExtractor(genres)}`,
@@ -30,7 +19,6 @@ export const themoviedbApi = createApi({
 
         if(response.page === 1) {
           const {
-            // page,
             total_pages,
             total_results,
           } = response
@@ -55,9 +43,9 @@ export const themoviedbApi = createApi({
 
 // https://api.themoviedb.org/3/movie/movie_id/recommendations?language=en-US&page=1
 // https://api.themoviedb.org/3/tv/series_id/recommendations?language=en-US&page=1
-export const { 
+export const {
   useGetSectionQuery,
   useLazyGetRecommendationsQuery,
   useLazyGetSectionQuery,
   // useLazyGetRecommendationsQuery,
-} = themoviedbApi
+} = selectionApi

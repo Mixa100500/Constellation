@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import ItemDescription from './ItemDesription'
-import { PosterImg, PosterContainer, PosterImgPlaceholder } from '.'
+import ItemDescription from './ItemDesription.jsx'
+import { PosterImg, PosterContainer, PosterImgPlaceholder } from './index.jsx'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { memo } from 'react'

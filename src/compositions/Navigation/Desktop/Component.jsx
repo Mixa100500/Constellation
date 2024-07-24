@@ -52,13 +52,15 @@ const DropDownBody = styled.div`
     left: -1px;
     right: 0;
     margin-top: var(--header-height);
-    background-color: var(--main-bg-color);
+    //background-color: var(--main-bg-color);
+		background-color: var(--second-bg-color);
     height: 328px;
 		padding: 24px;
     display: none;
     border-top: 1px solid var(--secondary-color);
     z-index: 101;
     animation: fadeIn 0.25s ease-in-out;
+    border-radius: 0 0 var(--backdrop-radius) var(--backdrop-radius);
     //animation-delay: 0.25s;
     ${p => p.open &&
 			css`
@@ -66,7 +68,7 @@ const DropDownBody = styled.div`
 			`
     }
 		
-    @media screen and (max-width: 599px) {
+    @media (max-width: 599px) {
 			display: none;
 		}
 
