@@ -24,25 +24,27 @@ const KinoboxPlayer = ({ imdbId }) => {
   const loaded = useSelector(selectPlayerLoaded)
   const dispatch = useDispatch()
 
+  // need new player
+
   useEffect(() => {
-    if(imdbId && !loaded) {
-      const script = document.createElement('script')
-      script.src = 'https://kinobox.tv/kinobox.min.js'
-      script.async = true
-      script.onload = () => {
-        // eslint-disable-next-line no-undef
-        kbox('.kinobox_player', {
-          search: {imdb: imdbId },
-        })
-        dispatch(setLoaded())
-      }
-      document.body.appendChild(script)
-      return
-    }
-    if(loaded) {
-      // eslint-disable-next-line no-undef
-      kbox('.kinobox_player', {search: {imdb: imdbId }})
-    }
+    // if(imdbId && !loaded) {
+    //   const script = document.createElement('script')
+    //   script.src = 'https://kinobox.tv/kinobox.min.js'
+    //   script.async = true
+    //   script.onload = () => {
+    //     // eslint-disable-next-line no-undef
+    //     kbox('.kinobox_player', {
+    //       search: {imdb: imdbId },
+    //     })
+    //     dispatch(setLoaded())
+    //   }
+    //   document.body.appendChild(script)
+    //   return
+    // }
+    // if(loaded) {
+    //   // eslint-disable-next-line no-undef
+    //   kbox('.kinobox_player', {search: {imdb: imdbId }})
+    // }
   }, [imdbId])
   return (
     <div className="kinobox_player"></div>
@@ -54,7 +56,7 @@ const VideoPlayer = () => {
 
   return <VideoContainer>
       {imdbId && <>
-        <div className='loading-text'>loading...</div>
+        <div className='loading-text'>no player :(</div>
         <KinoboxPlayer imdbId={imdbId}/>
       </>}
     </VideoContainer>
